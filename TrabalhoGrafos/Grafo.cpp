@@ -7,15 +7,17 @@
 #define INF 9999999;
 using namespace std;
 
-Grafo::Grafo(bool ehDigrafo1, bool ehPonderada1)
+Grafo::Grafo(bool ehDigrafo, bool ehPonderada)
 {
-   ehDigrafo == ehDigrafo1;
-   ehPonderada == ehPonderada1;
+   this->ehDigrafo == ehDigrafo;
+   this->ehPonderada == ehPonderada;
+
+   if(ehDigrafo == true)
+    cout << "Digrafo" << endl;
 }
 
 Grafo::~Grafo()
 {
-
 }
 
 void Grafo::adicionarNo(int id)
@@ -54,32 +56,70 @@ void Grafo::removerNo (int id)
 
 void Grafo::removeAresta(int id1,int id2)
 {
-    if(estaNoGrafo(id1) && estaNoGrafo(id2))
+
+    if(ehDigrafo == false)
     {
-        if(vizinho(id1,id2))
+
+        if(estaNoGrafo(id1) && estaNoGrafo(id2))
         {
-            for (std::vector<No>::iterator it = listaAdj.begin(); it != listaAdj.end(); ++it)
+            if(vizinho(id1,id2))
             {
-                if( it->getId() == id1 )
-                    it->removeAresta(id2);
-                if( it->getId() == id2)
-                    it->removeAresta(id1);
+                for (std::vector<No>::iterator it = listaAdj.begin(); it != listaAdj.end(); ++it)
+                {
+                    if( it->getId() == id1 )
+                        it->removeAresta(id2);
+                    if( it->getId() == id2)
+                        it->removeAresta(id1);
+                }
             }
+
+        }
+        else
+        {
+            cout << "Um ou mais NOS nao existem, impossivel remover a ARESTA." << endl;
         }
 
     }
+
     else
     {
-        cout << "Um ou mais NOS nao existem, impossivel remover a ARESTA." << endl;
+
+        if(estaNoGrafo(id1) && estaNoGrafo(id2))
+        {
+            if(vizinho(id1,id2))
+            {
+                for (std::vector<No>::iterator it = listaAdj.begin(); it != listaAdj.end(); ++it)
+                {
+                    if( it->getId() == id1 ){
+
+                        it->removeAresta(id2);
+
+                    }
+                    else if( it->getId() == id2){
+
+                        it->removeAresta(id1);
+                    }
+                }
+            }
+
+        }
+        else
+        {
+            cout << "Um ou mais NOS nao existem, impossivel remover a ARESTA." << endl;
+        }
+
     }
 
 }
 
 void Grafo::adicionarArestaNos(int id, int id2,int peso)
 {
+        this->ehDigrafo == true;
+
         bool id1_noGrafo = false;
         bool id2_noGrafo = false;
 
+        // Verifica se os Nos existem, senao eles sao criados
         if(estaNoGrafo(id))
         {
             id1_noGrafo = true;
@@ -99,8 +139,10 @@ void Grafo::adicionarArestaNos(int id, int id2,int peso)
             adicionarNo(id2);
             id2_noGrafo = true;
         }
+        //////////////////////////////////////////////////////
 
-        if(id1_noGrafo && id2_noGrafo)
+        // Se nao for Digrafo
+        if(id1_noGrafo && id2_noGrafo && (this->ehDigrafo == false) )
         {
 
             for (std::vector<No>::iterator it = listaAdj.begin(); it != listaAdj.end(); ++it)
@@ -111,6 +153,11 @@ void Grafo::adicionarArestaNos(int id, int id2,int peso)
                     if(it->getId() == id)
                     {
                         it->adicionaAresta(id2,peso,id);
+                        if(ehDigrafo == false)
+                            cout<< "false";
+                        else
+                            cout<< "true";
+                        cout << "Add Aresta Nao Digrafo" << endl;
                     }
 
                     if(it->getId() == id2)
@@ -122,6 +169,25 @@ void Grafo::adicionarArestaNos(int id, int id2,int peso)
             }
 
         }
+        ////////////////////////////////////////
+
+        //Se for Digrafo
+        else if(id1_noGrafo && id2_noGrafo && (this->ehDigrafo == true) )
+        {
+            for (std::vector<No>::iterator it = listaAdj.begin(); it != listaAdj.end(); ++it)
+            {
+                if(id != id2)
+                {
+                    if(it->getId() == id)
+                    {
+                        it->adicionaAresta(id2,peso,id);
+                        cout << "add Aresta Digrafo" << endl;
+                    }
+                }
+            }
+        }
+        //////////////////////////////////
+
         imprimiGrafo();
 
 }
@@ -130,7 +196,7 @@ void Grafo::adicionarArestaNos(int id, int id2,int peso)
 bool Grafo::estaNoGrafo(int i)
 {
     if(listaAdj.size() > 0){
-        cout<< "lista maior que 0";
+
         cout<< listaAdj.size() << endl;
 
         for (std::vector<No>::iterator it = listaAdj.begin(); it != listaAdj.end(); ++it)
@@ -146,7 +212,7 @@ bool Grafo::estaNoGrafo(int i)
 
     else{
         return false;
-        cout<<"lista vazia";
+
     }
 }
 
