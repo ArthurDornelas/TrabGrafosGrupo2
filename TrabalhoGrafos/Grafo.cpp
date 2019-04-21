@@ -7,17 +7,16 @@
 #define INF 9999999;
 using namespace std;
 
-Grafo::Grafo(bool ehDigrafo, bool ehPonderada)
+Grafo::Grafo(int ehDigrafoAux, int ehPonderadaAux)
 {
-   this->ehDigrafo == ehDigrafo;
-   this->ehPonderada == ehPonderada;
-
-   if(ehDigrafo == true)
-    cout << "Digrafo" << endl;
+   ehDigrafo = 0, ehPonderada = 0;
+   ehDigrafo = ehDigrafoAux;
+   ehPonderada = ehPonderadaAux;
 }
 
 Grafo::~Grafo()
 {
+
 }
 
 void Grafo::adicionarNo(int id)
@@ -56,14 +55,11 @@ void Grafo::removerNo (int id)
 
 void Grafo::removeAresta(int id1,int id2)
 {
-
-    if(ehDigrafo == false)
+    if(estaNoGrafo(id1) && estaNoGrafo(id2))
     {
-
-        if(estaNoGrafo(id1) && estaNoGrafo(id2))
+        if(vizinho(id1,id2))
         {
-            if(vizinho(id1,id2))
-            {
+            if(ehDigrafo == 0){
                 for (std::vector<No>::iterator it = listaAdj.begin(); it != listaAdj.end(); ++it)
                 {
                     if( it->getId() == id1 )
@@ -72,54 +68,28 @@ void Grafo::removeAresta(int id1,int id2)
                         it->removeAresta(id1);
                 }
             }
-
-        }
-        else
-        {
-            cout << "Um ou mais NOS nao existem, impossivel remover a ARESTA." << endl;
-        }
-
-    }
-
-    else
-    {
-
-        if(estaNoGrafo(id1) && estaNoGrafo(id2))
-        {
-            if(vizinho(id1,id2))
-            {
+            else
                 for (std::vector<No>::iterator it = listaAdj.begin(); it != listaAdj.end(); ++it)
                 {
-                    if( it->getId() == id1 ){
-
+                    if( it->getId() == id1 )
                         it->removeAresta(id2);
-
-                    }
-                    else if( it->getId() == id2){
-
-                        it->removeAresta(id1);
-                    }
                 }
-            }
-
-        }
-        else
-        {
-            cout << "Um ou mais NOS nao existem, impossivel remover a ARESTA." << endl;
         }
 
     }
+    else
+    {
+        cout << "Um ou mais NOS nao existem, impossivel remover a ARESTA." << endl;
+    }
 
+    imprimiGrafo();
 }
 
-void Grafo::adicionarArestaNos(int id, int id2,int peso)
+void Grafo::adicionarArestaNosSemPeso(int id, int id2)
 {
-        this->ehDigrafo == true;
-
         bool id1_noGrafo = false;
         bool id2_noGrafo = false;
 
-        // Verifica se os Nos existem, senao eles sao criados
         if(estaNoGrafo(id))
         {
             id1_noGrafo = true;
@@ -139,10 +109,81 @@ void Grafo::adicionarArestaNos(int id, int id2,int peso)
             adicionarNo(id2);
             id2_noGrafo = true;
         }
-        //////////////////////////////////////////////////////
 
-        // Se nao for Digrafo
-        if(id1_noGrafo && id2_noGrafo && (this->ehDigrafo == false) )
+
+        if(id1_noGrafo==true && id2_noGrafo==true && ehDigrafo==0 )
+        {
+
+            for (std::vector<No>::iterator it = listaAdj.begin(); it != listaAdj.end(); ++it)
+            {
+
+                if(id != id2)
+                {
+                    if(it->getId() == id)
+                    {
+                        it->adicionaArestaSemPeso(id2,id);
+                    }
+
+                    if(it->getId() == id2)
+                    {
+                        it->adicionaArestaSemPeso(id,id2);
+                    }
+                }
+
+            }
+
+        }
+
+        else if(id1_noGrafo==true && id2_noGrafo==true && ehDigrafo==1)
+        {
+
+            for (std::vector<No>::iterator it = listaAdj.begin(); it != listaAdj.end(); ++it)
+            {
+
+                if(id != id2)
+                {
+                    if(it->getId() == id)
+                    {
+                        it->adicionaArestaSemPeso(id2,id);
+                    }
+                }
+
+            }
+
+        }
+
+
+        imprimiGrafo();
+
+}
+
+void Grafo::adicionarArestaNos(int id, int id2,int peso)
+{
+        bool id1_noGrafo = false;
+        bool id2_noGrafo = false;
+
+        if(estaNoGrafo(id))
+        {
+            id1_noGrafo = true;
+        }
+        else
+        {
+            adicionarNo(id);
+            id1_noGrafo = true;
+        }
+
+        if(estaNoGrafo(id2))
+        {
+            id2_noGrafo = true;
+        }
+        else
+        {
+            adicionarNo(id2);
+            id2_noGrafo = true;
+        }
+
+
+        if(id1_noGrafo==true && id2_noGrafo==true && ehDigrafo==0 )
         {
 
             for (std::vector<No>::iterator it = listaAdj.begin(); it != listaAdj.end(); ++it)
@@ -153,11 +194,6 @@ void Grafo::adicionarArestaNos(int id, int id2,int peso)
                     if(it->getId() == id)
                     {
                         it->adicionaAresta(id2,peso,id);
-                        if(ehDigrafo == false)
-                            cout<< "false";
-                        else
-                            cout<< "true";
-                        cout << "Add Aresta Nao Digrafo" << endl;
                     }
 
                     if(it->getId() == id2)
@@ -169,24 +205,25 @@ void Grafo::adicionarArestaNos(int id, int id2,int peso)
             }
 
         }
-        ////////////////////////////////////////
 
-        //Se for Digrafo
-        else if(id1_noGrafo && id2_noGrafo && (this->ehDigrafo == true) )
+        else if(id1_noGrafo==true && id2_noGrafo==true && ehDigrafo==1)
         {
+
             for (std::vector<No>::iterator it = listaAdj.begin(); it != listaAdj.end(); ++it)
             {
+
                 if(id != id2)
                 {
                     if(it->getId() == id)
                     {
                         it->adicionaAresta(id2,peso,id);
-                        cout << "add Aresta Digrafo" << endl;
                     }
                 }
+
             }
+
         }
-        //////////////////////////////////
+
 
         imprimiGrafo();
 
@@ -196,8 +233,6 @@ void Grafo::adicionarArestaNos(int id, int id2,int peso)
 bool Grafo::estaNoGrafo(int i)
 {
     if(listaAdj.size() > 0){
-
-        cout<< listaAdj.size() << endl;
 
         for (std::vector<No>::iterator it = listaAdj.begin(); it != listaAdj.end(); ++it)
         {
@@ -212,7 +247,7 @@ bool Grafo::estaNoGrafo(int i)
 
     else{
         return false;
-
+        cout<<"lista vazia";
     }
 }
 
@@ -221,14 +256,14 @@ int Grafo::ordemGrafo()
     return listaAdj.size();
 }
 
-int Grafo::retornaGrauNo(int id)
+int Grafo::retornagrauSaidaNo(int id)
 {
 
     for (std::vector<No>::iterator it = listaAdj.begin(); it != listaAdj.end(); ++it)
     {
         if( it->getId() == id )
         {
-            return it->getGrau();
+            return it->getGrauSaida();
         }
     }
     cout << "Nao existe esse NO no Grafo."<<endl;
@@ -257,7 +292,7 @@ bool Grafo::grafoCompleto()
     int num_Arestas = 0;
     for(int i = 0; i < n; i++)
     {
-        num_Arestas += listaAdj[i].getGrau();
+        num_Arestas += listaAdj[i].getGrauSaida();
     }
     if(num_Arestas == n*(n-1))
         return true;
@@ -269,7 +304,7 @@ bool Grafo::grafoKRegularidade(int k)
 {
     for (std::vector<No>::iterator it = listaAdj.begin(); it != listaAdj.end(); ++it)
     {
-        if(it->getGrau()!=k)
+        if(it->getGrauSaida()!=k)
         {
             return false;
         }
@@ -338,7 +373,7 @@ void Grafo::sequenciaGraus()
 {
     for (std::vector<No>::iterator it = listaAdj.begin(); it != listaAdj.end(); ++it)
     {
-        std::cout << "No " << it->getId() << " - " << it->getGrau() << "  ";
+        std::cout << "No " << it->getId() << " - " << it->getGrauSaida() << "  ";
     }
 }
 
@@ -349,7 +384,7 @@ X                                                                               
 X  No algoritmo de Prim comeca do primeiro No inserido e busca o proximo No com menor peso de aresta que esse liga                                              X
 X  e adiciona esse No a um vetor chamado arvore.Em seguida o algoritmo de prim  busca o proximo No a ser inserido com menor pseso                               X
 X  de aresta entre os nos ja presentes no vetor, por exemplo, se temos dois Nos inseridos no vetor arvore buscaremos a aresta de menor peso                     X
-X  em um conjunto que engloba a aresta desses dois nos ,  colocaremos esse No aqual essa aresta liga ao nosso vetor                                             X
+X  em um conjunto que engloba a aresta desses dois nos ,  colocaremos esse No a qual essa aresta liga ao nosso vetor                                             X
 X  e o processo repete.Verificamos antes de inserir o novo No se ele vai formar um ciclo com dois Nos ja presentes no vetor arvore atraves da variavel "ciclo". X
 X  O processo que verifica qual a menor aresta consiste em rodar um For e  comparar com uma variavel declarada na variavel chamada Menor,                       X
 X  caso o peso da aresta seja menor que a variavel "menor" esse valor E substituido pelo peso da aresta,                                                        X

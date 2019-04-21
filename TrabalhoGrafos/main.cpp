@@ -6,13 +6,12 @@ using namespace std;
 
 int main() {
 
-        Grafo* grafo = new Grafo(true,false);
+        Grafo* grafo = new Grafo(0,1);
         //grafo->lerDigrafo("teste.txt");
 
 
     Menu* menu = new Menu(grafo);
     menu->inicia();
-
 
 
 }

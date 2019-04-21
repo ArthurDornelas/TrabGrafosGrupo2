@@ -533,26 +533,26 @@
 	"Aresta.h"
 	"iostream"
 
-1553821647 source:c:\users\arthur\downloads\grafosnovo-master\grafosnovo-master\grafosfinal\grafos-master\trabalhografos\main.cpp
+1555173940 source:c:\users\arthur\downloads\grafosnovo-master\grafosnovo-master\grafosfinal\grafos-master\trabalhografos\main.cpp
 	<iostream>
 	"Grafo.h"
 	"Grafo.cpp"
 	"Menu.h"
 
-1553821713 c:\users\arthur\downloads\grafosnovo-master\grafosnovo-master\grafosfinal\grafos-master\trabalhografos\grafo.h
+1555264948 c:\users\arthur\downloads\grafosnovo-master\grafosnovo-master\grafosfinal\grafos-master\trabalhografos\grafo.h
 	<vector>
 	"No.h"
 	<iostream>
 	<fstream>
 
-1552580506 c:\users\arthur\downloads\grafosnovo-master\grafosnovo-master\grafosfinal\grafos-master\trabalhografos\no.h
+1555456015 c:\users\arthur\downloads\grafosnovo-master\grafosnovo-master\grafosfinal\grafos-master\trabalhografos\no.h
 	<vector>
 	"Aresta.h"
 
-1552580506 c:\users\arthur\downloads\grafosnovo-master\grafosnovo-master\grafosfinal\grafos-master\trabalhografos\aresta.h
+1555173593 c:\users\arthur\downloads\grafosnovo-master\grafosnovo-master\grafosfinal\grafos-master\trabalhografos\aresta.h
 	"No.h"
 
-1553821647 c:\users\arthur\downloads\grafosnovo-master\grafosnovo-master\grafosfinal\grafos-master\trabalhografos\grafo.cpp
+1555264948 c:\users\arthur\downloads\grafosnovo-master\grafosnovo-master\grafosfinal\grafos-master\trabalhografos\grafo.cpp
 	"Grafo.h"
 	"No.h"
 	"No.cpp"
@@ -560,7 +560,7 @@
 	<algorithm>
 	<cstring>
 
-1552580506 c:\users\arthur\downloads\grafosnovo-master\grafosnovo-master\grafosfinal\grafos-master\trabalhografos\no.cpp
+1555264948 c:\users\arthur\downloads\grafosnovo-master\grafosnovo-master\grafosfinal\grafos-master\trabalhografos\no.cpp
 	"Aresta.h"
 	"No.h"
 
@@ -569,50 +569,7 @@
 	"No.h"
 	"Aresta.h"
 
-1552580506 source:c:\users\arthur\downloads\grafosnovo-master\grafosnovo-master\grafosfinal\grafos-master\trabalhografos\menu.cpp
-	"Menu.h"
-	"Grafo.h"
-	"No.h"
-	"Aresta.h"
-	"iostream"
-
-1553855989 source:c:\users\adriana\projects\trabgrafosgrupo2\trabalhografos\main.cpp
-	<iostream>
-	"Grafo.h"
-	"Grafo.cpp"
-	"Menu.h"
-
-1553852779 c:\users\adriana\projects\trabgrafosgrupo2\trabalhografos\grafo.h
-	<vector>
-	"No.h"
-	<iostream>
-	<fstream>
-
-1553852779 c:\users\adriana\projects\trabgrafosgrupo2\trabalhografos\no.h
-	<vector>
-	"Aresta.h"
-
-1553852779 c:\users\adriana\projects\trabgrafosgrupo2\trabalhografos\aresta.h
-	"No.h"
-
-1553856932 c:\users\adriana\projects\trabgrafosgrupo2\trabalhografos\grafo.cpp
-	"Grafo.h"
-	"No.h"
-	"No.cpp"
-	<vector>
-	<algorithm>
-	<cstring>
-
-1553852779 c:\users\adriana\projects\trabgrafosgrupo2\trabalhografos\no.cpp
-	"Aresta.h"
-	"No.h"
-
-1553852779 c:\users\adriana\projects\trabgrafosgrupo2\trabalhografos\menu.h
-	"Grafo.h"
-	"No.h"
-	"Aresta.h"
-
-1553852779 source:c:\users\adriana\projects\trabgrafosgrupo2\trabalhografos\menu.cpp
+1555456034 source:c:\users\arthur\downloads\grafosnovo-master\grafosnovo-master\grafosfinal\grafos-master\trabalhografos\menu.cpp
 	"Menu.h"
 	"Grafo.h"
 	"No.h"

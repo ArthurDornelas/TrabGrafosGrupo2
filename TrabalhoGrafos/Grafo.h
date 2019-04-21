@@ -10,8 +10,8 @@ class Grafo
 {
 private:
     std::vector <No> listaAdj;
-    bool ehDigrafo;
-    bool ehPonderada;
+    int ehDigrafo;
+    int ehPonderada;
 
 
 public:
@@ -19,16 +19,17 @@ public:
     std::vector <No> arvore;
     std::vector <Aresta> arestasArvore;
     std::vector <Aresta> auxArestasArvore;
-    Grafo(bool ehDigrafo1, bool ehPonderada1);
+    Grafo(int ehDigrafoAux, int ehPonderadaAux);
     ~Grafo();
     void adicionarArestaNos(int id, int id2,int peso);
+    void adicionarArestaNosSemPeso(int id, int id2);
     void adicionarNo(int id);
     void removerNo(int id);
     void removeAresta(int id1, int id2);
-    void adicionaAresta(int id1,int id2, float peso);
+    //void adicionaAresta(int id1,int id2, float peso);
     bool estaNoGrafo(int index);
     int ordemGrafo();
-    int retornaGrauNo(int id);
+    int retornagrauSaidaNo(int id);
     bool vizinho(int id1, int id2);
     bool grafoCompleto();
     bool grafoKRegularidade(int k);
@@ -37,6 +38,8 @@ public:
     void sequenciaGraus();
     void imprimiGrafo();
     void algoritmoPrim();
+    int ehdigrafo(){return ehDigrafo;};
+    int ehponderada() {return ehPonderada;};
     void lerGrafo(string caminho);
     void lerDigrafo(string caminho);
     bool ehBipartido();

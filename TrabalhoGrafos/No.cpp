@@ -4,13 +4,13 @@ using namespace std;
 
 No::No()
 {
-    grau=0;
+    grauSaida=0;
 }
 
-No::No(int ident, int grauNo)
+No::No(int ident, int grauSaidaNo)
 {
     id = ident;
-    grau = grauNo;
+    grauSaida = grauSaidaNo;
 
 }
 
@@ -19,14 +19,14 @@ No::~No()
 
 }
 
-void No::setGrau(int grauNo)
+void No::setGrauSaida(int grauSaidaNo)
 {
-    grau = grauNo;
+    grauSaida = grauSaidaNo;
 }
 
-int No::getGrau()
+void No::setGrauEntrada(int grauEntradaNo)
 {
-    return grau;
+    grauEntrada = grauEntradaNo;
 }
 
 void No::setId(int ident)
@@ -46,9 +46,19 @@ float No::getAresta(int i){
 void No::adicionaAresta(int ident, float pesoAresta,int idLista){
     Aresta aresta = Aresta(ident,pesoAresta,idLista);
     if(ident == id)
-       grau += 2;
+       grauSaida += 2;
     else
-       grau += 1;
+       grauSaida += 1;
+    listaAresta.push_back(aresta);
+
+}
+
+void No::adicionaArestaSemPeso(int ident,int idLista){
+    Aresta aresta = Aresta(ident,idLista);
+    if(ident == id)
+       grauSaida += 2;
+    else
+       grauSaida += 1;
     listaAresta.push_back(aresta);
 
 }
@@ -65,9 +75,9 @@ void No::removeAresta(int ident)
    }
 
     if(ident == id)
-        grau -= 2;
+        grauSaida -= 2;
     else
-        grau -= 1;
+        grauSaida -= 1;
 }
 
 bool No::eVizinho(int id)

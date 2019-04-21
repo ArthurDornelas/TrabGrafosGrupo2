@@ -122,14 +122,17 @@ void Menu::opcao3()
         int id2;
         cin >> id1;
         cin >> id2;
-        cout << "Digite o peso da aresta" << endl;
-        float peso;
-        cin >> peso;
-        grafoUtilizado->adicionarArestaNos(id1, id2, peso);
-        cout << "Aresta adicionada" << endl;
-
-
-
+        if(grafoUtilizado->ehponderada() == 1){
+            cout << "Digite o peso da aresta" << endl;
+            float peso;
+            cin >> peso;
+            grafoUtilizado->adicionarArestaNos(id1, id2,peso);
+            cout << "Aresta adicionada" << endl;
+        }
+        else{
+            grafoUtilizado->adicionarArestaNosSemPeso(id1, id2);
+            cout << "Aresta adicionada" << endl;
+        }
     }
     else if (i == 2)
     {
@@ -155,8 +158,8 @@ void Menu::opcao4()
     cout << "Digite o no para verificar seu grau" << endl;
     int id;
     cin >> id;
-    int grau = grafoUtilizado->retornaGrauNo(id);
-    cout << "O Grau do no é: " << grau << endl;
+    int grauSaida = grafoUtilizado->retornagrauSaidaNo(id);
+    cout << "O Grau do no é: " << grauSaida << endl;
     this->inicia();
 
 }
