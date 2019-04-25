@@ -5,13 +5,14 @@
 #include <algorithm>
 #include <cstring>
 #define INF 9999999;
+#include <stack> // busca em profundidade
 using namespace std;
 
 Grafo::Grafo(int ehDigrafoAux, int ehPonderadaAux)
 {
-   ehDigrafo = 0, ehPonderada = 0;
-   ehDigrafo = ehDigrafoAux;
-   ehPonderada = ehPonderadaAux;
+    ehDigrafo = 0, ehPonderada = 0;
+    ehDigrafo = ehDigrafoAux;
+    ehPonderada = ehPonderadaAux;
 }
 
 Grafo::~Grafo()
@@ -59,7 +60,8 @@ void Grafo::removeAresta(int id1,int id2)
     {
         if(vizinho(id1,id2))
         {
-            if(ehDigrafo == 0){
+            if(ehDigrafo == 0)
+            {
                 for (std::vector<No>::iterator it = listaAdj.begin(); it != listaAdj.end(); ++it)
                 {
                     if( it->getId() == id1 )
@@ -87,152 +89,153 @@ void Grafo::removeAresta(int id1,int id2)
 
 void Grafo::adicionarArestaNosSemPeso(int id, int id2)
 {
-        bool id1_noGrafo = false;
-        bool id2_noGrafo = false;
+    bool id1_noGrafo = false;
+    bool id2_noGrafo = false;
 
-        if(estaNoGrafo(id))
-        {
-            id1_noGrafo = true;
-        }
-        else
-        {
-            adicionarNo(id);
-            id1_noGrafo = true;
-        }
+    if(estaNoGrafo(id))
+    {
+        id1_noGrafo = true;
+    }
+    else
+    {
+        adicionarNo(id);
+        id1_noGrafo = true;
+    }
 
-        if(estaNoGrafo(id2))
-        {
-            id2_noGrafo = true;
-        }
-        else
-        {
-            adicionarNo(id2);
-            id2_noGrafo = true;
-        }
+    if(estaNoGrafo(id2))
+    {
+        id2_noGrafo = true;
+    }
+    else
+    {
+        adicionarNo(id2);
+        id2_noGrafo = true;
+    }
 
 
-        if(id1_noGrafo==true && id2_noGrafo==true && ehDigrafo==0 )
+    if(id1_noGrafo==true && id2_noGrafo==true && ehDigrafo==0 )
+    {
+
+        for (std::vector<No>::iterator it = listaAdj.begin(); it != listaAdj.end(); ++it)
         {
 
-            for (std::vector<No>::iterator it = listaAdj.begin(); it != listaAdj.end(); ++it)
+            if(id != id2)
             {
-
-                if(id != id2)
+                if(it->getId() == id)
                 {
-                    if(it->getId() == id)
-                    {
-                        it->adicionaArestaSemPeso(id2,id);
-                    }
-
-                    if(it->getId() == id2)
-                    {
-                        it->adicionaArestaSemPeso(id,id2);
-                    }
+                    it->adicionaArestaSemPeso(id2,id);
                 }
 
+                if(it->getId() == id2)
+                {
+                    it->adicionaArestaSemPeso(id,id2);
+                }
             }
 
         }
 
-        else if(id1_noGrafo==true && id2_noGrafo==true && ehDigrafo==1)
+    }
+
+    else if(id1_noGrafo==true && id2_noGrafo==true && ehDigrafo==1)
+    {
+
+        for (std::vector<No>::iterator it = listaAdj.begin(); it != listaAdj.end(); ++it)
         {
 
-            for (std::vector<No>::iterator it = listaAdj.begin(); it != listaAdj.end(); ++it)
+            if(id != id2)
             {
-
-                if(id != id2)
+                if(it->getId() == id)
                 {
-                    if(it->getId() == id)
-                    {
-                        it->adicionaArestaSemPeso(id2,id);
-                    }
+                    it->adicionaArestaSemPeso(id2,id);
                 }
-
             }
 
         }
 
+    }
 
-        imprimiGrafo();
+
+    imprimiGrafo();
 
 }
 
 void Grafo::adicionarArestaNos(int id, int id2,int peso)
 {
-        bool id1_noGrafo = false;
-        bool id2_noGrafo = false;
+    bool id1_noGrafo = false;
+    bool id2_noGrafo = false;
 
-        if(estaNoGrafo(id))
-        {
-            id1_noGrafo = true;
-        }
-        else
-        {
-            adicionarNo(id);
-            id1_noGrafo = true;
-        }
+    if(estaNoGrafo(id))
+    {
+        id1_noGrafo = true;
+    }
+    else
+    {
+        adicionarNo(id);
+        id1_noGrafo = true;
+    }
 
-        if(estaNoGrafo(id2))
-        {
-            id2_noGrafo = true;
-        }
-        else
-        {
-            adicionarNo(id2);
-            id2_noGrafo = true;
-        }
+    if(estaNoGrafo(id2))
+    {
+        id2_noGrafo = true;
+    }
+    else
+    {
+        adicionarNo(id2);
+        id2_noGrafo = true;
+    }
 
 
-        if(id1_noGrafo==true && id2_noGrafo==true && ehDigrafo==0 )
+    if(id1_noGrafo==true && id2_noGrafo==true && ehDigrafo==0 )
+    {
+
+        for (std::vector<No>::iterator it = listaAdj.begin(); it != listaAdj.end(); ++it)
         {
 
-            for (std::vector<No>::iterator it = listaAdj.begin(); it != listaAdj.end(); ++it)
+            if(id != id2)
             {
-
-                if(id != id2)
+                if(it->getId() == id)
                 {
-                    if(it->getId() == id)
-                    {
-                        it->adicionaAresta(id2,peso,id);
-                    }
-
-                    if(it->getId() == id2)
-                    {
-                        it->adicionaAresta(id,peso,id2);
-                    }
+                    it->adicionaAresta(id2,peso,id);
                 }
 
+                if(it->getId() == id2)
+                {
+                    it->adicionaAresta(id,peso,id2);
+                }
             }
 
         }
 
-        else if(id1_noGrafo==true && id2_noGrafo==true && ehDigrafo==1)
+    }
+
+    else if(id1_noGrafo==true && id2_noGrafo==true && ehDigrafo==1)
+    {
+
+        for (std::vector<No>::iterator it = listaAdj.begin(); it != listaAdj.end(); ++it)
         {
 
-            for (std::vector<No>::iterator it = listaAdj.begin(); it != listaAdj.end(); ++it)
+            if(id != id2)
             {
-
-                if(id != id2)
+                if(it->getId() == id)
                 {
-                    if(it->getId() == id)
-                    {
-                        it->adicionaAresta(id2,peso,id);
-                    }
+                    it->adicionaAresta(id2,peso,id);
                 }
-
             }
 
         }
 
+    }
 
-        imprimiGrafo();
+
+    imprimiGrafo();
 
 }
 
 
 bool Grafo::estaNoGrafo(int i)
 {
-    if(listaAdj.size() > 0){
+    if(listaAdj.size() > 0)
+    {
 
         for (std::vector<No>::iterator it = listaAdj.begin(); it != listaAdj.end(); ++it)
         {
@@ -245,7 +248,8 @@ bool Grafo::estaNoGrafo(int i)
 
     }
 
-    else{
+    else
+    {
         return false;
         cout<<"lista vazia";
     }
@@ -384,7 +388,7 @@ X                                                                               
 X  No algoritmo de Prim comeca do primeiro No inserido e busca o proximo No com menor peso de aresta que esse liga                                              X
 X  e adiciona esse No a um vetor chamado arvore.Em seguida o algoritmo de prim  busca o proximo No a ser inserido com menor pseso                               X
 X  de aresta entre os nos ja presentes no vetor, por exemplo, se temos dois Nos inseridos no vetor arvore buscaremos a aresta de menor peso                     X
-X  em um conjunto que engloba a aresta desses dois nos ,  colocaremos esse No a qual essa aresta liga ao nosso vetor                                             X
+X  em um conjunto que engloba a aresta desses dois nos ,  colocaremos esse No a qual essa aresta liga ao nosso vetor                                            X
 X  e o processo repete.Verificamos antes de inserir o novo No se ele vai formar um ciclo com dois Nos ja presentes no vetor arvore atraves da variavel "ciclo". X
 X  O processo que verifica qual a menor aresta consiste em rodar um For e  comparar com uma variavel declarada na variavel chamada Menor,                       X
 X  caso o peso da aresta seja menor que a variavel "menor" esse valor E substituido pelo peso da aresta,                                                        X
@@ -551,12 +555,13 @@ bool Grafo::ehBipartido()
 void Grafo::preencher_grafo_bipartido()
 {
     bool paridade = true;
-    for(std::vector<No>::iterator it = listaAdj.begin();it != listaAdj.end() ; ++it)
+    for(std::vector<No>::iterator it = listaAdj.begin(); it != listaAdj.end() ; ++it)
     {
         if(paridade)
         {
             it->setLabel('A');
-        }else
+        }
+        else
         {
             it->setLabel('B');
         }
@@ -567,8 +572,56 @@ void Grafo::preencher_grafo_bipartido()
 
 void Grafo::imprimir_biparticao()
 {
-    for(std::vector<No>::iterator it = listaAdj.begin();it != listaAdj.end() ; ++it)
+    for(std::vector<No>::iterator it = listaAdj.begin(); it != listaAdj.end() ; ++it)
     {
         std::cout<< "-> "<< it->getLabel()<< std::endl;
     }
 }
+
+/*
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+X                                                                                                                                                               X
+X   O algoritmo de busca em profundidade eh um algoritmo recursivo, que faz uma busca  na direçao "vertical", ou seja, ao ser encotrado um nó que nao tem
+X   mais nós adjacentes para "baixo" ele retornar para o nó anterior e confere se existe outro no adjacente a esse e que n tenha sido visitado
+X
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+*/
+void Grafo::auxBuscaEmProfundidade(int key)
+{
+    No *aux=new No();
+    int i=0;
+    for(std::vector<No>::iterator it = listaAdj.begin(); it != listaAdj.end(); ++it)
+    {
+        it->setVisitado(false);
+        if(it->getId()==key)
+        {
+            aux=(&(listaAdj[i]));
+        }
+        i++;
+    }
+    buscaEmProfundidade(aux);
+}
+
+void Grafo::buscaEmProfundidade(No *v)
+{
+    v->setVisitado(true);
+    cout<<"Vertice "<< v->getId() <<" visitado"<<endl;
+    for(std::vector<Aresta>::iterator arest = v->listaAresta.begin(); arest != v->listaAresta.end(); ++arest)
+    {
+        int i=0;
+        for(std::vector<No>::iterator it = listaAdj.begin(); it != listaAdj.end(); ++it)
+        {
+            if(it->getVisitado()==false)
+            {
+                if(it->getId()==arest->getIdNo())
+                {
+                    buscaEmProfundidade(&(listaAdj[i]));
+                    break;
+                }
+            }
+            i++;
+        }
+    }
+}
+
+

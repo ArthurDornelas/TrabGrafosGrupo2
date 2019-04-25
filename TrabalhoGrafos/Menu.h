@@ -22,6 +22,7 @@ class Menu
         void opcao9();
         void opcao10();
         void opcao11();
+        void opcao12();
 
 
     private:

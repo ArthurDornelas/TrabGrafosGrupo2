@@ -11,6 +11,7 @@ No::No(int ident, int grauSaidaNo)
 {
     id = ident;
     grauSaida = grauSaidaNo;
+    visitado=false;
 
 }
 
@@ -90,3 +91,12 @@ bool No::eVizinho(int id)
     return false;
 }
 
+void No::setVisitado(bool novo)
+{
+    visitado=novo;
+}
+
+bool No::getVisitado()
+{
+    return visitado;
+}

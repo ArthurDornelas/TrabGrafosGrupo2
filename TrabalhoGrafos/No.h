@@ -13,6 +13,7 @@ private:
     int grauEntrada;
     char label;
     float id_intraNo;
+    bool visitado;
 
 public:
 
@@ -33,6 +34,9 @@ public:
     void removeAresta(int id);
     float getAresta(int index);
     bool eVizinho(int id);
+    void setVisitado(bool novo);
+    bool getVisitado();
+
 
 };
 

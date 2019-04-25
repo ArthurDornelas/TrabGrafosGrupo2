@@ -4,6 +4,7 @@
 #include "No.h"
 #include <iostream>
 #include <fstream>
+
 using namespace std;
 
 class Grafo
@@ -46,6 +47,9 @@ public:
     char bucar_label_do_no(int id);
     void preencher_grafo_bipartido();
     void imprimir_biparticao();
+    void auxBuscaEmProfundidade(int key);
+    void buscaEmProfundidade(No *v);//faz uma busca apartir de um vertice
+
 
 
 };

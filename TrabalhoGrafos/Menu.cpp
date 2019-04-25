@@ -22,11 +22,12 @@ void Menu::inicia()
     cout << "Digite 4 para verificar o grau do no" << endl;
     cout << "Digite 5 para verificar a k-regularidade de um grafo" << endl;
     cout << "Digite 6 para retornar a ordem de um grafo" << endl;
-    cout << "Digite 7 para mostrar a vizinhança aberta de um no" << endl;
-    cout << "Digite 8 para mostra a vizinhança fechado de um no" << endl;
+    cout << "Digite 7 para mostrar a vizinhanca aberta de um no" << endl;
+    cout << "Digite 8 para mostra a vizinhanca fechado de um no" << endl;
     cout << "Digite 9 para verificar se o grafo e completo" << endl;
     cout << "Digite 10 para verificar se o grafo e bipartido" << endl;
-    cout << "Digite 11 para imprimir a sequência de grau do vertice" << endl;
+    cout << "Digite 11 para imprimir a sequencia de grau do vertice" << endl;
+    cout << "Digite 12 para realizar uma busca em profundidade a partir de um vertice" << endl;
     cout << "Digite 0 para finalizar o programa" << endl;
     while(code != 0)
     {
@@ -65,6 +66,9 @@ void Menu::inicia()
             break;
         case 11:
             opcao11();
+            break;
+        case 12:
+            opcao12();
             break;
         case 0:
             cout << "Fechando o programa" << endl;
@@ -230,4 +234,13 @@ void Menu::opcao11()
     grafoUtilizado->sequenciaGraus();
     this->inicia();
 
+}
+
+void Menu::opcao12()
+{
+    int key=0;
+    cout<<"Digite a id do no que deseja iniciar a busca:"<<endl;
+    cin>>key;
+    grafoUtilizado->auxBuscaEmProfundidade(key);
+    this->inicia();
 }
