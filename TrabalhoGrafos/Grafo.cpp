@@ -581,8 +581,8 @@ void Grafo::imprimir_biparticao()
 /*
 XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 X                                                                                                                                                               X
-X   O algoritmo de busca em profundidade eh um algoritmo recursivo, que faz uma busca  na direçao "vertical", ou seja, ao ser encotrado um nó que nao tem
-X   mais nós adjacentes para "baixo" ele retornar para o nó anterior e confere se existe outro no adjacente a esse e que n tenha sido visitado
+X   O algoritmo de busca em profundidade eh um algoritmo recursivo, que faz uma busca  na direçao "vertical", ou seja, enquanto for possível aprofunda-se no 
+X   no grafo, se n for mais possivel, recua e procura outra adjacencia q nao foi visitada ainda.
 X
 XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 */
