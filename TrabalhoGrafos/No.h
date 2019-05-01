@@ -29,8 +29,8 @@ public:
     void setId(int id);
     void setGrauSaida(int g);
     void setGrauEntrada(int g);
-    void adicionaAresta(int id,float pesoA,int idLista);
-    void adicionaArestaSemPeso(int id,int idLista);
+    void adicionaAresta(int id,float pesoA,int idLista,int indiceNo);
+    void adicionaArestaSemPeso(int id,int idLista,int indiceNo);
     void removeAresta(int id);
     float getAresta(int index);
     bool eVizinho(int id);

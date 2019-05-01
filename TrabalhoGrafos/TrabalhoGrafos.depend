@@ -620,3 +620,46 @@
 	"Aresta.h"
 	"iostream"
 
+1556677540 source:c:\users\adriana\documents\projeto grafos\trabgrafosgrupo2\trabalhografos\main.cpp
+	<iostream>
+	"Grafo.h"
+	"Grafo.cpp"
+	"Menu.h"
+
+1556677579 c:\users\adriana\documents\projeto grafos\trabgrafosgrupo2\trabalhografos\grafo.h
+	<vector>
+	"No.h"
+	<iostream>
+	<fstream>
+
+1556677330 c:\users\adriana\documents\projeto grafos\trabgrafosgrupo2\trabalhografos\no.h
+	<vector>
+	"Aresta.h"
+
+1556677341 c:\users\adriana\documents\projeto grafos\trabgrafosgrupo2\trabalhografos\aresta.h
+
+1556677777 c:\users\adriana\documents\projeto grafos\trabgrafosgrupo2\trabalhografos\grafo.cpp
+	"Grafo.h"
+	"No.h"
+	"No.cpp"
+	<vector>
+	<algorithm>
+	<cstring>
+	<stack>
+
+1556677330 c:\users\adriana\documents\projeto grafos\trabgrafosgrupo2\trabalhografos\no.cpp
+	"Aresta.h"
+	"No.h"
+
+1556636065 c:\users\adriana\documents\projeto grafos\trabgrafosgrupo2\trabalhografos\menu.h
+	"Grafo.h"
+	"No.h"
+	"Aresta.h"
+
+1556636065 source:c:\users\adriana\documents\projeto grafos\trabgrafosgrupo2\trabalhografos\menu.cpp
+	"Menu.h"
+	"Grafo.h"
+	"No.h"
+	"Aresta.h"
+	"iostream"
+

@@ -7,7 +7,7 @@ using namespace std;
 int main()
 {
 
-    Grafo* grafo = new Grafo(1,1);
+    Grafo* grafo = new Grafo(0,1);
     //grafo->lerDigrafo("teste.txt");
 
 

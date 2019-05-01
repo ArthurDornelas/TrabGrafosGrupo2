@@ -115,7 +115,7 @@ void Grafo::adicionarArestaNosSemPeso(int id, int id2)
 
     if(id1_noGrafo==true && id2_noGrafo==true && ehDigrafo==0 )
     {
-
+        int i=0,k=-1,l=-1;
         for (std::vector<No>::iterator it = listaAdj.begin(); it != listaAdj.end(); ++it)
         {
 
@@ -123,33 +123,55 @@ void Grafo::adicionarArestaNosSemPeso(int id, int id2)
             {
                 if(it->getId() == id)
                 {
-                    it->adicionaArestaSemPeso(id2,id);
+                    k = i;
                 }
 
-                if(it->getId() == id2)
+                else if(it->getId() == id2)
                 {
-                    it->adicionaArestaSemPeso(id,id2);
+                    l = i;
                 }
             }
 
+            if((k!=-1) && (l!=-1))
+            {
+                listaAdj[k].adicionaArestaSemPeso(id2,id,l);
+                listaAdj[l].adicionaArestaSemPeso(id,id2,k);
+                break;
+            }
+
+            i++;
         }
 
     }
 
     else if(id1_noGrafo==true && id2_noGrafo==true && ehDigrafo==1)
     {
-
+        int i=0,k=-1,l=-1;
         for (std::vector<No>::iterator it = listaAdj.begin(); it != listaAdj.end(); ++it)
         {
 
             if(id != id2)
             {
+
                 if(it->getId() == id)
                 {
-                    it->adicionaArestaSemPeso(id2,id);
+                    k = i;
                 }
+
+                else if(it->getId() == id2)
+                {
+                    l = i;
+                }
+
             }
 
+            if((k!=-1) && (l!=-1))
+            {
+                listaAdj[k].adicionaArestaSemPeso(id2,id,l);
+                break;
+            }
+
+            i++;
         }
 
     }
@@ -185,9 +207,9 @@ void Grafo::adicionarArestaNos(int id, int id2,int peso)
     }
 
 
-    if(id1_noGrafo==true && id2_noGrafo==true && ehDigrafo==0 )
+      if(id1_noGrafo==true && id2_noGrafo==true && ehDigrafo==0 )
     {
-
+        int i=0,k=-1,l=-1;
         for (std::vector<No>::iterator it = listaAdj.begin(); it != listaAdj.end(); ++it)
         {
 
@@ -195,37 +217,58 @@ void Grafo::adicionarArestaNos(int id, int id2,int peso)
             {
                 if(it->getId() == id)
                 {
-                    it->adicionaAresta(id2,peso,id);
+                    k = i;
                 }
 
-                if(it->getId() == id2)
+                else if(it->getId() == id2)
                 {
-                    it->adicionaAresta(id,peso,id2);
+                    l = i;
                 }
             }
 
+            if((k!=-1) && (l!=-1))
+            {
+                listaAdj[k].adicionaAresta(id2,peso,id,l);
+                listaAdj[l].adicionaAresta(id,peso,id2,k);
+                break;
+            }
+
+            i++;
         }
 
     }
 
     else if(id1_noGrafo==true && id2_noGrafo==true && ehDigrafo==1)
     {
-
+        int i=0,k=-1,l=-1;
         for (std::vector<No>::iterator it = listaAdj.begin(); it != listaAdj.end(); ++it)
         {
 
             if(id != id2)
             {
+
                 if(it->getId() == id)
                 {
-                    it->adicionaAresta(id2,peso,id);
+                    k = i;
                 }
+
+                else if(it->getId() == id2)
+                {
+                    l = i;
+                }
+
             }
 
+            if((k!=-1) && (l!=-1))
+            {
+                listaAdj[k].adicionaAresta(id2,peso,id,l);
+                break;
+            }
+
+            i++;
         }
 
     }
-
 
     imprimiGrafo();
 
@@ -486,7 +529,7 @@ void Grafo::imprimiGrafo()
         std::cout << it->getId();
         for(std::vector <Aresta>::iterator arest = it->listaAresta.begin(); arest != it->listaAresta.end(); arest++,j++)
         {
-            std::cout << " -> " << it->listaAresta[j].getIdNo();
+            std::cout << " -> " << it->listaAresta[j].getIdNo() << "--" << it->listaAresta[j].getIndiceNo();
         }
         std::cout << std::endl;
     }
@@ -608,19 +651,13 @@ void Grafo::buscaEmProfundidade(No *v)
     cout<<"Vertice "<< v->getId() <<" visitado"<<endl;
     for(std::vector<Aresta>::iterator arest = v->listaAresta.begin(); arest != v->listaAresta.end(); ++arest)
     {
-        int i=0;
-        for(std::vector<No>::iterator it = listaAdj.begin(); it != listaAdj.end(); ++it)
-        {
-            if(it->getVisitado()==false)
+            int indice = arest->getIndiceNo();
+
+            if(listaAdj[indice].getVisitado()==false)
             {
-                if(it->getId()==arest->getIdNo())
-                {
-                    buscaEmProfundidade(&(listaAdj[i]));
+                    buscaEmProfundidade(&(listaAdj[indice]));
                     break;
-                }
             }
-            i++;
-        }
     }
 }
 

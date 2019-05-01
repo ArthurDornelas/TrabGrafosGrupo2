@@ -48,7 +48,7 @@ public:
     void preencher_grafo_bipartido();
     void imprimir_biparticao();
     void auxBuscaEmProfundidade(int key);
-    void buscaEmProfundidade(No *v);//faz uma busca apartir de um vertice
+    void buscaEmProfundidade(No *v);//faz uma busca a partir de um vertice
 
 
 
