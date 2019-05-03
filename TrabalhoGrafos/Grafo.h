@@ -49,7 +49,7 @@ public:
     void imprimir_biparticao();
     void auxBuscaEmProfundidade(int key);
     void buscaEmProfundidade(No *v);//faz uma busca a partir de um vertice
-
+    void buscaEmLargura(int id);
 
 
 };

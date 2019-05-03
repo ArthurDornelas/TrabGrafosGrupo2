@@ -6,6 +6,7 @@
 #include <cstring>
 #define INF 9999999;
 #include <stack> // busca em profundidade
+#include<queue>
 using namespace std;
 
 Grafo::Grafo(int ehDigrafoAux, int ehPonderadaAux)
@@ -660,5 +661,45 @@ void Grafo::buscaEmProfundidade(No *v)
             }
     }
 }
+
+
+void Grafo::buscaEmLargura(int id)
+
+{
+    int indiceNo = -1;
+    queue<int> fila;
+
+    int i=0;
+    for(std::vector<No>::iterator it = listaAdj.begin(); it != listaAdj.end(); ++it)
+    {
+        if(it->getId()==id)
+        {
+            indiceNo = i;
+        }
+        i++;
+    }
+
+    fila.push(indiceNo);
+    while(!fila.empty())
+    {
+        indiceNo = fila.front();
+        listaAdj[indiceNo].setVisitado(true);
+        cout<<"Vertice "<< listaAdj[indiceNo].getId() <<" visitado"<<endl;
+        cout<<endl;
+
+        for(std::vector<Aresta>::iterator arest = listaAdj[indiceNo].listaAresta.begin(); arest != listaAdj[indiceNo].listaAresta.end(); ++arest)
+        {
+
+            if(listaAdj[arest->getIndiceNo()].getVisitado()==false)
+            {
+                fila.push(arest->getIndiceNo());
+            }
+
+        }
+        fila.pop();
+    }
+
+}
+
 
 

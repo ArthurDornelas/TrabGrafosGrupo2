@@ -663,3 +663,47 @@
 	"Aresta.h"
 	"iostream"
 
+1556678567 source:c:\users\joao\desktop\trabgrafosgrupo2-master\trabalhografos\menu.cpp
+	"Menu.h"
+	"Grafo.h"
+	"No.h"
+	"Aresta.h"
+	"iostream"
+
+1556678567 c:\users\joao\desktop\trabgrafosgrupo2-master\trabalhografos\menu.h
+	"Grafo.h"
+	"No.h"
+	"Aresta.h"
+
+1556926591 c:\users\joao\desktop\trabgrafosgrupo2-master\trabalhografos\grafo.h
+	<vector>
+	"No.h"
+	<iostream>
+	<fstream>
+
+1556678567 c:\users\joao\desktop\trabgrafosgrupo2-master\trabalhografos\no.h
+	<vector>
+	"Aresta.h"
+
+1556678567 c:\users\joao\desktop\trabgrafosgrupo2-master\trabalhografos\aresta.h
+
+1556926743 source:c:\users\joao\desktop\trabgrafosgrupo2-master\trabalhografos\main.cpp
+	<iostream>
+	"Grafo.h"
+	"Grafo.cpp"
+	"Menu.h"
+
+1556927014 c:\users\joao\desktop\trabgrafosgrupo2-master\trabalhografos\grafo.cpp
+	"Grafo.h"
+	"No.h"
+	"No.cpp"
+	<vector>
+	<algorithm>
+	<cstring>
+	<stack>
+	<queue>
+
+1556678567 c:\users\joao\desktop\trabgrafosgrupo2-master\trabalhografos\no.cpp
+	"Aresta.h"
+	"No.h"
+
