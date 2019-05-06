@@ -14,7 +14,7 @@ private:
     char label;
     float id_intraNo;
     bool visitado;
-
+    int visitadoConex;
 public:
 
     std::vector <Aresta> listaAresta;
@@ -36,6 +36,8 @@ public:
     bool eVizinho(int id);
     void setVisitado(bool novo);
     bool getVisitado();
+    void setVisitadoConex(int a);
+    int getVisitadoConex();
 
 
 };

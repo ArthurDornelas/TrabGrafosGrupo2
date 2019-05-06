@@ -100,3 +100,13 @@ bool No::getVisitado()
 {
     return visitado;
 }
+
+void No::setVisitadoConex(int a)
+{
+    visitadoConex= a;
+}
+
+int No::getVisitadoConex()
+{
+    return visitadoConex;
+}

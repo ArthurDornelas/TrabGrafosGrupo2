@@ -701,5 +701,51 @@ void Grafo::buscaEmLargura(int id)
 
 }
 
+void Grafo::compConexa()
+{
 
+    No *aux=new No();
+    int i=0;
+    aux = (&(listaAdj[i]));
+
+    for(std::vector<No>::iterator it = listaAdj.begin(); it != listaAdj.end(); ++it)
+    {
+        it->setVisitadoConex(0);
+    }
+
+    int componente = 0;
+
+    for(std::vector<No>::iterator it = listaAdj.begin(); it != listaAdj.end(); ++it)
+    {
+        if(it->getVisitadoConex() == 0)
+        {
+            componente = componente + 1;
+            buscaConexa(aux, componente);
+        }
+    }
+
+}
+
+void Grafo::buscaConexa(No *v, int componente)
+{
+    v->setVisitadoConex(componente);
+
+    for(std::vector<Aresta>::iterator arest = v->listaAresta.begin(); arest != v->listaAresta.end(); ++arest)
+    {
+        int i= 0;
+        for(std::vector<No>::iterator it = listaAdj.begin(); it != listaAdj.end(); ++it)
+        {
+            if(it->getVisitadoConex()==0)
+            {
+                if(it->getId()==arest->getIdNo())
+                {
+                buscaConexa(&(listaAdj[i]), componente);
+                break;
+            }
+            i++;
+        }
+
+    }
+}
+}
 

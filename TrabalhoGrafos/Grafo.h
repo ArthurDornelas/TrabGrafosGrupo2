@@ -50,6 +50,8 @@ public:
     void auxBuscaEmProfundidade(int key);
     void buscaEmProfundidade(No *v);//faz uma busca a partir de um vertice
     void buscaEmLargura(int id);
+    void compConexa();
+    void buscaConexa(No* v, int componente);
 
 
 };
