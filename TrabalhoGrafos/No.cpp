@@ -110,3 +110,18 @@ int No::getVisitadoConex()
 {
     return visitadoConex;
 }
+
+void No::addCorAdj(int k)
+{
+    bool flag = false;
+    for(int i=0; i<corAdj.size() ; i++)
+    {
+        if(corAdj[i] == k)
+        {
+            flag = true;
+            break;
+        }
+    }
+    if(flag == false)
+        corAdj.push_back(k);
+}

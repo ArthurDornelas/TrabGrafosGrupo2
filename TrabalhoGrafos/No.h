@@ -7,7 +7,7 @@ using namespace std;
 class No{
 
 private:
-
+    int cor;
     int id;
     int grauSaida;
     int grauEntrada;
@@ -16,7 +16,7 @@ private:
     bool visitado;
     int visitadoConex;
 public:
-
+    std::vector <int> corAdj;
     std::vector <Aresta> listaAresta;
     No();
     No(int id, int grauSaida);
@@ -38,7 +38,9 @@ public:
     bool getVisitado();
     void setVisitadoConex(int a);
     int getVisitadoConex();
-
+    void setCorNo(int corNo){cor = corNo;};
+    int getCorNo(){return cor;};
+    void addCorAdj(int k);
 
 };
 
