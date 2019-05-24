@@ -169,6 +169,7 @@ void Grafo::adicionarArestaNosSemPeso(int id, int id2)
             if((k!=-1) && (l!=-1))
             {
                 listaAdj[k].adicionaArestaSemPeso(id2,id,l);
+                listaAdj[l].setGrauEntrada(1);
                 break;
             }
 
@@ -263,6 +264,7 @@ void Grafo::adicionarArestaNos(int id, int id2,int peso)
             if((k!=-1) && (l!=-1))
             {
                 listaAdj[k].adicionaAresta(id2,peso,id,l);
+                listaAdj[l].setGrauEntrada(1);
                 break;
             }
 
@@ -524,6 +526,7 @@ void Grafo::algoritmoPrim()
 
 void Grafo::imprimiGrafo()
 {
+
     for(std::vector<No>::iterator it = listaAdj.begin(); it != listaAdj.end(); ++it)
     {
         int j=0;
@@ -534,7 +537,6 @@ void Grafo::imprimiGrafo()
         }
         std::cout << std::endl;
     }
-
 
 }
 

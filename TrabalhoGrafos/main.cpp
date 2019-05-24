@@ -30,7 +30,7 @@ void leArquivo(Grafo *grafo, int ponderado)
     i=0;
     if(ponderado == 1)
     {
-        while(infile)
+        while(!infile.eof())
         {
             string s;
             getline(infile,s);
@@ -38,7 +38,7 @@ void leArquivo(Grafo *grafo, int ponderado)
             char str[s.length()+1];
             strcpy(str, s.c_str());
             char *pch = strtok(str," ");
-            int vetN[3];
+            int vetN[3]={0,0,0};
             int contador = 0;
             while (pch != NULL)
             {
@@ -52,11 +52,12 @@ void leArquivo(Grafo *grafo, int ponderado)
                     vetN[contador] = atoi(pch);
                     i++;
                 }
-                else
+                else if(contador == 2)
                 {
                     vetN[contador] = atoi(pch);
                     i++;
                 }
+
                 pch = strtok (NULL, " ");
                 contador++;
             }
@@ -65,8 +66,7 @@ void leArquivo(Grafo *grafo, int ponderado)
             grafo->adicionarArestaNos(vetN[j],vetN[j+1],vetN[j+2]);
             cout<<endl<<endl;
 
-            if(i>=12)
-                break;
+
         }
     }
 
@@ -79,7 +79,7 @@ void leArquivo(Grafo *grafo, int ponderado)
     else
     {
         i=0;
-        while(infile)
+        while(!infile.eof())
         {
             string s;
             getline(infile,s);
@@ -87,7 +87,7 @@ void leArquivo(Grafo *grafo, int ponderado)
             char str[s.length()+1];
             strcpy(str, s.c_str());
             char *pch = strtok(str," ");
-            int vetN[3];
+            int vetN[3]={0,0,0};
             int contador = 0;
             while (pch != NULL)
             {
@@ -102,16 +102,19 @@ void leArquivo(Grafo *grafo, int ponderado)
                     vetN[contador] = atoi(pch);
                     i++;
                 }
+                else
+                {
+                    break;
+                }
                 pch = strtok (NULL, " ");
                 contador++;
             }
 
             int j=0;
+            cout<< "ADD: " << vetN[j] << " e " << vetN[j+1]<<endl;
             grafo->adicionarArestaNosSemPeso(vetN[j],vetN[j+1]);
             cout<<endl<<endl;
 
-            if(i>=9)
-                break;
         }
     }
 
@@ -123,13 +126,16 @@ int main(int argc, char* argv[])
     int digrafo = atoi(argv[0]);
     int ponderado = atoi(argv[1]);
 
-    Grafo* grafo = new Grafo(0,1);
-    leArquivo(grafo,1);
-    cout<<"Testa Guloso"<< endl<<endl<<endl<<endl;
+    Grafo* grafo = new Grafo(0,0);
+    leArquivo(grafo,0);
+
+
+    cout<<"Testa Guloso"<< endl<<endl;
     int k = grafo->algoritmoGuloso();
-    cout<< k<< endl<<endl;
+    cout<< "Qtd de Cores: " <<k<< endl<<endl;
     cout<<"Imprime"<<endl;
     grafo->imprimiGrafo();
+
 
     Menu* menu = new Menu(grafo);
     menu->inicia();
