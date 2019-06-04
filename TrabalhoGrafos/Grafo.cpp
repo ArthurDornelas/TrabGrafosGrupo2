@@ -818,15 +818,9 @@ void Grafo::algoritmoKruskal()
     }
 
 
-    /*for(std::vector<No>::iterator it = listaAdj.begin(); it != listaAdj.end(); ++it)
-    {
-        for(std::vector<Aresta>::iterator arest = it->listaAresta.begin(); arest != it->listaAresta.end(); ++it)
-        {
-            if(it->getId() == arest->getIdLista())
-                cout<<arest->getIdLista();
-        }
-    }*/
-
+    for(std::vector<Aresta>::iterator it = arvoreKruskal.begin(); it != arvoreKruskal.end(); ++it){
+        cout<<it->getIndiceLista()<<" ---- "<<it->getIndiceNo()<<" == "<<it->getPesoAresta()<<endl;
+    }
 
 
     /*for(std::vector<No>::iterator it = arvoreKruskal.begin(); it != arvoreKruskal.end(); ++it)

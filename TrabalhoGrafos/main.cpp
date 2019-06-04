@@ -124,29 +124,25 @@ int main(int argc, char* argv[])
     Grafo* grafo = new Grafo(0,1);
     leArquivo(grafo,1);
 
-    cout<<"Testa Guloso"<< endl<<endl;
+    /*cout<<"Testa Guloso"<< endl<<endl;
     int k = grafo->algoritmoGuloso();
     cout<< "Qtd de Cores: " <<k<< endl<<endl;
-    grafo->imprimiGrafo();
+    grafo->imprimiGrafo();*/
 
 
     //grafo->adicionarArestaNos(1,2,3);
     //grafo->adicionarArestaNos(1,3,5);
     //grafo->adicionarArestaNos(2,3,7);
-    /*grafo->adicionarArestaNos(1,3,2);
-    grafo->adicionarArestaNos(1,5,3);
-    grafo->adicionarArestaNos(2,3,5);
-    grafo->adicionarArestaNos(2,4,5);
-    grafo->adicionarArestaNos(2,6,4);
-    grafo->adicionarArestaNos(3,5,2);
-    grafo->adicionarArestaNos(4,3,4);
+    grafo->adicionarArestaNos(0,1,10);
+    grafo->adicionarArestaNos(0,2,6);
+    grafo->adicionarArestaNos(0,3,5);
+    grafo->adicionarArestaNos(1,3,15);
+    grafo->adicionarArestaNos(2,3,4);
 
-    grafo->adicionarArestaNos(6,1,6);*/
+    grafo->algoritmoKruskal();
 
-    //grafo->algoritmoKruskal();
-
-    Menu* menu = new Menu(grafo);
-    menu->inicia();
+    //Menu* menu = new Menu(grafo);
+    //menu->inicia();
 
 
     return 0;
