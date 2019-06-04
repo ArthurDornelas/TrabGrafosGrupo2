@@ -121,8 +121,8 @@ int main(int argc, char* argv[])
     int digrafo = atoi(argv[0]);
     int ponderado = atoi(argv[1]);
 
-    Grafo* grafo = new Grafo(0,1);
-    leArquivo(grafo,1);
+    Grafo* grafo = new Grafo(1,1);
+    //leArquivo(grafo,1);
 
     /*cout<<"Testa Guloso"<< endl<<endl;
     int k = grafo->algoritmoGuloso();
