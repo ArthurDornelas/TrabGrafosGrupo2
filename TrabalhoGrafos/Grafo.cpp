@@ -7,6 +7,8 @@
 #define INF 9999999;
 #include <stack> // busca em profundidade
 #include<queue>
+#include "Aresta.h"
+
 using namespace std;
 
 Grafo::Grafo(int ehDigrafoAux, int ehPonderadaAux)
@@ -497,6 +499,7 @@ void Grafo::algoritmoPrim()
 
         idNo = arvore[posNoArvoreMenor].listaAresta[arestaMenor].getIdNo();
         int i = 0;
+
         for (std::vector<No>::iterator it = listaAdj.begin(); it != listaAdj.end(); ++it)
         {
             if(idNo == it->getId())
@@ -537,6 +540,8 @@ void Grafo::imprimiGrafo()
         }
         std::cout << std::endl;
     }
+
+
 
 }
 
@@ -812,6 +817,144 @@ int Grafo::algoritmoGuloso()
     }
 
     return k;
+}
+
+No* Grafo::busca_kruskal(No *v)
+{
+    if(v->getPai() == v)
+        return v;
+    return busca_kruskal(v->getPai());
+}
+
+void Grafo::uniao_kruskal(No *v1,No *v2)
+{
+    if(v1->getRank() > v2->getRank())
+        v2->setPai(v1);
+    else if(v2->getRank() > v1->getRank())
+        v1->setPai(v2);
+    else
+    {
+        v2->setPai(v1);
+        v1->incrementaRank();
+    }
+
+}
+
+void Grafo::algoritmoKruskal()
+{
+    int i=0;
+    for(std::vector<No>::iterator it = listaAdj.begin(); it != listaAdj.end(); ++it)
+    {
+        int j=0;
+        auxArvoreKruskal.push_back(listaAdj[i]);
+        for(std::vector<Aresta>::iterator arest = it->listaAresta.begin(); arest != it->listaAresta.end(); ++arest)
+        {
+            pesoArestas.push_back(it->listaAresta[j]);//colocando todas as arestas em um unico vetor
+            j++;
+        }
+        i++;
+    }
+
+
+     int k=0;
+      for(std::vector<No>::iterator it = auxArvoreKruskal.begin(); it != auxArvoreKruskal.end(); ++it)
+        {
+         it->setPai(&auxArvoreKruskal[k]);//criar uma sub-arvore para cada no do grafo
+         it->setRank(0);                 //sendo o pai o proprio vertice
+         k++;
+        }
+
+    quickSortKruskal(0,pesoArestas.size()-1);//ordenando o vetor de arestas na ordem crescente de acordo com seu peso
+
+    int l=0;
+
+    for(std::vector<Aresta>::iterator it = pesoArestas.begin(); it != pesoArestas.end(); ++it)
+    {
+
+
+        No *v1=busca_kruskal(&listaAdj[it->getIndiceLista()]);//vertice de origem de uma aresta
+        No *v2=busca_kruskal(&listaAdj[it->getIndiceNo()]);//vertice de destino de uma aresta
+
+        if(v1 != v2)
+        {
+            arvoreKruskal.push_back(pesoArestas[l]);
+            uniao_kruskal(v1,v2);
+            l++;
+        }
+    }
+
+
+    /*for(std::vector<No>::iterator it = listaAdj.begin(); it != listaAdj.end(); ++it)
+    {
+        for(std::vector<Aresta>::iterator arest = it->listaAresta.begin(); arest != it->listaAresta.end(); ++it)
+        {
+            if(it->getId() == arest->getIdLista())
+                cout<<arest->getIdLista();
+        }
+    }*/
+
+
+
+    /*for(std::vector<No>::iterator it = arvoreKruskal.begin(); it != arvoreKruskal.end(); ++it)
+    {
+        cout<<"TESTE KRUSKAL:"<<it->getId()<<endl;
+    }
+
+    for (std::vector<Aresta>::iterator it = pesoArestas.begin(); it != pesoArestas.end(); ++it)
+    {
+        cout<<"TESTE KRUSKAL ARESTAS:"<<it->getPesoAresta()<<endl;
+    }
+    cout<<endl;
+
+
+    for (std::vector<Aresta>::iterator it = pesoArestas.begin(); it != pesoArestas.end(); ++it)
+    {
+        cout<<"TESTE KRUSKAL ARESTAS ORIGEM:"<<pesoArestas[0].getIdLista()<<endl;
+
+        cout<<"TESTE KRUSKAL ARESTAS DESTINO:"<<pesoArestas[0].getIdNo()<<endl;
+
+        cout<<"TESTE KRUSKAL ARESTAS PESO:"<<pesoArestas[0].getPesoAresta()<<endl;
+    }*/
+
+}
+
+int Grafo::quickPartitionKruskal(int left, int right)
+{
+    int pivo = pesoArestas[right].getPesoAresta();
+    int i = (left - 1);
+
+    for(int j=left ; j <= right-1 ; j++)
+    {
+        if( pesoArestas[j].getPesoAresta() >= pivo)
+        {
+            i++;
+            trocaKruskal(i, j);
+        }
+    }
+    trocaKruskal(i+1, right);
+    return i+1;
+}
+
+void Grafo::quickSortKruskal(int left,int right)
+{
+    if( left < right)
+    {
+        int pi = quickPartitionKruskal(left, right);
+
+        quickSortKruskal(left, pi-1);
+        quickSortKruskal(pi+1, right);
+    }
+}
+
+void Grafo::trocaKruskal(int x1, int x2)
+{
+    if(x1 != x2)
+    {
+        Aresta *aux = new Aresta();
+        *aux = pesoArestas[x1];
+        pesoArestas[x1] = pesoArestas[x2];
+        pesoArestas[x2] = *aux;
+    }
 }
 
 //////////////////////////////////////////////////////////////////////////

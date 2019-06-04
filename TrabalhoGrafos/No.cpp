@@ -7,6 +7,8 @@ No::No()
     grauSaida=0;
     grauEntrada = 0;
     cor = -1;
+    pai=NULL;
+    Rank=0;
 }
 
 No::No(int ident, int grauSaidaNo)

@@ -2,6 +2,7 @@
 #define NO_H_INCLUDED
 #include <vector>
 #include "Aresta.h"
+#include "No.h"
 using namespace std;
 
 class No{
@@ -15,6 +16,8 @@ private:
     float id_intraNo;
     bool visitado;
     int visitadoConex;
+    No* pai;
+    int Rank;
 public:
     std::vector <int> corAdj;
     std::vector <Aresta> listaAresta;
@@ -41,6 +44,11 @@ public:
     void setCorNo(int corNo){cor = corNo;};
     int getCorNo(){return cor;};
     void addCorAdj(int k);
+    No* getPai(){return pai;};
+    void setPai(No* novo) {pai=novo;};
+    int getRank(){return Rank;};
+    void setRank(int novo) {Rank=novo;};
+    void incrementaRank() { Rank++; };
 
 };
 

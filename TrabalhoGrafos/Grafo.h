@@ -18,8 +18,11 @@ private:
 public:
 
     std::vector <No> arvore;
+    std::vector <Aresta> arvoreKruskal;
+    std::vector <No> auxArvoreKruskal;
     std::vector <Aresta> arestasArvore;
     std::vector <Aresta> auxArestasArvore;
+    std::vector <Aresta> pesoArestas;
     Grafo(int ehDigrafoAux, int ehPonderadaAux);
     ~Grafo();
     void adicionarArestaNos(int id, int id2,int peso);
@@ -56,7 +59,12 @@ public:
     void quickSort(int left, int right);
     int quickPartition(int left, int right);
     void troca(int x1, int x2);
-
+    void algoritmoKruskal();
+    void uniao_kruskal(No *v1, No *v2);
+    No* busca_kruskal(No *v);
+    void quickSortKruskal(int left,int right);
+    int quickPartitionKruskal(int left, int right);
+    void trocaKruskal(int x1, int x2);
 
 };
 #endif // GRAFO_H_INCLUDED
