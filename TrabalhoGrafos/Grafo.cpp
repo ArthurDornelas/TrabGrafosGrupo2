@@ -788,9 +788,9 @@ void Grafo::algoritmoKruskal()
     for(std::vector<No>::iterator it = listaAdj.begin(); it != listaAdj.end(); ++it)
     {
         int j=0;
-        //auxArvoreKruskal.push_back(listaAdj[i]);
         for(std::vector<Aresta>::iterator arest = it->listaAresta.begin(); arest != it->listaAresta.end(); ++arest)
         {
+//            if(pesoArestas.find(pesoArestas.begin(),pesoArestas.end(),it->listaAresta[j]) != pesoArestas.end())
             pesoArestas.push_back(it->listaAresta[j]);//colocando todas as arestas em um unico vetor
             j++;
         }
@@ -813,13 +813,16 @@ void Grafo::algoritmoKruskal()
         l++;
     }
 
+    int soma=0;
     cout<<"Arvore Geradora Minima - KRUSKAL"<<endl;
     cout<<"|No Origem|"<<"  |No destino|"<<"  |Peso Aresta|"<<endl;
     for(std::vector<Aresta>::iterator it = arvoreKruskal.begin(); it != arvoreKruskal.end(); ++it)
     {
-
-            cout<<"     "<<it->getIndiceLista()<<" ----------- "<<it->getIndiceNo()<<"     ==>    "<<it->getPesoAresta()<<endl;
+        soma+=it->getPesoAresta();
+        cout<<"     "<<it->getIdLista()<<" ----------- "<<it->getIdNo()<<"     ==>    "<<it->getPesoAresta()<<endl;
     }
+    cout<<"                           -----------"<<endl;
+    cout<<"      Custo Minimo       ==>    "<<soma<<endl;
 }
 
 int Grafo::quickPartitionKruskal(int left, int right)
