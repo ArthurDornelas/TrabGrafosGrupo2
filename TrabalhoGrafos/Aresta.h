@@ -13,8 +13,8 @@ class Aresta{
 
 
     public:
-        Aresta(int idNo,float pesoA,int id, int indNo){ identNo = idNo; pesoAresta = pesoA; idLista = id; indiceNo = indNo;};
-        Aresta(int idNo,int id, int indNo ){ identNo = idNo; pesoAresta = -1 ; idLista = id; indiceNo = indNo; };
+        Aresta(int idNo,float pesoA,int id, int indNo,int indLista){ identNo = idNo; pesoAresta = pesoA; idLista = id; indiceNo = indNo; indiceLista = indLista;};
+        Aresta(int idNo,int id, int indNo,int indLista ){ identNo = idNo; pesoAresta = -1 ; idLista = id; indiceNo = indNo; indiceLista = indLista; };
         Aresta(){ identNo = 0; pesoAresta = -1 ; idLista = 0; indiceNo = 0; };
         float getPesoAresta(){ return this->pesoAresta; };
         int getIdNo(){ return this->identNo; };
@@ -24,6 +24,7 @@ class Aresta{
         void setPesoAresta(float peso){ this->pesoAresta = peso; };
         void setIndiceNo(int indNo){this->indiceNo = indNo;};
         int getIndiceNo(){ return this->indiceNo; };
+        int getIndiceLista(){ return this->indiceLista; };
 };
 
 #endif // ARESTA_H_INCLUDED

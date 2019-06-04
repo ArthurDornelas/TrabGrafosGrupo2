@@ -38,7 +38,7 @@ void leArquivo(Grafo *grafo, int ponderado)
             char str[s.length()+1];
             strcpy(str, s.c_str());
             char *pch = strtok(str," ");
-            int vetN[3]= {0,0,0};
+            int vetN[3]={0,0,0};
             int contador = 0;
             while (pch != NULL)
             {
@@ -64,8 +64,6 @@ void leArquivo(Grafo *grafo, int ponderado)
 
             int j=0;
             grafo->adicionarArestaNos(vetN[j],vetN[j+1],vetN[j+2]);
-            cout<<endl<<endl;
-
 
         }
     }
@@ -87,7 +85,7 @@ void leArquivo(Grafo *grafo, int ponderado)
             char str[s.length()+1];
             strcpy(str, s.c_str());
             char *pch = strtok(str," ");
-            int vetN[3]= {0,0,0};
+            int vetN[3]={0,0,0};
             int contador = 0;
             while (pch != NULL)
             {
@@ -111,34 +109,30 @@ void leArquivo(Grafo *grafo, int ponderado)
             }
 
             int j=0;
-            cout<< "ADD: " << vetN[j] << " e " << vetN[j+1]<<endl;
             grafo->adicionarArestaNosSemPeso(vetN[j],vetN[j+1]);
-            cout<<endl<<endl;
 
         }
     }
 
 }
 
-
 int main(int argc, char* argv[])
 {
     int digrafo = atoi(argv[0]);
     int ponderado = atoi(argv[1]);
 
-    Grafo* grafo = new Grafo(1,1);
-    // leArquivo(grafo,0);
+    Grafo* grafo = new Grafo(0,1);
+    leArquivo(grafo,1);
+
+    cout<<"Testa Guloso"<< endl<<endl;
+    int k = grafo->algoritmoGuloso();
+    cout<< "Qtd de Cores: " <<k<< endl<<endl;
+    grafo->imprimiGrafo();
 
 
-    /* cout<<"Testa Guloso"<< endl<<endl;
-     int k = grafo->algoritmoGuloso();
-     cout<< "Qtd de Cores: " <<k<< endl<<endl;
-     cout<<"Imprime"<<endl;
-     grafo->imprimiGrafo();*/
-
-    grafo->adicionarArestaNos(1,2,3);
-    grafo->adicionarArestaNos(1,3,5);
-    grafo->adicionarArestaNos(2,3,7);
+    //grafo->adicionarArestaNos(1,2,3);
+    //grafo->adicionarArestaNos(1,3,5);
+    //grafo->adicionarArestaNos(2,3,7);
     /*grafo->adicionarArestaNos(1,3,2);
     grafo->adicionarArestaNos(1,5,3);
     grafo->adicionarArestaNos(2,3,5);
@@ -149,10 +143,10 @@ int main(int argc, char* argv[])
 
     grafo->adicionarArestaNos(6,1,6);*/
 
-    grafo->algoritmoKruskal();
+    //grafo->algoritmoKruskal();
 
-    //Menu* menu = new Menu(grafo);
-    // menu->inicia();
+    Menu* menu = new Menu(grafo);
+    menu->inicia();
 
 
     return 0;

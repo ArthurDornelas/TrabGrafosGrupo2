@@ -797,3 +797,49 @@
 	"Aresta.h"
 	"No.h"
 
+1559607326 source:c:\users\adriana\desktop\trabgrafosgrupo2-master (4)\trabgrafosgrupo2-master\trabalhografos\menu.cpp
+	"Menu.h"
+	"Grafo.h"
+	"No.h"
+	"Aresta.h"
+	"iostream"
+
+1559607326 c:\users\adriana\desktop\trabgrafosgrupo2-master (4)\trabgrafosgrupo2-master\trabalhografos\menu.h
+	"Grafo.h"
+	"No.h"
+	"Aresta.h"
+
+1559620015 c:\users\adriana\desktop\trabgrafosgrupo2-master (4)\trabgrafosgrupo2-master\trabalhografos\grafo.h
+	<vector>
+	"No.h"
+	<iostream>
+	<fstream>
+
+1559618532 c:\users\adriana\desktop\trabgrafosgrupo2-master (4)\trabgrafosgrupo2-master\trabalhografos\no.h
+	<vector>
+	"Aresta.h"
+	"No.h"
+
+1559619680 c:\users\adriana\desktop\trabgrafosgrupo2-master (4)\trabgrafosgrupo2-master\trabalhografos\aresta.h
+
+1559619721 source:c:\users\adriana\desktop\trabgrafosgrupo2-master (4)\trabgrafosgrupo2-master\trabalhografos\main.cpp
+	<iostream>
+	"Grafo.h"
+	"Grafo.cpp"
+	"Menu.h"
+
+1559620455 c:\users\adriana\desktop\trabgrafosgrupo2-master (4)\trabgrafosgrupo2-master\trabalhografos\grafo.cpp
+	"Grafo.h"
+	"No.h"
+	"No.cpp"
+	<vector>
+	<algorithm>
+	<cstring>
+	<stack>
+	<queue>
+	"Aresta.h"
+
+1559618479 c:\users\adriana\desktop\trabgrafosgrupo2-master (4)\trabgrafosgrupo2-master\trabalhografos\no.cpp
+	"Aresta.h"
+	"No.h"
+

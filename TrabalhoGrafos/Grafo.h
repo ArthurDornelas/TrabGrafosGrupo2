@@ -23,6 +23,8 @@ public:
     std::vector <Aresta> arestasArvore;
     std::vector <Aresta> auxArestasArvore;
     std::vector <Aresta> pesoArestas;
+    std::vector <int> ordenado;
+    std::vector <No> auxOrdena;
     Grafo(int ehDigrafoAux, int ehPonderadaAux);
     ~Grafo();
     void adicionarArestaNos(int id, int id2,int peso);
@@ -30,7 +32,6 @@ public:
     void adicionarNo(int id);
     void removerNo(int id);
     void removeAresta(int id1, int id2);
-    //void adicionaAresta(int id1,int id2, float peso);
     bool estaNoGrafo(int index);
     int ordemGrafo();
     int retornagrauSaidaNo(int id);
