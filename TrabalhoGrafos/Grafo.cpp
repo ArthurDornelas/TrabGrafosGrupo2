@@ -7,6 +7,9 @@
 #define INF 9999999;
 #include <stack> // busca em profundidade
 #include<queue>
+#include <time.h>
+#include <math.h>
+#include <stdlib.h>
 #include "Aresta.h"
 
 using namespace std;
