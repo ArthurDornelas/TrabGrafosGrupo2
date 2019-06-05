@@ -6,7 +6,8 @@ using namespace std;
 
 void leArquivo(Grafo *grafo, int ponderado)
 {
-    int numN = 0; //armazena o número de N's do arquivo
+    cout<< "Lendo e Armazenando Arquivo..."<<endl<<endl;
+    int numN = 0; //armazena o nÃºmero de N's do arquivo
     ifstream infile ("teste.txt");
     int i=0;
 
@@ -16,7 +17,7 @@ void leArquivo(Grafo *grafo, int ponderado)
         {
             string s;
             getline(infile,s);
-            numN = atoi(s.c_str()); //pega o número de N's que estão no arquivo.
+            numN = atoi(s.c_str()); //pega o nÃºmero de N's que estÃ£o no arquivo.
             break;
         }
     }
@@ -24,7 +25,7 @@ void leArquivo(Grafo *grafo, int ponderado)
 
 
     //****************************************************************
-    // Leitura dos Arquivos e armazenamento, quando é um grafo       *
+    // Leitura dos Arquivos e armazenamento, quando Ã© um grafo       *
     // ponderado                                                     *
     //****************************************************************
     i=0;
@@ -70,7 +71,7 @@ void leArquivo(Grafo *grafo, int ponderado)
 
 
     //****************************************************************
-    // Leitura dos Arquivos e armazenamento, quando é um grafo       *
+    // Leitura dos Arquivos e armazenamento, quando Ã© um grafo       *
     // nao ponderado                                                 *
     //****************************************************************
 
@@ -124,11 +125,15 @@ int main(int argc, char* argv[])
     Grafo* grafo = new Grafo(0,1);
     leArquivo(grafo,1);
 
-    /*cout<<"Testa Guloso"<< endl<<endl;
+    cout<<"Testa Guloso Randomizado"<< endl<<endl;
+    grafo->auxGulosoRandomizado();
+    cout<<endl;
+    grafo->imprimiGrafo();
+    cout<< endl<<endl;
+    cout<<"Testa Guloso"<< endl<<endl;
     int k = grafo->algoritmoGuloso();
     cout<< "Qtd de Cores: " <<k<< endl<<endl;
-    grafo->imprimiGrafo();*/
-
+    grafo->imprimiGrafo();
 
 
     ////////TESTE KRUSKAL/////////
