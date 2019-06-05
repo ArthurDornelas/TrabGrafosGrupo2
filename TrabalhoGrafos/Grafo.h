@@ -57,6 +57,8 @@ public:
     void compConexa();
     void buscaConexa(No* v, int componente);
     int algoritmoGuloso();
+    void algoritmoGulosoRandomizado(float alfa, int intMax);
+    void auxGulosoRandomizado();
     void quickSort(int left, int right);
     int quickPartition(int left, int right);
     void troca(int x1, int x2);
