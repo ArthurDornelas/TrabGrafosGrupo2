@@ -120,16 +120,36 @@ void leArquivo(Grafo *grafo, int ponderado)
 
 int main(int argc, char* argv[])
 {
-    int digrafo = atoi(argv[0]);
-    int ponderado = atoi(argv[1]);
 
     Grafo* grafo = new Grafo(1,1);
+    grafo->adicionarNo(0);
+    grafo->adicionarNo(1);
+    grafo->adicionarNo(2);
+    grafo->adicionarNo(3);
+    grafo->adicionarNo(4);
+    grafo->adicionarNo(5);
+    grafo->adicionarArestaNosSemPeso(5,0);
+    grafo->adicionarArestaNosSemPeso(5,2);
+    grafo->adicionarArestaNosSemPeso(4,0);
+    grafo->adicionarArestaNosSemPeso(4,1);
+    grafo->adicionarArestaNosSemPeso(2,3);
+    grafo->adicionarArestaNosSemPeso(3,1);
+    cout << grafo->temCiclo() << endl;
+    grafo->ordenacaoTopologica();
+
+   // grafo->adicionarArestaNosSemPeso(0,2);
+   // grafo->adicionarArestaNosSemPeso(3,0);
+
+
+
+
+
     // leArquivo(grafo,1);
     //cout<<"Testa Guloso"<< endl<<endl<<endl<<endl;
     //int k = grafo->algoritmoGuloso();
 
    // cout<< k<< endl<<endl;
-    cout<<"Imprime"<<endl;
+   /* cout<<"Imprime"<<endl;
     grafo->imprimiGrafo();
     grafo->adicionarNo(1);
      grafo->adicionarArestaNos(4,2,-1);
@@ -147,7 +167,7 @@ int main(int argc, char* argv[])
     // Menu* menu = new Menu(grafo);//
     // menu->inicia();//
 
-
+*/
     return 0;
 
 }

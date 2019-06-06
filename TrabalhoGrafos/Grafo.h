@@ -4,6 +4,7 @@
 #include "No.h"
 #include <iostream>
 #include <fstream>
+#include <stack>
 
 using namespace std;
 
@@ -58,7 +59,10 @@ public:
     int quickPartition(int left, int right);
     void troca(int x1, int x2);
     void algoritmoFloyd();
-
+    bool temCiclo();
+    bool buscaUtil(int x, int cor[]);
+    void ordenacaoTopologica();
+    void ordTopologicaUtil(int v, bool visitado[], stack<int> &pilha);
 
 };
 #endif // GRAFO_H_INCLUDED
