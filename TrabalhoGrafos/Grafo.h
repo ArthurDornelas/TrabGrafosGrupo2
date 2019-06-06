@@ -9,6 +9,7 @@ using namespace std;
 
 class Grafo
 {
+
 private:
     std::vector <No> listaAdj;
     int ehDigrafo;
@@ -18,13 +19,8 @@ private:
 public:
 
     std::vector <No> arvore;
-    std::vector <Aresta> arvoreKruskal;
-    std::vector <No> auxArvoreKruskal;
     std::vector <Aresta> arestasArvore;
     std::vector <Aresta> auxArestasArvore;
-    std::vector <Aresta> pesoArestas;
-    std::vector <int> ordenado;
-    std::vector <No> auxOrdena;
     Grafo(int ehDigrafoAux, int ehPonderadaAux);
     ~Grafo();
     void adicionarArestaNos(int id, int id2,int peso);
@@ -32,6 +28,7 @@ public:
     void adicionarNo(int id);
     void removerNo(int id);
     void removeAresta(int id1, int id2);
+    //void adicionaAresta(int id1,int id2, float peso);
     bool estaNoGrafo(int index);
     int ordemGrafo();
     int retornagrauSaidaNo(int id);
@@ -57,17 +54,11 @@ public:
     void compConexa();
     void buscaConexa(No* v, int componente);
     int algoritmoGuloso();
-    void algoritmoGulosoRandomizado(float alfa, int intMax);
-    void auxGulosoRandomizado();
     void quickSort(int left, int right);
     int quickPartition(int left, int right);
     void troca(int x1, int x2);
-    void algoritmoKruskal();
-    void uniao_kruskal(No *v1, No *v2);
-    No* busca_kruskal(No *v);
-    void quickSortKruskal(int left,int right);
-    int quickPartitionKruskal(int left, int right);
-    void trocaKruskal(int x1, int x2);
+    void algoritmoFloyd();
+
 
 };
 #endif // GRAFO_H_INCLUDED

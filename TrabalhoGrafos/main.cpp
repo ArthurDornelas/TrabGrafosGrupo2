@@ -6,8 +6,7 @@ using namespace std;
 
 void leArquivo(Grafo *grafo, int ponderado)
 {
-    cout<< "Lendo e Armazenando Arquivo..."<<endl<<endl;
-    int numN = 0; //armazena o nÃºmero de N's do arquivo
+    int numN = 0; //armazena o número de N's do arquivo
     ifstream infile ("teste.txt");
     int i=0;
 
@@ -17,7 +16,7 @@ void leArquivo(Grafo *grafo, int ponderado)
         {
             string s;
             getline(infile,s);
-            numN = atoi(s.c_str()); //pega o nÃºmero de N's que estÃ£o no arquivo.
+            numN = atoi(s.c_str()); //pega o número de N's que estão no arquivo.
             break;
         }
     }
@@ -25,13 +24,13 @@ void leArquivo(Grafo *grafo, int ponderado)
 
 
     //****************************************************************
-    // Leitura dos Arquivos e armazenamento, quando Ã© um grafo       *
+    // Leitura dos Arquivos e armazenamento, quando é um grafo       *
     // ponderado                                                     *
     //****************************************************************
     i=0;
     if(ponderado == 1)
     {
-        while(!infile.eof())
+        while(infile)
         {
             string s;
             getline(infile,s);
@@ -39,7 +38,7 @@ void leArquivo(Grafo *grafo, int ponderado)
             char str[s.length()+1];
             strcpy(str, s.c_str());
             char *pch = strtok(str," ");
-            int vetN[3]={0,0,0};
+            int vetN[3];
             int contador = 0;
             while (pch != NULL)
             {
@@ -48,54 +47,6 @@ void leArquivo(Grafo *grafo, int ponderado)
                     vetN[contador] = atoi(pch);
                     i++;
                 }
-                else if(contador == 1)
-                {
-                    vetN[contador] = atoi(pch);
-                    i++;
-                }
-                else if(contador == 2)
-                {
-                    vetN[contador] = atoi(pch);
-                    i++;
-                }
-
-                pch = strtok (NULL, " ");
-                contador++;
-            }
-
-            int j=0;
-            grafo->adicionarArestaNos(vetN[j],vetN[j+1],vetN[j+2]);
-
-        }
-    }
-
-
-    //****************************************************************
-    // Leitura dos Arquivos e armazenamento, quando Ã© um grafo       *
-    // nao ponderado                                                 *
-    //****************************************************************
-
-    else
-    {
-        i=0;
-        while(!infile.eof())
-        {
-            string s;
-            getline(infile,s);
-            //cout<<s<<endl;
-            char str[s.length()+1];
-            strcpy(str, s.c_str());
-            char *pch = strtok(str," ");
-            int vetN[3]={0,0,0};
-            int contador = 0;
-            while (pch != NULL)
-            {
-                if(contador == 0)
-                {
-                    vetN[contador] = atoi(pch);
-                    i++;
-                }
-
                 else if(contador == 1)
                 {
                     vetN[contador] = atoi(pch);
@@ -103,7 +54,53 @@ void leArquivo(Grafo *grafo, int ponderado)
                 }
                 else
                 {
-                    break;
+                    vetN[contador] = atoi(pch);
+                    i++;
+                }
+                pch = strtok (NULL, " ");
+                contador++;
+            }
+
+            int j=0;
+            grafo->adicionarArestaNos(vetN[j],vetN[j+1],vetN[j+2]);
+            cout<<endl<<endl;
+
+            if(i>=12)
+                break;
+        }
+    }
+
+
+    //****************************************************************
+    // Leitura dos Arquivos e armazenamento, quando é um grafo       *
+    // nao ponderado                                                 *
+    //****************************************************************
+
+    else
+    {
+        i=0;
+        while(infile)
+        {
+            string s;
+            getline(infile,s);
+            //cout<<s<<endl;
+            char str[s.length()+1];
+            strcpy(str, s.c_str());
+            char *pch = strtok(str," ");
+            int vetN[3];
+            int contador = 0;
+            while (pch != NULL)
+            {
+                if(contador == 0)
+                {
+                    vetN[contador] = atoi(pch);
+                    i++;
+                }
+
+                else if(contador == 1)
+                {
+                    vetN[contador] = atoi(pch);
+                    i++;
                 }
                 pch = strtok (NULL, " ");
                 contador++;
@@ -111,60 +108,44 @@ void leArquivo(Grafo *grafo, int ponderado)
 
             int j=0;
             grafo->adicionarArestaNosSemPeso(vetN[j],vetN[j+1]);
+            cout<<endl<<endl;
 
+            if(i>=9)
+                break;
         }
     }
 
 }
+
 
 int main(int argc, char* argv[])
 {
     int digrafo = atoi(argv[0]);
     int ponderado = atoi(argv[1]);
 
-    Grafo* grafo = new Grafo(0,1);
-    leArquivo(grafo,1);
+    Grafo* grafo = new Grafo(1,1);
+    // leArquivo(grafo,1);
+    //cout<<"Testa Guloso"<< endl<<endl<<endl<<endl;
+    //int k = grafo->algoritmoGuloso();
 
-    cout<<"Testa Guloso Randomizado"<< endl<<endl;
-    grafo->auxGulosoRandomizado();
-    cout<<endl;
+   // cout<< k<< endl<<endl;
+    cout<<"Imprime"<<endl;
     grafo->imprimiGrafo();
-    cout<< endl<<endl;
-    cout<<"Testa Guloso"<< endl<<endl;
-    int k = grafo->algoritmoGuloso();
-    cout<< "Qtd de Cores: " <<k<< endl<<endl;
-    grafo->imprimiGrafo();
+    grafo->adicionarNo(1);
+     grafo->adicionarArestaNos(4,2,-1);
+    grafo->adicionarNo(2);
+    grafo->adicionarNo(3);
+    grafo->adicionarNo(4);
+    grafo->adicionarArestaNos(2,3,3);
+
+    grafo->adicionarArestaNos(3,4,2);
+    grafo->adicionarArestaNos(1,3,-2);
+    grafo->adicionarArestaNos(2,1,4);
 
 
-    ////////TESTE KRUSKAL/////////
-    /*grafo->adicionarArestaNos(0, 1, 4);
-    grafo->adicionarArestaNos(0, 2, 4);
-    grafo->adicionarArestaNos(1, 2, 2);
-    grafo->adicionarArestaNos(1, 0, 4);
-    grafo->adicionarArestaNos(2, 0, 4);
-    grafo->adicionarArestaNos(2, 1, 2);
-    grafo->adicionarArestaNos(2, 3, 3);
-    grafo->adicionarArestaNos(2, 5, 2);
-    grafo->adicionarArestaNos(2, 4, 4);
-    grafo->adicionarArestaNos(3, 2, 3);
-    grafo->adicionarArestaNos(3, 4, 3);
-    grafo->adicionarArestaNos(4, 2, 4);
-    grafo->adicionarArestaNos(4, 3, 3);
-    grafo->adicionarArestaNos(5, 2, 2);
-    grafo->adicionarArestaNos(5, 4, 3);*/
-
-    //grafo->adicionarArestaNos(1,2,3);
-    //grafo->adicionarArestaNos(1,3,5);
-    //grafo->adicionarArestaNos(2,3,7);
-   /* grafo->adicionarArestaNos(0,1,10);
-    grafo->adicionarArestaNos(0,2,6);
-    grafo->adicionarArestaNos(0,3,5);
-    grafo->adicionarArestaNos(1,3,15);
-    grafo->adicionarArestaNos(2,3,4);
-*/
-
-    Menu* menu = new Menu(grafo);
-    menu->inicia();
+    grafo->algoritmoFloyd();
+    // Menu* menu = new Menu(grafo);//
+    // menu->inicia();//
 
 
     return 0;

@@ -7,11 +7,6 @@
 #define INF 9999999;
 #include <stack> // busca em profundidade
 #include<queue>
-#include <time.h>
-#include <math.h>
-#include <stdlib.h>
-#include "Aresta.h"
-
 using namespace std;
 
 Grafo::Grafo(int ehDigrafoAux, int ehPonderadaAux)
@@ -140,8 +135,8 @@ void Grafo::adicionarArestaNosSemPeso(int id, int id2)
 
             if((k!=-1) && (l!=-1))
             {
-                listaAdj[k].adicionaArestaSemPeso(id2,id,l,k);
-                listaAdj[l].adicionaArestaSemPeso(id,id2,k,l);
+                listaAdj[k].adicionaArestaSemPeso(id2,id,l);
+                listaAdj[l].adicionaArestaSemPeso(id,id2,k);
                 break;
             }
 
@@ -173,8 +168,7 @@ void Grafo::adicionarArestaNosSemPeso(int id, int id2)
 
             if((k!=-1) && (l!=-1))
             {
-                listaAdj[k].adicionaArestaSemPeso(id2,id,l,k);
-                listaAdj[l].setGrauEntrada(1);
+                listaAdj[k].adicionaArestaSemPeso(id2,id,l);
                 break;
             }
 
@@ -183,6 +177,8 @@ void Grafo::adicionarArestaNosSemPeso(int id, int id2)
 
     }
 
+
+    imprimiGrafo();
 
 }
 
@@ -233,8 +229,8 @@ void Grafo::adicionarArestaNos(int id, int id2,int peso)
 
             if((k!=-1) && (l!=-1))
             {
-                listaAdj[k].adicionaAresta(id2,peso,id,l,k);
-                listaAdj[l].adicionaAresta(id,peso,id2,k,l);
+                listaAdj[k].adicionaAresta(id2,peso,id,l);
+                listaAdj[l].adicionaAresta(id,peso,id2,k);
                 break;
             }
 
@@ -243,7 +239,7 @@ void Grafo::adicionarArestaNos(int id, int id2,int peso)
 
     }
 
-    else if(id1_noGrafo==true && id2_noGrafo==true && ehDigrafo==1)
+    else if((id1_noGrafo==true && id2_noGrafo==true) && ehDigrafo==1)
     {
         int i=0,k=-1,l=-1;
         for (std::vector<No>::iterator it = listaAdj.begin(); it != listaAdj.end(); ++it)
@@ -266,8 +262,7 @@ void Grafo::adicionarArestaNos(int id, int id2,int peso)
 
             if((k!=-1) && (l!=-1))
             {
-                listaAdj[k].adicionaAresta(id2,peso,id,l,k);
-                listaAdj[l].setGrauEntrada(1);
+                listaAdj[k].adicionaAresta(id2,peso,id,l);
                 break;
             }
 
@@ -275,6 +270,8 @@ void Grafo::adicionarArestaNos(int id, int id2,int peso)
         }
 
     }
+
+    imprimiGrafo();
 
 }
 
@@ -498,7 +495,6 @@ void Grafo::algoritmoPrim()
 
         idNo = arvore[posNoArvoreMenor].listaAresta[arestaMenor].getIdNo();
         int i = 0;
-
         for (std::vector<No>::iterator it = listaAdj.begin(); it != listaAdj.end(); ++it)
         {
             if(idNo == it->getId())
@@ -528,7 +524,6 @@ void Grafo::algoritmoPrim()
 
 void Grafo::imprimiGrafo()
 {
-
     for(std::vector<No>::iterator it = listaAdj.begin(); it != listaAdj.end(); ++it)
     {
         int j=0;
@@ -539,7 +534,6 @@ void Grafo::imprimiGrafo()
         }
         std::cout << std::endl;
     }
-
 
 
 }
@@ -755,333 +749,85 @@ void Grafo::buscaConexa(No *v, int componente)
     }
 }
 
-
-No* Grafo::busca_kruskal(No *v)
-{
-    if(v->getPai() == v)
-        return v;
-    return busca_kruskal(v->getPai());
-}
-
-void Grafo::uniao_kruskal(No *v1,No *v2)
-{
-    if(v1->getRank() > v2->getRank())
-        v2->setPai(v1);
-    else if(v2->getRank() > v1->getRank())
-        v1->setPai(v2);
-    else
-    {
-        v2->setPai(v1);
-        v1->incrementaRank();
-    }
-
-}
-
-void Grafo::algoritmoKruskal()
-{
-    int k=0;
-    for(std::vector<No>::iterator it = listaAdj.begin(); it != listaAdj.end(); ++it)
-    {
-        it->setPai(&listaAdj[k]);//criar uma sub-arvore para cada no do grafo
-        it->setRank(0);          //sendo o pai o proprio vertice
-        k++;
-    }
-
-    int i=0;
-    for(std::vector<No>::iterator it = listaAdj.begin(); it != listaAdj.end(); ++it)
-    {
-        int j=0;
-        for(std::vector<Aresta>::iterator arest = it->listaAresta.begin(); arest != it->listaAresta.end(); ++arest)
-        {
-//            if(pesoArestas.find(pesoArestas.begin(),pesoArestas.end(),it->listaAresta[j]) != pesoArestas.end())
-            pesoArestas.push_back(it->listaAresta[j]);//colocando todas as arestas em um unico vetor
-            j++;
-        }
-        i++;
-    }
-
-    quickSortKruskal(0,pesoArestas.size()-1);//ordenando o vetor de arestas na ordem crescente de acordo com seu peso
-
-    int l=0;
-    for(std::vector<Aresta>::iterator it = pesoArestas.begin(); it != pesoArestas.end(); ++it)
-    {
-        No *v1=busca_kruskal(&listaAdj[it->getIndiceLista()]);//vertice de origem de uma aresta
-        No *v2=busca_kruskal(&listaAdj[it->getIndiceNo()]);//vertice de destino de uma aresta
-
-        if(v1 != v2)
-        {
-            arvoreKruskal.push_back(pesoArestas[l]);
-            uniao_kruskal(v1,v2);
-        }
-        l++;
-    }
-
-    int soma=0;
-    cout<<"Arvore Geradora Minima - KRUSKAL"<<endl;
-    cout<<"|No Origem|"<<"  |No destino|"<<"  |Peso Aresta|"<<endl;
-    for(std::vector<Aresta>::iterator it = arvoreKruskal.begin(); it != arvoreKruskal.end(); ++it)
-    {
-        soma+=it->getPesoAresta();
-        cout<<"     "<<it->getIdLista()<<" ----------- "<<it->getIdNo()<<"     ==>    "<<it->getPesoAresta()<<endl;
-    }
-    cout<<"                           -----------"<<endl;
-    cout<<"      Custo Minimo       ==>    "<<soma<<endl;
-}
-
-int Grafo::quickPartitionKruskal(int left, int right)
-{
-    int pivo = pesoArestas[right].getPesoAresta();
-    int i = (left - 1);
-
-    for(int j=left ; j <= right-1 ; j++)
-    {
-        if( pesoArestas[j].getPesoAresta() <= pivo)
-        {
-            i++;
-            trocaKruskal(i, j);
-        }
-    }
-    trocaKruskal(i+1, right);
-    return i+1;
-}
-
-void Grafo::quickSortKruskal(int left,int right)
-{
-    if( left < right)
-    {
-        int pi = quickPartitionKruskal(left, right);
-
-        quickSortKruskal(left, pi-1);
-        quickSortKruskal(pi+1, right);
-    }
-}
-
-void Grafo::trocaKruskal(int x1, int x2)
-{
-    if(x1 != x2)
-    {
-        Aresta *aux = new Aresta();
-        *aux = pesoArestas[x1];
-        pesoArestas[x1] = pesoArestas[x2];
-        pesoArestas[x2] = *aux;
-    }
-}
-
-
-/**
-        Algoritmo Guloso para Coloração de Vértices.
-
-*/
 int Grafo::algoritmoGuloso()
 {
-    ordenado.clear();
-    auxOrdena.clear();
-    int i = 0;
+    //Coloca as cores de todos os nos como -1
     for(std::vector<No>::iterator it = listaAdj.begin(); it != listaAdj.end(); ++it)
     {
-        it->setCorNo(-1);           // Coloca as cores de todos os nos como -1
-        ordenado.push_back(i);      // Manda a posicao de todos os nós na listaAdj para o vetor ordenado
-        i++;
+        it->setCorNo(-1);
     }
 
+    //Ordena o vetor em ordem descrecente em relacao ao grau
+    quickSort(0,listaAdj.size()-1);
 
-    auxOrdena = listaAdj;
+    int k = 0; //o maximo de cor no momento
 
-    quickSort(0,listaAdj.size()-1);         // Ordena o vetor em ordem descrecente em relacao ao grau.
-
-
-
-    int k = 0;                              // O maximo de cor no momento.
-
-    listaAdj[ordenado[0]].setCorNo(k);      // Pega o primeiro vertice com maior No e adiciona a primeira cor a ele.
-
-
-    for(std::vector<Aresta>::iterator arest = listaAdj[ordenado[0]].listaAresta.begin(); arest != listaAdj[ordenado[0]].listaAresta.end(); ++arest)
+    //Pega o primeiro vertice com maior No e adiciona a primeira cor a ele.
+    listaAdj[0].setCorNo(k);
+    //Adiciona k no vetor de cores adjacentes de todos os nós adjacentes ao primeiro no.
+    for(std::vector<Aresta>::iterator arest = listaAdj[0].listaAresta.begin(); arest != listaAdj[0].listaAresta.end(); ++arest)
     {
-        listaAdj[arest->getIndiceNo()].addCorAdj(k);        // Adiciona k no vetor de cores adjacentes de todos os nós adjacentes ao primeiro no.
+        listaAdj[arest->getIndiceNo()].addCorAdj(k);
     }
-    k++;                                                    // Atualiza k.
+    k++;
 
-    for(int j=1; j < ordenado.size() ; j++)                 // Pega os próximos nós de acordo com a ordem decrescente em reaçao ao grau.
+    for(std::vector<No>::iterator it = listaAdj.begin()+1; it != listaAdj.end(); ++it)
     {
-        int pos = ordenado[j];                              // Var pos que pega qual o indice da listaAdj fica o nó.
 
-        for(int i=0; i<=k ; i++)                            // For que roda todas as cores que existem até o momento.
+        for(int i=0; i<=k ; i++)
         {
 
             bool flag = false;
-            if(i<k)                                         // Se i = k entao nenhum nó adjacente a ele tem cor k, assim a cor dele sera k e nao é preciso checar suas cores adjacentes.
+            for(int corAdjacente = 0; corAdjacente < it->corAdj.size(); corAdjacente++)
             {
-                for(int corAdjacente = 0; corAdjacente < listaAdj[pos].corAdj.size(); corAdjacente++)       // For que roda todas as cores que sao adjacentes ao nó, pelo vetor corAdjacente que pertence ao nó.
+                if(it->corAdj[corAdjacente] == i)
                 {
-                    if(listaAdj[pos].corAdj[corAdjacente] == i)
-                    {
-                        flag = true;                                          // Var flag recebe true se existe a cor i no vetor de corAdjacente do nó, e assim passa para a próxima cor.
-                        break;
-                    }
+                    flag = true;
+                    break;
                 }
             }
-            /* Se a Var flag for falsa, entao temos que aquele indice de cor nao está sendo
-               utilizada por nenhum nó adjacente, portanto pode ser dada a esse nó, e para
-               isso, é necessario verificar se a cor i é uma cor que ja foi utilizada antes
-               ou é uma cor nova (o que implica que o nó é adjacente a todas as cores já
-               utilizadas), sendo assim necessário atualizar a variavel k, com uma cor nova.
-            */
-            if(flag == false && i < k)                                   // Cor i já existe.
+
+            if(flag == false && i < k)
             {
-                listaAdj[pos].setCorNo(i);
-                for(std::vector<Aresta>::iterator arest = listaAdj[pos].listaAresta.begin(); arest != listaAdj[pos].listaAresta.end(); ++arest)
+                it->setCorNo(i);
+                for(std::vector<Aresta>::iterator arest = it->listaAresta.begin(); arest != it->listaAresta.end(); ++arest)
                 {
-                    listaAdj[arest->getIndiceNo()].addCorAdj(i);         // Adiciona k no vetor de cores adjacentes de todos os nós adjacentes ao no.
+                    listaAdj[arest->getIndiceNo()].addCorAdj(i);
                 }
                 break;
             }
-            else if(flag == false && i==k)                               // Cor i não existe.
+            else if(flag == false && i==k)
             {
-                listaAdj[pos].setCorNo(i);
-                for(std::vector<Aresta>::iterator arest = listaAdj[pos].listaAresta.begin(); arest != listaAdj[pos].listaAresta.end(); ++arest)
+                it->setCorNo(i);
+                for(std::vector<Aresta>::iterator arest = it->listaAresta.begin(); arest != it->listaAresta.end(); ++arest)
                 {
-                    listaAdj[arest->getIndiceNo()].addCorAdj(i);         // Adiciona k no vetor de cores adjacentes de todos os nós adjacentes ao no.
+                    listaAdj[arest->getIndiceNo()].addCorAdj(i);
                 }
-                k++;                                                     // Atualiza k com nova cor
+                k++; // atualiza k com nova cor
                 break;
             }
         }
     }
 
-    return k;                                                            // Retorna o numero k-coloravel do grafo.
+    return k;
 }
 
-
-
-void Grafo::auxGulosoRandomizado()
-{
-    algoritmoGulosoRandomizado(0.1,1);
-}
-
-void Grafo::algoritmoGulosoRandomizado(float alfa, int intMax)
-{
-    ordenado.clear();
-    auxOrdena.clear();
-    int i = 0;
-    for(std::vector<No>::iterator it = listaAdj.begin(); it != listaAdj.end(); ++it)
-    {
-        it->setCorNo(-1);           // Coloca as cores de todos os nos como -1
-        ordenado.push_back(i);      // Manda a posicao de todos os nós na listaAdj para o vetor ordenado
-        i++;
-    }
-    auxOrdena = listaAdj;
-    quickSort(0, listaAdj.size()-1);
-
-    srand(time(NULL));
-
-    std::vector <int> posCandidatos;
-    int melhorSolucao = 9999;
-
-    int aux = 0;
-    int j = 0;
-    i=0;
-
-    while(i < intMax)
-    {
-        posCandidatos = ordenado;
-        for(std::vector<No>::iterator it = listaAdj.begin(); it != listaAdj.end(); ++it)
-        {
-            it->setCorNo(-1);           // Coloca as cores de todos os nos como -1
-        }
-        int k = 0;
-        while(posCandidatos.size() != 0)
-        {
-
-            int aux = ceil(posCandidatos.size() * alfa);
-
-            int j = rand() % aux;
-
-            int pos = posCandidatos[j];
-
-
-                for(int i=0; i<=k ; i++)                            // For que roda todas as cores que existem até o momento.
-                {
-
-                    bool flag = false;
-                    if(i<k)                                         // Se i = k entao nenhum nó adjacente a ele tem cor k, assim a cor dele sera k e nao é preciso checar suas cores adjacentes.
-                    {
-                        for(int corAdjacente = 0; corAdjacente < listaAdj[pos].corAdj.size(); corAdjacente++)       // For que roda todas as cores que sao adjacentes ao nó, pelo vetor corAdjacente que pertence ao nó.
-                        {
-                            if(listaAdj[pos].corAdj[corAdjacente] == i)
-                            {
-                                flag = true;                                          // Var flag recebe true se existe a cor i no vetor de corAdjacente do nó, e assim passa para a próxima cor.
-                                break;
-                            }
-                        }
-                    }
-
-                    /* Se a var flag for falsa, entao temos que aquele indice de cor nao está sendo
-                       utilizada por nenhum nó adjacente, portanto pode ser dada a esse nó, e para
-                       isso, é necessario verificar se a cor i é uma cor que ja foi utilizada antes
-                       ou é uma cor nova (o que implica que o nó é adjacente a todas as cores já
-                       utilizadas), sendo assim necessário atualizar a variavel k, com uma cor nova.
-                    */
-                    if(flag == false && i < k)                                   // Cor i já existe.
-                    {
-                        listaAdj[pos].setCorNo(i);
-                        for(std::vector<Aresta>::iterator arest = listaAdj[pos].listaAresta.begin(); arest != listaAdj[pos].listaAresta.end(); ++arest)
-                        {
-                            if(listaAdj[arest->getIndiceNo()].getCorNo() == -1 )
-                                listaAdj[arest->getIndiceNo()].addCorAdj(i);   // Adiciona k no vetor de cores adjacentes de todos os nós adjacentes ao no.
-                        }
-                        break;
-                    }
-                    else if(flag == false && i==k)                               // Cor i não existe.
-                    {
-                        listaAdj[pos].setCorNo(i);
-                        for(std::vector<Aresta>::iterator arest = listaAdj[pos].listaAresta.begin(); arest != listaAdj[pos].listaAresta.end(); ++arest)
-                        {
-                            if(listaAdj[arest->getIndiceNo()].getCorNo() == -1)
-                                listaAdj[arest->getIndiceNo()].addCorAdj(i);   // Adiciona k no vetor de cores adjacentes de todos os nós adjacentes ao no.
-                        }
-                        k++;                                                     // Atualiza k com nova cor
-                        break;
-                    }
-                }
-
-                posCandidatos.erase(posCandidatos.begin()+j);
-
-        }
-
-        if(k < melhorSolucao)
-        {
-            melhorSolucao = k;
-        }
-        posCandidatos.clear();
-        cout<<"Solucao "<<i<<" : " <<k<<endl;
-        i++;
-    }
-    cout<< "A melhor solucao: " << melhorSolucao;
-
-}
-
-
-/**
-        Realiza o quickSort para fazer com que os nós do vector auxOrdena
-        e os inteiros do vector ordenada fiquem em ordem decrescente em
-        relaçao ao grau. Utiliza-se as tres funções quickPartition, Quick
-        Sort e troca.
-*/
+//////////////////////////////////////////////////////////////////////////
 int Grafo::quickPartition(int left, int right)
 {
-    int pivo = auxOrdena[right].getGrauSaida();
+    int pivo = listaAdj[right].getGrauSaida();
     int i = (left - 1);
 
     for(int j=left ; j <= right-1 ; j++)
     {
-        if( auxOrdena[j].getGrauSaida() >= pivo)
+        if( listaAdj[j].getGrauSaida() >= pivo)
         {
             i++;
             troca(i, j);
         }
     }
     troca(i+1, right);
+    //  for(std::vector<Aresta>::iterator arest = it->listaAresta.begin(); arest != it->listaAresta.end(); ++arest)//
     return i+1;
 }
 
@@ -1101,14 +847,113 @@ void Grafo::troca(int x1, int x2)
     if(x1 != x2)
     {
         No *aux = new No();
-        *aux = auxOrdena[x1];
-        auxOrdena[x1] = auxOrdena[x2];
-        auxOrdena[x2] = *aux;
-
-        int auxiliar = 0;
-        auxiliar = ordenado[x1];
-        ordenado[x1] = ordenado[x2];
-        ordenado[x2] = auxiliar;
+        *aux = listaAdj[x1];
+        listaAdj[x1] = listaAdj[x2];
+        listaAdj[x2] = *aux;
     }
 }
+void Grafo::algoritmoFloyd()
+{
+    if(ehdigrafo()==1&&ehponderada()==1)
+    {
+
+        int i,j;
+        int tam =listaAdj.size();
+
+        int vet1[tam][tam];
+
+        for(int i=0; i<tam; i++)
+            for(int j=0; j<tam; j++)
+                vet1[i][j]=INF;
+
+        for(int i=0; i<tam; i++)
+        {
+            for(j=0; j<tam; j++)
+            {
+                if(i==j)
+                    vet1[i][j]=0;
+
+            }
+
+            for(int i=0; i<tam; i++)
+            {
+                for(int j=0; j<tam; j++)
+                {
+
+                    // cout<<"IDNO="<< no->getId();
+
+                    for(std::vector<Aresta>::iterator arest = listaAdj[i].listaAresta.begin(); arest != listaAdj[i].listaAresta.end(); ++arest)
+                    {
+                        if(i!=j)
+                        {
+
+                            if(arest->getIdNo() == listaAdj[j].getId() && arest->getPesoAresta()<vet1[i][j])
+                            {
+
+                                // cout<<"\ni="<<i<<"j="<<j;
+                                // cout<<"   vetIeJ="<<vet1[i][j]<<"\n";
+                                vet1[i][j]=arest->getPesoAresta();
+                                //   cout<<"\n"<<arest->getPesoAresta();
+                                break;
+                            }
+
+                        }
+                    }
+                }
+
+
+            }
+
+
+
+
+
+        }
+        for(int i=0; i<tam; i++)
+        {
+            for(int j=0; j<tam; j++)
+            {
+                for(int k=0; k<tam; k++)
+                {
+                    if(vet1[i][k]+vet1[k][j]<vet1[i][j])
+                        vet1[i][j]=vet1[i][k]+vet1[k][j];
+
+
+
+                }
+
+
+            }
+        }
+
+
+
+
+        for(int i=0; i<listaAdj.size(); i++)
+        {
+            cout<<"\n";
+            for(int j=0; j<listaAdj.size(); j++)
+            {
+                cout<<"\t"<<listaAdj[i].getId()<<listaAdj[j].getId()<<"="<<vet1[i][j];
+            }
+        }
+
+
+
+    }
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
 /////////////////////////////////////////////////////////////

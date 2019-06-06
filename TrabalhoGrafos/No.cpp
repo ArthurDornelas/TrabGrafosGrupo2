@@ -5,10 +5,6 @@ using namespace std;
 No::No()
 {
     grauSaida=0;
-    grauEntrada = 0;
-    cor = -1;
-    pai=NULL;
-    Rank=0;
 }
 
 No::No(int ident, int grauSaidaNo)
@@ -26,12 +22,12 @@ No::~No()
 
 void No::setGrauSaida(int grauSaidaNo)
 {
-    grauSaida += grauSaidaNo;
+    grauSaida = grauSaidaNo;
 }
 
 void No::setGrauEntrada(int grauEntradaNo)
 {
-    grauEntrada += grauEntradaNo;
+    grauEntrada = grauEntradaNo;
 }
 
 void No::setId(int ident)
@@ -48,20 +44,18 @@ float No::getAresta(int i){
     return listaAresta[i].getIdNo();
 }
 
-void No::adicionaAresta(int ident, float pesoAresta,int idLista,int indiceNo,int indiceLista)
-{
-    Aresta aresta = Aresta(ident,pesoAresta,idLista,indiceNo,indiceLista);
+void No::adicionaAresta(int ident, float pesoAresta,int idLista,int indiceNo){
+    Aresta aresta = Aresta(ident,pesoAresta,idLista,indiceNo);
     if(ident == id)
-        grauSaida += 2;
+       grauSaida += 2;
     else
-        grauSaida += 1;
+       grauSaida += 1;
     listaAresta.push_back(aresta);
 
 }
 
-void No::adicionaArestaSemPeso(int ident,int idLista,int indiceNo,int indiceLista)
-{
-    Aresta aresta = Aresta(ident,idLista,indiceNo,indiceLista);
+void No::adicionaArestaSemPeso(int ident,int idLista,int indiceNo){
+    Aresta aresta = Aresta(ident,idLista,indiceNo);
     if(ident == id)
        grauSaida += 2;
     else
