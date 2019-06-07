@@ -725,6 +725,10 @@ void Grafo::compConexa()
     }
 
 }
+
+/**
+    Funcao auxiliar para verificar se tem ciclo
+*/
 bool Grafo::buscaUtil(int u, int cor[])
 {
     // Colore como 1 para mostrar que o vertice
@@ -738,31 +742,33 @@ bool Grafo::buscaUtil(int u, int cor[])
     {
         int v = arest->getIndiceNo(); // Nó adjacente a u
 
+        //Se v ja foi visitado
         if(cor[v] == 1)
             return true;
 
-        //Se v não foi processado e tem um aresta de saida
+        //Se v não foi visitado e tem um aresta de saida
         if(cor[v] == 0 && buscaUtil(v, cor))
             return true;
     }
     // Colore como 2 para mostrar que foi processado
     cor[u] = 2;
 
-
     return false;
 }
 
-// Retorna true se ha um ciclo
+
+/**
+    Funcao que verifica se tem ciclo no grafo.
+    Retorna true se ha um ciclo.
+*/
 bool Grafo::temCiclo()
 {
     // Inicializa todos as cores de todos vertices como -1
     int *cor = new int[listaAdj.size()];
 
-
     for(int i = 0; i != listaAdj.size(); i++)
     {
         cor[i] = 0;
-
     }
     //Faz uma busca em profundidade com todos os vertices
     for(int i= 0; i != listaAdj.size(); i++)
@@ -770,17 +776,18 @@ bool Grafo::temCiclo()
         if(cor[i]== 0)
             if(buscaUtil(i, cor) == true)
                 return true;
-
     }
     return false;
 }
-// Funcao recursiva utilizada pela ordenacaoTopologica()
+
+/**
+    Funcao recursiva utilizada pela Ordenaçao Topologica.
+*/
 void Grafo::ordTopologicaUtil(int v, bool visitado[], stack<int> &pilha)
 {
 
     // Marca o no atual como visitado
     visitado[v] = true;
-
 
     // Percorre todos os nos adjacentes a esse no
     for(std::vector<Aresta>::iterator arest = listaAdj[v].listaAresta.begin(); arest != listaAdj[v].listaAresta.end(); ++arest)
@@ -788,15 +795,15 @@ void Grafo::ordTopologicaUtil(int v, bool visitado[], stack<int> &pilha)
         int i = arest->getIndiceNo();
         if(!visitado[i])
             ordTopologicaUtil(i, visitado, pilha);
-
     }
     // Coloca o no atual na pilha para guardar o resultado
     pilha.push(v);
-
-
 }
-// Funcao para fazer a ordenacao topologica. Ela utiliza a funcao auxiliar
-// ordTopologicaUtil()
+
+/**
+    Funcao para fazer a Ordenacao Topologica.
+    Ela utiliza a funcao auxiliar OrdenacaoTopologicaUtil.
+*/
 void Grafo::ordenacaoTopologica()
 {
     if(temCiclo()==true)
@@ -807,14 +814,13 @@ void Grafo::ordenacaoTopologica()
 
     else {
 
-        stack<int> pilha;
+        stack<int> pilha; //pilha para armazenar os Indices do Nós
 
         //Marca todos os vertices como nao visitados
         bool *visitado = new bool[listaAdj.size()];
         for (int i = 0; i != listaAdj.size(); i++)
         {
             visitado[i]= false;
-
         }
 
         // Chama a funcao auxiliar recursiva
@@ -822,22 +828,17 @@ void Grafo::ordenacaoTopologica()
         // de todos os vertices, um por um
         for (int i= 0; i!=listaAdj.size(); i++)
         {
-
             if(visitado[i] == false)
                 ordTopologicaUtil(i, visitado, pilha);
-
         }
+
         // Imprime o conteudo da pilha
         while (pilha.empty() == false)
         {
-            cout << pilha.top() << " ";
-
+            cout << listaAdj[pilha.top()].getId() << " ";
             pilha.pop();
-
         }
-
     }
-
 }
 
 void Grafo::buscaConexa(No *v, int componente)

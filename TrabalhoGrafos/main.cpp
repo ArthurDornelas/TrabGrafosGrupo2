@@ -122,18 +122,8 @@ int main(int argc, char* argv[])
 {
 
     Grafo* grafo = new Grafo(1,1);
-    grafo->adicionarNo(0);
-    grafo->adicionarNo(1);
-    grafo->adicionarNo(2);
-    grafo->adicionarNo(3);
-    grafo->adicionarNo(4);
-    grafo->adicionarNo(5);
-    grafo->adicionarArestaNosSemPeso(5,0);
-    grafo->adicionarArestaNosSemPeso(5,2);
-    grafo->adicionarArestaNosSemPeso(4,0);
-    grafo->adicionarArestaNosSemPeso(4,1);
-    grafo->adicionarArestaNosSemPeso(2,3);
-    grafo->adicionarArestaNosSemPeso(3,1);
+
+    leArquivo(grafo,1);
     cout << grafo->temCiclo() << endl;
     grafo->ordenacaoTopologica();
 
