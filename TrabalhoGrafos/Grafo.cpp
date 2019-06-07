@@ -763,7 +763,7 @@ bool Grafo::buscaUtil(int u, int cor[])
 */
 bool Grafo::temCiclo()
 {
-    // Inicializa todos as cores de todos vertices como -1
+    // Inicializa todos as cores de todos vertices como 0
     int *cor = new int[listaAdj.size()];
 
     for(int i = 0; i != listaAdj.size(); i++)
