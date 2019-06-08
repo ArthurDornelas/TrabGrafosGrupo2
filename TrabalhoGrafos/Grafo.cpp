@@ -1068,22 +1068,24 @@ void Grafo::algoritmoFloyd()
 
 }
 
-
-
-
+//////////////////////////////////////////////////////////////////////////////////////
+//DIJKSTRA
+//Funcao que retorna o menor custo do no de origem para todos outros nos do grafo.
+///////////////////////////////////////////////////////////////////////////////////
 void Grafo::dijkstra(int id)
 {
-
+    //vetor distancia que armazena os valores das distancias dos nos para o no de origem
     int distancia[listaAdj.size()];
 
     int indiceNo = -1;
 
 
     int i=0;
+    //procura o indice do ID do no de origem
     for(std::vector<No>::iterator it = listaAdj.begin(); it != listaAdj.end(); ++it)
     {
         distancia[i]=999999;
-
+        //condicao para achar o indice do no de origem
         if(it->getId()==id)
         {
             indiceNo = i;
@@ -1091,63 +1093,67 @@ void Grafo::dijkstra(int id)
         i++;
     }
 
+    //distancia da origem para ela mesma eh 0
     distancia[indiceNo]=0;
     int copia=indiceNo;
 
 
-
+    //percorre a lista de aresta do no de origem e atribui a distancia de cada no como seu peso de sua aresta
     for(std::vector<Aresta>::iterator arest = listaAdj[indiceNo].listaAresta.begin(); arest != listaAdj[indiceNo].listaAresta.end(); ++arest)
     {
 
 
-        cout<<indiceNo<<"="<<distancia[indiceNo]<<"<"<<arest->getIndiceNo()<<"="<<distancia[arest->getIndiceNo()]<<"+"<<arest->getPesoAresta()<<endl;
+        //verifica se a distancia do no de origem eh menor que a do no que a aresta esta ligando
         if(distancia[indiceNo]<(distancia[arest->getIndiceNo()]))
         {
-            cout<<distancia[arest->getIndiceNo()]<<"="<<distancia[indiceNo]<<"+"<<arest->getPesoAresta()<<endl;
+
             distancia[arest->getIndiceNo()]=distancia[indiceNo]+arest->getPesoAresta();
         }
 
 
 
     }
-    cout<<"vetor   Distancia da origem \n";
-    for (int i = 0; i < listaAdj.size(); ++i)
-        cout<<i<<"---------"<<distancia[i]<<endl;
 
+    //percorre a lista adjacente de nos exceto o no de origem
     for(int j=0; j<listaAdj.size(); j++)
     {
         if(j!=copia)
         {
-
+            //for percorre a lista de aresta de cada no da lista adjacente e compara as distancias
             for(std::vector<Aresta>::iterator arest = listaAdj[j].listaAresta.begin(); arest != listaAdj[j].listaAresta.end(); ++arest)
             {
 
-                cout<<"comparando"<<j<<"="<<distancia[j]<<"<"<<arest->getIndiceNo()<<"="<<distancia[arest->getIndiceNo()]<<"+"<<arest->getPesoAresta()<<endl;
 
+                //compara se a distancia do no na lista adjacente eh menor que o no que a aresta esta ligando
+                //todas distancias precisam ser diferentes. Caso n forem elas permanecem a mesma.
                 if(distancia[j]<(distancia[arest->getIndiceNo()])&&distancia[j]!=distancia[arest->getIndiceNo()])
                 {
                     if(distancia[j]<distancia[arest->getIndiceNo()]&&distancia[arest->getIndiceNo()]!=999999&&distancia[j]!=distancia[arest->getIndiceNo()])
                     {
                         if(distancia[j]+arest->getPesoAresta()!=distancia[arest->getIndiceNo()])
                         {
-                        cout<<distancia[arest->getIndiceNo()]<<"+"<<distancia[j];
-                        distancia[arest->getIndiceNo()]+=distancia[j];
+
+                            distancia[arest->getIndiceNo()]+=distancia[j];
                         }
 
                     }
                     else
                     {
-                         cout<<distancia[arest->getIndiceNo()]<<"="<<distancia[j]<<"+"<<arest->getPesoAresta()<<endl;
-                    distancia[arest->getIndiceNo()]=distancia[j]+arest->getPesoAresta();
+
+                        distancia[arest->getIndiceNo()]=distancia[j]+arest->getPesoAresta();
                     }
 
 
 
                 }
+                //condicao para a distancia do no que a aresta esta ligando seja menor que a distancia do no da lista adjacente
                 else if(distancia[j]!=distancia[arest->getIndiceNo()])
-                if(distancia[j]>(distancia[arest->getIndiceNo()]+arest->getPesoAresta()))
                 {
-                    distancia[j]=distancia[arest->getIndiceNo()]+arest->getPesoAresta();
+                    if(distancia[j]>(distancia[arest->getIndiceNo()]+arest->getPesoAresta()))
+                    {
+                        distancia[j]=distancia[arest->getIndiceNo()]+arest->getPesoAresta();
+                    }
+
                 }
 
 
@@ -1165,7 +1171,7 @@ void Grafo::dijkstra(int id)
 
     }
 
-
+    //Imprime a distancia dos nos da lista adjacente em funcao do seu indice na lista.
     cout<<"vetor   Distancia da origem \n";
     for (int i = 0; i < listaAdj.size(); ++i)
         cout<<i<<"---------"<<distancia[i]<<endl;
