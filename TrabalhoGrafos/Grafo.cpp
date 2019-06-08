@@ -2,9 +2,12 @@
 #include "No.h"
 #include "No.cpp"
 #include <vector>
+#include <set>
+#include <iterator>
+#include <list>
 #include <algorithm>
 #include <cstring>
-#define INF 9999999;
+#define INF 9999999
 #include <stack> // busca em profundidade
 #include<queue>
 using namespace std;
@@ -763,7 +766,7 @@ bool Grafo::buscaUtil(int u, int cor[])
 */
 bool Grafo::temCiclo()
 {
-    // Inicializa todos as cores de todos vertices como 0
+    // Inicializa todos as cores de todos vertices como -1
     int *cor = new int[listaAdj.size()];
 
     for(int i = 0; i != listaAdj.size(); i++)
@@ -812,7 +815,8 @@ void Grafo::ordenacaoTopologica()
 
     }
 
-    else {
+    else
+    {
 
         stack<int> pilha; //pilha para armazenar os Indices do Nós
 
@@ -982,7 +986,6 @@ void Grafo::algoritmoFloyd()
                 vet1[i][j]=INF;
 
         for(int i=0; i<tam; i++)
-        {
             for(j=0; j<tam; j++)
             {
                 if(i==j)
@@ -990,40 +993,40 @@ void Grafo::algoritmoFloyd()
 
             }
 
-            for(int i=0; i<tam; i++)
+        for(int i=0; i<tam; i++)
+        {
+            for(int j=0; j<tam; j++)
             {
-                for(int j=0; j<tam; j++)
+
+                // cout<<"IDNO="<< no->getId();
+
+                for(std::vector<Aresta>::iterator arest = listaAdj[i].listaAresta.begin(); arest != listaAdj[i].listaAresta.end(); ++arest)
                 {
-
-                    // cout<<"IDNO="<< no->getId();
-
-                    for(std::vector<Aresta>::iterator arest = listaAdj[i].listaAresta.begin(); arest != listaAdj[i].listaAresta.end(); ++arest)
+                    if(i!=j)
                     {
-                        if(i!=j)
+
+                        if(arest->getIdNo() == listaAdj[j].getId() && arest->getPesoAresta()<vet1[i][j])
                         {
 
-                            if(arest->getIdNo() == listaAdj[j].getId() && arest->getPesoAresta()<vet1[i][j])
-                            {
-
-                                // cout<<"\ni="<<i<<"j="<<j;
-                                // cout<<"   vetIeJ="<<vet1[i][j]<<"\n";
-                                vet1[i][j]=arest->getPesoAresta();
-                                //   cout<<"\n"<<arest->getPesoAresta();
-                                break;
-                            }
-
+                            // cout<<"\ni="<<i<<"j="<<j;
+                            // cout<<"   vetIeJ="<<vet1[i][j]<<"\n";
+                            vet1[i][j]=arest->getPesoAresta();
+                            //   cout<<"\n"<<arest->getPesoAresta();
+                            break;
                         }
+
                     }
                 }
-
-
             }
 
 
-
-
-
         }
+
+
+
+
+
+
         for(int i=0; i<tam; i++)
         {
             for(int j=0; j<tam; j++)
@@ -1064,6 +1067,123 @@ void Grafo::algoritmoFloyd()
 
 
 }
+
+
+
+
+void Grafo::dijkstra(int id)
+{
+
+    int distancia[listaAdj.size()];
+
+    int indiceNo = -1;
+
+
+    int i=0;
+    for(std::vector<No>::iterator it = listaAdj.begin(); it != listaAdj.end(); ++it)
+    {
+        distancia[i]=999999;
+
+        if(it->getId()==id)
+        {
+            indiceNo = i;
+        }
+        i++;
+    }
+
+    distancia[indiceNo]=0;
+    int copia=indiceNo;
+
+
+
+    for(std::vector<Aresta>::iterator arest = listaAdj[indiceNo].listaAresta.begin(); arest != listaAdj[indiceNo].listaAresta.end(); ++arest)
+    {
+
+
+        cout<<indiceNo<<"="<<distancia[indiceNo]<<"<"<<arest->getIndiceNo()<<"="<<distancia[arest->getIndiceNo()]<<"+"<<arest->getPesoAresta()<<endl;
+        if(distancia[indiceNo]<(distancia[arest->getIndiceNo()]))
+        {
+            cout<<distancia[arest->getIndiceNo()]<<"="<<distancia[indiceNo]<<"+"<<arest->getPesoAresta()<<endl;
+            distancia[arest->getIndiceNo()]=distancia[indiceNo]+arest->getPesoAresta();
+        }
+
+
+
+    }
+    cout<<"vetor   Distancia da origem \n";
+    for (int i = 0; i < listaAdj.size(); ++i)
+        cout<<i<<"---------"<<distancia[i]<<endl;
+
+    for(int j=0; j<listaAdj.size(); j++)
+    {
+        if(j!=copia)
+        {
+
+            for(std::vector<Aresta>::iterator arest = listaAdj[j].listaAresta.begin(); arest != listaAdj[j].listaAresta.end(); ++arest)
+            {
+
+                cout<<"comparando"<<j<<"="<<distancia[j]<<"<"<<arest->getIndiceNo()<<"="<<distancia[arest->getIndiceNo()]<<"+"<<arest->getPesoAresta()<<endl;
+
+                if(distancia[j]<(distancia[arest->getIndiceNo()])&&distancia[j]!=distancia[arest->getIndiceNo()])
+                {
+                    if(distancia[j]<distancia[arest->getIndiceNo()]&&distancia[arest->getIndiceNo()]!=999999&&distancia[j]!=distancia[arest->getIndiceNo()])
+                    {
+                        if(distancia[j]+arest->getPesoAresta()!=distancia[arest->getIndiceNo()])
+                        {
+                        cout<<distancia[arest->getIndiceNo()]<<"+"<<distancia[j];
+                        distancia[arest->getIndiceNo()]+=distancia[j];
+                        }
+
+                    }
+                    else
+                    {
+                         cout<<distancia[arest->getIndiceNo()]<<"="<<distancia[j]<<"+"<<arest->getPesoAresta()<<endl;
+                    distancia[arest->getIndiceNo()]=distancia[j]+arest->getPesoAresta();
+                    }
+
+
+
+                }
+                else if(distancia[j]!=distancia[arest->getIndiceNo()])
+                if(distancia[j]>(distancia[arest->getIndiceNo()]+arest->getPesoAresta()))
+                {
+                    distancia[j]=distancia[arest->getIndiceNo()]+arest->getPesoAresta();
+                }
+
+
+
+
+
+            }
+
+
+
+
+
+
+        }
+
+    }
+
+
+    cout<<"vetor   Distancia da origem \n";
+    for (int i = 0; i < listaAdj.size(); ++i)
+        cout<<i<<"---------"<<distancia[i]<<endl;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

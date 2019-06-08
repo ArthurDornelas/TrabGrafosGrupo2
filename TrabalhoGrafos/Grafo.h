@@ -63,6 +63,8 @@ public:
     bool buscaUtil(int x, int cor[]);
     void ordenacaoTopologica();
     void ordTopologicaUtil(int v, bool visitado[], stack<int> &pilha);
+    void dijkstra(int id);
+
 
 };
 #endif // GRAFO_H_INCLUDED
