@@ -704,29 +704,150 @@ void Grafo::buscaEmLargura(int id)
 
 }
 
+/** Funcao auxilia utilizada pela compConexa();
+
+*/
+
+void Grafo::buscaConexaUtil(int u, bool visitado[])
+{
+    // Marca e mostra o no atual visitado
+    visitado[u] = true;
+    cout << u << " ";
+
+    // Percorre todos os nos adjacentes ao no atual
+    for(std::vector<Aresta>::iterator arest = listaAdj[u].listaAresta.begin(); arest != listaAdj[u].listaAresta.end(); ++arest)
+    {
+        int i = arest->getIndiceNo();
+        if(!visitado[i])
+            buscaConexaUtil(i,visitado);
+
+
+}
+}
+
+/** Funcao utilizada para encontrar a componente conexa
+
+*/
 void Grafo::compConexa()
 {
+    if(ehdigrafo()==1)
+        cout << "Utilize a funcao compFortConexa() para grafos direcionados";
 
-    No *aux=new No();
-    int i=0;
-    aux = (&(listaAdj[i]));
 
-    for(std::vector<No>::iterator it = listaAdj.begin(); it != listaAdj.end(); ++it)
+    else {
+    // Marca todos os vertices como nao visitados
+    bool *visitado = new bool[listaAdj.size()];
+    for(int i=0; i < listaAdj.size(); i++)
     {
-        it->setVisitadoConex(0);
+        visitado[i] = false;
     }
 
-    int componente = 0;
-
-    for(std::vector<No>::iterator it = listaAdj.begin(); it != listaAdj.end(); ++it)
+    for(int i=0; i < listaAdj.size(); i++)
     {
-        if(it->getVisitadoConex() == 0)
+        if(visitado[i] == false)
         {
-            componente = componente + 1;
-            buscaConexa(aux, componente);
+            // Mostra todos os vertices alcancaveis
+            buscaConexaUtil(i, visitado);
+            cout << "\n";
         }
     }
+    }
+}
+/**
+       Uma funcao recursiva utilizada para encontra a componente fortemente conexa
+       utilizado a busca em profundidade
+       u -> O no a ser visitado
+       dem[] --> Guarda as vezes que os nos foram visitados
+       low[] --> o no menos visitado que pode ser alcancado pela
+       subarvore com o no atual
+       membro --> Guarda todos nos anteriores que estao conectado
+       (pode ser parte da componente fortemente conexa)
+       verificaMembro[] --> Um vetor utilizado para checar mais
+       rapidamente se o no esta na pilha
 
+*/
+void Grafo::fortConexaUtil(int u, int dem[], int low[], stack<int> *membro, bool *verificaMembro)
+{
+    // Variavel estatica utilizada para facilitar ao inves de utilizar ponteiro
+    static int time = 0;
+    //Inicializa o tempo de descoberta e o valor low
+    dem[u] = low[u] = ++time;
+    membro->push(u);
+    verificaMembro[u] = true;
+
+    // Percorre todos os nos adjacentes ao no atual
+    for(std::vector<Aresta>::iterator arest = listaAdj[u].listaAresta.begin(); arest != listaAdj[u].listaAresta.end(); ++arest)
+    {
+        int i = arest->getIndiceNo();
+
+        // Se i nao foi visitado entao ira recorrer
+        if(dem[i] == -1)
+        {
+
+            fortConexaUtil(i, dem, low, membro, verificaMembro);
+            /* Checa se a subarvore enraizada a 'i', tem conexao
+               com algum dos nos anteriores a 'u'
+            */
+            low[u] = min(low[u], low[i]);
+        }
+            /*  Atualiza o valor low de 'u' somente se 'i' ainda esta na pilha
+                , ou seja, eh uma aresta de saida ao inves de uma aresta externa.
+            */
+        else if(verificaMembro[i] == true)
+            low[u] = min(low[u], dem[i]);
+    }
+    // No encontrando, utiliza a funcao pop da pilha e mostra a componente fortemente conexa
+    int aux = 0; // Variavel utilizada para guardar os nos que foram tirados da pilha
+    if(low[u] == dem[u])
+    {
+
+        while(membro->top() != u)
+        {
+
+
+            aux = (int) membro->top();
+            cout << aux << " ";
+            verificaMembro[aux] =  false;
+            membro->pop();
+        }
+        aux = (int)membro->top();
+        cout << aux << "\n";
+        verificaMembro[aux] = false;
+        membro->pop();
+    }
+
+}
+/** Funcao que faz uma busca em profundidade. Utiliza fortConexaUtil()
+
+*/
+
+void Grafo::fortConexa()
+{
+    if(ehdigrafo()==0)
+        cout << "Nao eh possivel encontrar componente fortemente conexa num grafo direcionado" << endl;
+
+    else {
+    int *dem = new int[listaAdj.size()];
+    int *low = new int[listaAdj.size()];
+    bool *verificaMembro = new bool[listaAdj.size()];
+    stack<int> *membro = new stack<int>();
+
+    // Inicializa variaveis
+    for(int i = 0; i < listaAdj.size(); i++)
+    {
+        dem[i] = -1;
+        low[i] = -1;
+        verificaMembro[i] = false;
+}
+    /* Chama a funcao auxiliar recursiva para encontrar
+       as componentes conexas
+
+    */
+    for(int i = 0; i < listaAdj.size(); i++)
+        if(dem[i]==-1)
+            fortConexaUtil(i, dem, low, membro, verificaMembro);
+
+    }
 }
 
 /**
@@ -803,6 +924,9 @@ void Grafo::ordTopologicaUtil(int v, bool visitado[], stack<int> &pilha)
     pilha.push(v);
 }
 
+
+
+
 /**
     Funcao para fazer a Ordenacao Topologica.
     Ela utiliza a funcao auxiliar OrdenacaoTopologicaUtil.
@@ -841,29 +965,6 @@ void Grafo::ordenacaoTopologica()
         {
             cout << listaAdj[pilha.top()].getId() << " ";
             pilha.pop();
-        }
-    }
-}
-
-void Grafo::buscaConexa(No *v, int componente)
-{
-    v->setVisitadoConex(componente);
-
-    for(std::vector<Aresta>::iterator arest = v->listaAresta.begin(); arest != v->listaAresta.end(); ++arest)
-    {
-        int i= 0;
-        for(std::vector<No>::iterator it = listaAdj.begin(); it != listaAdj.end(); ++it)
-        {
-            if(it->getVisitadoConex()==0)
-            {
-                if(it->getId()==arest->getIdNo())
-                {
-                    buscaConexa(&(listaAdj[i]), componente);
-                    break;
-                }
-                i++;
-            }
-
         }
     }
 }

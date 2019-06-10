@@ -52,8 +52,6 @@ public:
     void auxBuscaEmProfundidade(int key);
     void buscaEmProfundidade(No *v);//faz uma busca a partir de um vertice
     void buscaEmLargura(int id);
-    void compConexa();
-    void buscaConexa(No* v, int componente);
     int algoritmoGuloso();
     void quickSort(int left, int right);
     int quickPartition(int left, int right);
@@ -64,7 +62,10 @@ public:
     void ordenacaoTopologica();
     void ordTopologicaUtil(int v, bool visitado[], stack<int> &pilha);
     void dijkstra(int id);
-
+    void buscaConexaUtil(int u, bool visitado[]);
+    void compConexa();
+    void fortConexa();
+    void fortConexaUtil(int u, int dem[], int low[], stack<int> *membro, bool *verificaMembro);
 
 };
 #endif // GRAFO_H_INCLUDED

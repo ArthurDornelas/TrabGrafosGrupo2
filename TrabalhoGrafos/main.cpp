@@ -122,10 +122,27 @@ int main(int argc, char* argv[])
 {
 
     Grafo* grafo = new Grafo(1,1);
+    Grafo* grafo2 = new Grafo(0,0);
+    grafo2->adicionarNo(0);
+    grafo2->adicionarNo(1);
+    grafo2->adicionarNo(2);
+    grafo2->adicionarNo(3);
+    grafo2->adicionarNo(4);
+    grafo2->adicionarArestaNosSemPeso(0,1);
+    grafo2->adicionarArestaNosSemPeso(1,2);
+    grafo2->adicionarArestaNosSemPeso(3,4);
+    grafo2->compConexa();
 
-    leArquivo(grafo,1);
-    cout << grafo->temCiclo() << endl;
-    grafo->ordenacaoTopologica();
+    //leArquivo(grafo,1);
+    grafo->adicionarArestaNosSemPeso(1,2);
+    grafo->adicionarArestaNosSemPeso(2,3);
+    grafo->adicionarArestaNosSemPeso(3,1);
+    grafo->adicionarArestaNosSemPeso(2,4);
+    grafo->adicionarArestaNosSemPeso(4,5);
+    grafo->fortConexa();
+    //grafo->compConexa();
+    //cout << grafo->temCiclo() << endl;
+    //grafo->ordenacaoTopologica();
 
    // grafo->adicionarArestaNosSemPeso(0,2);
    // grafo->adicionarArestaNosSemPeso(3,0);
