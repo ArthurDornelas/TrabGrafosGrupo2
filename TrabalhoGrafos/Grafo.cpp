@@ -1169,12 +1169,12 @@ void Grafo::algoritmoFloyd()
 
 }
 
-//////////////////////////////////////////////////////////////////////////////////////
-//DIJKSTRA
-// Algoritmo que calcula o caminho de custo mínimo entre vértices de um grafo.
-//Escolhido um vértice como raiz da busca, este algoritmo calcula o custo mínimo deste
-//vértice para todos os demais vértices do grafo.
-///////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
+//DIJKSTRA                                                                                       //
+// O algoritmo de Dijkstra calcula o caminho de menor custo entre os nós de um grafo.     //
+//Um vértice de origem é escolhido,dai o algoritmo calcula o custo mínimo do vértoce de origem   //
+//para todos outros vértices do grafo.                                                           //
+///////////////////////////////////////////////////////////////////////////////////////////////////
 void Grafo::dijkstra(int id)
 {
     //vetor distancia que armazena os valores das distancias dos nos para o no de origem
@@ -1243,8 +1243,10 @@ void Grafo::dijkstra(int id)
                     //todas distancias precisam ser diferentes. Caso n forem elas permanecem a mesma.
                     if(distancia[j]<(distancia[arest->getIndiceNo()])&&distancia[j]!=distancia[arest->getIndiceNo()])
                     {
+                        //verifica se a distancia do no apontado seja diferente de infinito e menor que a distancia do no de origem
                         if(distancia[j]<distancia[arest->getIndiceNo()]&&distancia[arest->getIndiceNo()]!=999999&&distancia[j]!=distancia[arest->getIndiceNo()])
                         {
+                            //caso nao seja infinito, a distancia do no apontado apenas adiciona com a distancia do no de origem
                             if(distancia[j]+arest->getPesoAresta()!=distancia[arest->getIndiceNo()])
                             {
 
@@ -1252,7 +1254,7 @@ void Grafo::dijkstra(int id)
                             }
 
                         }
-                        //serve para as outras condicoes
+                        //condicao se a disntancia do no quea aresta esta indo seja menor que a distancia do no de origem
                         else
                         {
 
