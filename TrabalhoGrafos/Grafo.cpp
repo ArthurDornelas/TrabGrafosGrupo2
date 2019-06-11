@@ -755,7 +755,17 @@ void Grafo::buscaConexa(No *v, int componente)
     }
 }
 
-
+/*
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+X                                                                                                                                                               X
+X  O algoritmo de Kruskal,sendo um grafo conexo, ponderado e nao direcionado, tem como objetivo encontrar um subconjunto das arestas que forma uma árvore que   X 
+X  inclui todos os vértices, onde o peso total, dado pela soma dos pesos das arestas da árvore, é minimizado. No algoritmo abaixo inicialmente foi inicializado X 
+X  todos os vertices do grafo como sendo um subconjunto unitario contendo apenas o proprio vertice, representado de forma como o pai de cada vertice eh o       X
+X  proprio vertice e o Rank de todos os vertice eh inicializado com 0. O passo seguinte foi colocar todas as arestas em um unico vetor, e entao ordernar-lo     X
+X  em ordem crescente de acordo com o peso da aresta,esta ordenacao eh feita por meio do Quick Sort. Apos isso eh utilizada uma funcao auxiliar          X
+X                                                                                                                                                               X
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+ */
 No* Grafo::busca_kruskal(No *v)
 {
     if(v->getPai() == v)
@@ -763,7 +773,7 @@ No* Grafo::busca_kruskal(No *v)
     return busca_kruskal(v->getPai());
 }
 
-void Grafo::uniao_kruskal(No *v1,No *v2)
+void Grafo::uniao_kruskal(No *v1,No *v2)//funcao para unir 2 subconjuntos de vertices em um unico subconjuto 
 {
     if(v1->getRank() > v2->getRank())
         v2->setPai(v1);
@@ -793,7 +803,6 @@ void Grafo::algoritmoKruskal()
         int j=0;
         for(std::vector<Aresta>::iterator arest = it->listaAresta.begin(); arest != it->listaAresta.end(); ++arest)
         {
-//            if(pesoArestas.find(pesoArestas.begin(),pesoArestas.end(),it->listaAresta[j]) != pesoArestas.end())
             pesoArestas.push_back(it->listaAresta[j]);//colocando todas as arestas em um unico vetor
             j++;
         }
@@ -808,10 +817,10 @@ void Grafo::algoritmoKruskal()
         No *v1=busca_kruskal(&listaAdj[it->getIndiceLista()]);//vertice de origem de uma aresta
         No *v2=busca_kruskal(&listaAdj[it->getIndiceNo()]);//vertice de destino de uma aresta
 
-        if(v1 != v2)
+        if(v1 != v2)//se forem diferentes é porque nao forma ciclo
         {
-            arvoreKruskal.push_back(pesoArestas[l]);
-            uniao_kruskal(v1,v2);
+            arvoreKruskal.push_back(pesoArestas[l]);//insere no vetor de arestas da arvore geradora minima
+            uniao_kruskal(v1,v2);//faz a uniao
         }
         l++;
     }
@@ -828,8 +837,8 @@ void Grafo::algoritmoKruskal()
     cout<<"      Custo Minimo       ==>    "<<soma<<endl;
 }
 
-int Grafo::quickPartitionKruskal(int left, int right)
-{
+int Grafo::quickPartitionKruskal(int left, int right)//ordenacao de um vetor de arestas em ordem crescente 
+{                                                   //de acordo com o peso
     int pivo = pesoArestas[right].getPesoAresta();
     int i = (left - 1);
 
