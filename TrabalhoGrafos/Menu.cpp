@@ -28,6 +28,7 @@ void Menu::inicia()
     cout << "Digite 10 para verificar se o grafo e bipartido" << endl;
     cout << "Digite 11 para imprimir a sequencia de grau do vertice" << endl;
     cout << "Digite 12 para realizar uma busca em profundidade a partir de um vertice" << endl;
+    cout << "Digite 13 para Algoritmo de Kruskal" << endl;
     cout << "Digite 0 para finalizar o programa" << endl;
     while(code != 0)
     {
@@ -69,6 +70,9 @@ void Menu::inicia()
             break;
         case 12:
             opcao12();
+            break;
+        case 13:
+            opcao13();
             break;
         case 0:
             cout << "Fechando o programa" << endl;
@@ -244,3 +248,10 @@ void Menu::opcao12()
     grafoUtilizado->auxBuscaEmProfundidade(key);
     this->inicia();
 }
+
+void Menu::opcao13()
+{
+    grafoUtilizado->algoritmoKruskal();
+    this->inicia();
+}
+
