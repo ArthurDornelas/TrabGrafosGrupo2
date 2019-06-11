@@ -68,6 +68,7 @@ public:
     void quickSortKruskal(int left,int right);
     int quickPartitionKruskal(int left, int right);
     void trocaKruskal(int x1, int x2);
+    void dijkstra(int id);
 
 };
 #endif // GRAFO_H_INCLUDED

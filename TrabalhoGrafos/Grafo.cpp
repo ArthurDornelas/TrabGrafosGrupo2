@@ -758,8 +758,8 @@ void Grafo::buscaConexa(No *v, int componente)
 /*
 XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 X                                                                                                                                                               X
-X  O algoritmo de Kruskal,sendo um grafo conexo, ponderado e nao direcionado, tem como objetivo encontrar um subconjunto das arestas que forma uma árvore que   X 
-X  inclui todos os vértices, onde o peso total, dado pela soma dos pesos das arestas da árvore, é minimizado. No algoritmo abaixo inicialmente foi inicializado X 
+X  O algoritmo de Kruskal,sendo um grafo conexo, ponderado e nao direcionado, tem como objetivo encontrar um subconjunto das arestas que forma uma árvore que   X
+X  inclui todos os vértices, onde o peso total, dado pela soma dos pesos das arestas da árvore, é minimizado. No algoritmo abaixo inicialmente foi inicializado X
 X  todos os vertices do grafo como sendo um subconjunto unitario contendo apenas o proprio vertice, representado de forma como o pai de cada vertice eh o       X
 X  proprio vertice e o Rank de todos os vertice eh inicializado com 0. O passo seguinte foi colocar todas as arestas em um unico vetor, e entao ordernar-lo     X
 X  em ordem crescente de acordo com o peso da aresta,esta ordenacao eh feita por meio do Quick Sort. Apos isso eh utilizada uma funcao auxiliar          X
@@ -773,7 +773,7 @@ No* Grafo::busca_kruskal(No *v)
     return busca_kruskal(v->getPai());
 }
 
-void Grafo::uniao_kruskal(No *v1,No *v2)//funcao para unir 2 subconjuntos de vertices em um unico subconjuto 
+void Grafo::uniao_kruskal(No *v1,No *v2)//funcao para unir 2 subconjuntos de vertices em um unico subconjuto
 {
     if(v1->getRank() > v2->getRank())
         v2->setPai(v1);
@@ -837,7 +837,7 @@ void Grafo::algoritmoKruskal()
     cout<<"      Custo Minimo       ==>    "<<soma<<endl;
 }
 
-int Grafo::quickPartitionKruskal(int left, int right)//ordenacao de um vetor de arestas em ordem crescente 
+int Grafo::quickPartitionKruskal(int left, int right)//ordenacao de um vetor de arestas em ordem crescente
 {                                                   //de acordo com o peso
     int pivo = pesoArestas[right].getPesoAresta();
     int i = (left - 1);
@@ -1120,4 +1120,145 @@ void Grafo::troca(int x1, int x2)
         ordenado[x2] = auxiliar;
     }
 }
-/////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
+//DIJKSTRA                                                                                       //
+// O algoritmo de Dijkstra calcula o caminho de menor custo entre os nós de um grafo.     //
+//Um vértice de origem é escolhido,dai o algoritmo calcula o custo mínimo do vértoce de origem   //
+//para todos outros vértices do grafo.                                                           //
+///////////////////////////////////////////////////////////////////////////////////////////////////
+void Grafo::dijkstra(int id)
+{
+    //vetor distancia que armazena os valores das distancias dos nos para o no de origem
+    int distancia[listaAdj.size()];
+    bool negativo=1;
+    int indiceNo = -1;
+
+    //verifica se existe alguma aresta com peso negativo
+    for(int j=0; j<listaAdj.size(); j++)
+        for(std::vector<Aresta>::iterator arest = listaAdj[j].listaAresta.begin(); arest != listaAdj[j].listaAresta.end(); ++arest)
+            if(arest->getPesoAresta()<0)
+            {
+                cout<<"DIJKSTRA PRECISA DE ARESTAS COM PESO POSITIVO"<<endl;
+                    negativo=0;
+                    exit(0);
+            }
+    //verifica se existem arestas com peso negativo
+    if(negativo)
+    {
+        int i=0;
+        //procura o indice do ID do no de origem
+        for(std::vector<No>::iterator it = listaAdj.begin(); it != listaAdj.end(); ++it)
+        {
+            distancia[i]=999999;
+            //condicao para achar o indice do no de origem
+            if(it->getId()==id)
+            {
+                indiceNo = i;
+            }
+            i++;
+        }
+
+        //distancia da origem para ela mesma eh 0
+        distancia[indiceNo]=0;
+        int copia=indiceNo;
+
+
+        //percorre a lista de aresta do no de origem e atribui a distancia de cada no como seu peso de sua aresta
+        for(std::vector<Aresta>::iterator arest = listaAdj[indiceNo].listaAresta.begin(); arest != listaAdj[indiceNo].listaAresta.end(); ++arest)
+        {
+
+
+            //verifica se a distancia do no de origem eh menor que a do no que a aresta esta ligando
+            if(distancia[indiceNo]<(distancia[arest->getIndiceNo()]))
+            {
+
+
+                distancia[arest->getIndiceNo()]=distancia[indiceNo]+arest->getPesoAresta();
+            }
+
+
+
+        }
+
+        //percorre a lista adjacente de nos exceto o no de origem
+        for(int j=0; j<listaAdj.size(); j++)
+        {
+            if(j!=copia)
+            {
+
+                //for percorre a lista de aresta de cada no da lista adjacente e compara as distancias
+                for(std::vector<Aresta>::iterator arest = listaAdj[j].listaAresta.begin(); arest != listaAdj[j].listaAresta.end(); ++arest)
+                {
+
+
+                    //compara se a distancia do no na lista adjacente eh menor que o no que a aresta esta ligando
+                    //todas distancias precisam ser diferentes. Caso n forem elas permanecem a mesma.
+                    if(distancia[j]<(distancia[arest->getIndiceNo()])&&distancia[j]!=distancia[arest->getIndiceNo()]&&distancia[arest->getIndiceNo()]!=distancia[copia]+arest->getPesoAresta())
+                    {
+                        //verifica se a distancia do no apontado seja diferente de infinito e menor que a distancia do no de origem
+                        if(distancia[arest->getIndiceNo()]!=999999)
+                        {
+                            //caso nao seja infinito, a distancia do no apontado apenas adiciona com a distancia do no de origem
+                            if(distancia[j]+arest->getPesoAresta()<distancia[arest->getIndiceNo()])
+                            {
+
+                                distancia[arest->getIndiceNo()]+=distancia[j];
+
+                            }
+
+                        }
+                        //condicao se a disntancia do no quea aresta esta indo seja menor que a distancia do no de origem
+                        else
+                        {
+
+                            distancia[arest->getIndiceNo()]=distancia[j]+arest->getPesoAresta();
+
+                        }
+
+
+
+                    }
+                    //condicao para a distancia do no que a aresta esta ligando seja menor que a distancia do no da lista adjacente
+                    else if(distancia[j]!=distancia[arest->getIndiceNo()])
+                    {
+                        if(distancia[j]>(distancia[arest->getIndiceNo()]+arest->getPesoAresta()))
+                        {
+
+                            distancia[j]=distancia[arest->getIndiceNo()]+arest->getPesoAresta();
+                        }
+
+                    }
+
+
+
+
+
+                }
+
+
+
+
+
+
+            }
+
+        }
+
+        //Imprime a distancia dos nos da lista adjacente em funcao do seu indice na lista.
+        cout<<"vetor   Distancia da origem \n";
+        for (int i = 0; i < listaAdj.size(); ++i)
+            cout<<i<<"---------"<<distancia[i]<<endl;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
