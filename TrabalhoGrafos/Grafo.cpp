@@ -1244,7 +1244,7 @@ void Grafo::dijkstra(int id)
                     if(distancia[j]<(distancia[arest->getIndiceNo()])&&distancia[j]!=distancia[arest->getIndiceNo()])
                     {
                         //verifica se a distancia do no apontado seja diferente de infinito e menor que a distancia do no de origem
-                        if(distancia[j]<distancia[arest->getIndiceNo()]&&distancia[arest->getIndiceNo()]!=999999&&distancia[j]!=distancia[arest->getIndiceNo()])
+                        if(distancia[arest->getIndiceNo()]!=999999)
                         {
                             //caso nao seja infinito, a distancia do no apontado apenas adiciona com a distancia do no de origem
                             if(distancia[j]+arest->getPesoAresta()!=distancia[arest->getIndiceNo()])
