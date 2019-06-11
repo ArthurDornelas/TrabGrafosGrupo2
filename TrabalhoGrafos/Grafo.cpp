@@ -1193,7 +1193,7 @@ void Grafo::dijkstra(int id)
 
                     //compara se a distancia do no na lista adjacente eh menor que o no que a aresta esta ligando
                     //todas distancias precisam ser diferentes. Caso n forem elas permanecem a mesma.
-                    if(distancia[j]<(distancia[arest->getIndiceNo()])&&distancia[j]!=distancia[arest->getIndiceNo()]&&distancia[arest->getIndiceNo()]!=distancia[copia]+arest->getPesoAresta())
+                    if(distancia[j]<(distancia[arest->getIndiceNo()])&&distancia[j]!=distancia[arest->getIndiceNo()])
                     {
                         //verifica se a distancia do no apontado seja diferente de infinito e menor que a distancia do no de origem
                         if(distancia[arest->getIndiceNo()]!=999999)
