@@ -1,0 +1,945 @@
+# depslib dependency file v1.0
+1542131276 source:c:\users\adriana\downloads\grafos-master (2)\grafos-master\trabalhografos\main.cpp
+	<iostream>
+	"Grafo.h"
+	"Grafo.cpp"
+
+1542909017 "
+
+1542131009 c:\users\adriana\downloads\grafos-master (2)\grafos-master\trabalhografos\grafo.h
+	<vector>
+	"No.h"
+	"Aresta.h"
+
+1543166433 D
+
+1542895622 
+
+1542811614 9be519e98216921d8858debf8170fc8f73e1
+
+1542051389 c:\users\adriana\downloads\grafos-master (2)\grafos-master\trabalhografos\no.h
+	<vector>
+	"Aresta.h"
+
+1542080360 c:\users\adriana\downloads\grafos-master (2)\grafos-master\trabalhografos\aresta.h
+	"No.h"
+
+1542131351 c:\users\adriana\downloads\grafos-master (2)\grafos-master\trabalhografos\grafo.cpp
+	"Grafo.h"
+	"No.h"
+	"No.cpp"
+	<vector>
+
+1542129620 c:\users\adriana\downloads\grafos-master (2)\grafos-master\trabalhografos\no.cpp
+	"Aresta.h"
+	"No.h"
+
+1542310740 source:c:\users\principal\desktop\codigos\grafos-master\trabalhografos\main.cpp
+	<iostream>
+	"Grafo.h"
+	"Grafo.cpp"
+	"Menu.h"
+
+1542133712 c:\users\principal\desktop\codigos\grafos-master\trabalhografos\grafo.h
+	<vector>
+	"No.h"
+	"Aresta.h"
+
+1542133712 c:\users\principal\desktop\codigos\grafos-master\trabalhografos\no.h
+	<vector>
+	"Aresta.h"
+
+1542133712 c:\users\principal\desktop\codigos\grafos-master\trabalhografos\aresta.h
+	"No.h"
+
+1542133712 c:\users\principal\desktop\codigos\grafos-master\trabalhografos\grafo.cpp
+	"Grafo.h"
+	"No.h"
+	"No.cpp"
+	<vector>
+
+1542133712 c:\users\principal\desktop\codigos\grafos-master\trabalhografos\no.cpp
+	"Aresta.h"
+	"No.h"
+
+1542307482 source:c:\users\principal\desktop\codigos\grafos-master\trabalhografos\src\menu.cpp
+	"Menu.h"
+
+1542307523 c:\users\principal\desktop\codigos\grafos-master\trabalhografos\include\menu.h
+	"Grafo.h"
+
+1542310857 source:c:\users\principal\desktop\codigos\grafos-master\trabalhografos\menu.cpp
+	"Menu.h"
+	"Grafo.h"
+	"No.h"
+	"Aresta.h"
+	"iostream"
+
+1542309679 c:\users\principal\desktop\codigos\grafos-master\trabalhografos\menu.h
+	"Grafo.h"
+	"No.h"
+	"Aresta.h"
+
+1542309080 c:\users\principal\desktop\codigos\grafos-master\trabalhografos\menu.cpp
+	"Menu.h"
+	"Grafo.h"
+	"No.h"
+	"Aresta.h"
+	"iostream"
+
+1542324935 source:c:\users\adriana\downloads\grafos-master (6)\grafos-master\trabalhografos\main.cpp
+	<iostream>
+	"Grafo.h"
+	"Grafo.cpp"
+	"Menu.h"
+
+1542313015 c:\users\adriana\downloads\grafos-master (6)\grafos-master\trabalhografos\grafo.h
+	<vector>
+	"No.h"
+	"Aresta.h"
+
+1542289528 c:\users\adriana\downloads\grafos-master (6)\grafos-master\trabalhografos\no.h
+	<vector>
+	"Aresta.h"
+
+1542289528 c:\users\adriana\downloads\grafos-master (6)\grafos-master\trabalhografos\aresta.h
+	"No.h"
+
+1542325025 c:\users\adriana\downloads\grafos-master (6)\grafos-master\trabalhografos\grafo.cpp
+	"Grafo.h"
+	"No.h"
+	"No.cpp"
+	<vector>
+
+1542289528 c:\users\adriana\downloads\grafos-master (6)\grafos-master\trabalhografos\no.cpp
+	"Aresta.h"
+	"No.h"
+
+1542289528 c:\users\adriana\downloads\grafos-master (6)\grafos-master\trabalhografos\menu.h
+	"Grafo.h"
+	"No.h"
+	"Aresta.h"
+
+1542313469 source:c:\users\adriana\downloads\grafos-master (6)\grafos-master\trabalhografos\menu.cpp
+	"Menu.h"
+	"Grafo.h"
+	"No.h"
+	"Aresta.h"
+	"iostream"
+
+1542658791 source:c:\users\adriana\downloads\grafos-master (7)\grafos-master\trabalhografos\main.cpp
+	<iostream>
+	"Grafo.h"
+	"Grafo.cpp"
+	"Menu.h"
+
+1542665206 c:\users\adriana\downloads\grafos-master (7)\grafos-master\trabalhografos\grafo.h
+	<vector>
+	"No.h"
+	"Aresta.h"
+	"Cluster.h"
+
+1542665497 c:\users\adriana\downloads\grafos-master (7)\grafos-master\trabalhografos\no.h
+	<vector>
+	"Aresta.h"
+
+1542505316 c:\users\adriana\downloads\grafos-master (7)\grafos-master\trabalhografos\aresta.h
+	"No.h"
+
+1542666970 c:\users\adriana\downloads\grafos-master (7)\grafos-master\trabalhografos\grafo.cpp
+	"Grafo.h"
+	"No.h"
+	"No.cpp"
+	<vector>
+	"Cluster.h"
+
+1542571425 c:\users\adriana\downloads\grafos-master (7)\grafos-master\trabalhografos\no.cpp
+	"Aresta.h"
+	"No.h"
+
+1542315072 c:\users\adriana\downloads\grafos-master (7)\grafos-master\trabalhografos\menu.h
+	"Grafo.h"
+	"No.h"
+	"Aresta.h"
+
+1542315072 source:c:\users\adriana\downloads\grafos-master (7)\grafos-master\trabalhografos\menu.cpp
+	"Menu.h"
+	"Grafo.h"
+	"No.h"
+	"Aresta.h"
+	"iostream"
+
+1542661083 c:\users\adriana\downloads\grafos-master (7)\grafos-master\trabalhografos\cluster.h
+	"No.h"
+	"Aresta.h"
+	"Grafo.h"
+
+1542663975 source:/home/econs/Downloads/Grafos-master/TrabalhoGrafos/main.cpp
+	<iostream>
+	"Grafo.h"
+	"Grafo.cpp"
+	"Menu.h"
+
+1542829556 /home/econs/Downloads/Grafos-master/TrabalhoGrafos/Grafo.h
+	<vector>
+	"No.h"
+	"Aresta.h"
+	"Cluster.h"
+
+1542663975 /home/econs/Downloads/Grafos-master/TrabalhoGrafos/No.h
+	<vector>
+	"Aresta.h"
+
+1542663975 /home/econs/Downloads/Grafos-master/TrabalhoGrafos/Aresta.h
+	"No.h"
+
+1542663975 /home/econs/Downloads/Grafos-master/TrabalhoGrafos/Cluster.h
+	"No.h"
+	"Aresta.h"
+	"Grafo.h"
+
+1542829556 /home/econs/Downloads/Grafos-master/TrabalhoGrafos/Grafo.cpp
+	"Grafo.h"
+	"No.h"
+	"No.cpp"
+	<vector>
+	<algorithm>
+	<cstring>
+	"Cluster.h"
+
+1542663975 /home/econs/Downloads/Grafos-master/TrabalhoGrafos/No.cpp
+	"Aresta.h"
+	"No.h"
+
+1542663975 /home/econs/Downloads/Grafos-master/TrabalhoGrafos/Menu.h
+	"Grafo.h"
+	"No.h"
+	"Aresta.h"
+
+1542663975 source:/home/econs/Downloads/Grafos-master/TrabalhoGrafos/Menu.cpp
+	"Menu.h"
+	"Grafo.h"
+	"No.h"
+	"Aresta.h"
+	"iostream"
+
+1542811614 source:c:\users\adriana\downloads\grafos-master (9)\grafos-master\trabalhografos\main.cpp
+	<iostream>
+	"Grafo.h"
+	"Grafo.cpp"
+	"Menu.h"
+
+1542811614 c:\users\adriana\downloads\grafos-master (9)\grafos-master\trabalhografos\grafo.h
+	<vector>
+	"No.h"
+	"Aresta.h"
+	"Cluster.h"
+
+1542811614 c:\users\adriana\downloads\grafos-master (9)\grafos-master\trabalhografos\no.h
+	<vector>
+	"Aresta.h"
+
+1542811614 c:\users\adriana\downloads\grafos-master (9)\grafos-master\trabalhografos\aresta.h
+	"No.h"
+
+1542811614 c:\users\adriana\downloads\grafos-master (9)\grafos-master\trabalhografos\cluster.h
+	"No.h"
+	"Aresta.h"
+	"Grafo.h"
+
+1542811614 c:\users\adriana\downloads\grafos-master (9)\grafos-master\trabalhografos\grafo.cpp
+	"Grafo.h"
+	"No.h"
+	"No.cpp"
+	<vector>
+	<algorithm>
+	<cstring>
+	"Cluster.h"
+
+1542811614 c:\users\adriana\downloads\grafos-master (9)\grafos-master\trabalhografos\no.cpp
+	"Aresta.h"
+	"No.h"
+
+1542811614 c:\users\adriana\downloads\grafos-master (9)\grafos-master\trabalhografos\menu.h
+	"Grafo.h"
+	"No.h"
+	"Aresta.h"
+
+1542811614 source:c:\users\adriana\downloads\grafos-master (9)\grafos-master\trabalhografos\menu.cpp
+	"Menu.h"
+	"Grafo.h"
+	"No.h"
+	"Aresta.h"
+	"iostream"
+
+1543332908 source:/home/sasaoka/projetos/grafos/Grafos/TrabalhoGrafos/main.cpp
+	<iostream>
+	"Grafo.h"
+	"Grafo.cpp"
+	"Menu.h"
+	<iostream>
+	"Grafo.h"
+	"Grafo.cpp"
+	"Menu.h"
+
+1543208279 /home/sasaoka/projetos/grafos/Grafos/TrabalhoGrafos/Grafo.h
+	<vector>
+	"No.h"
+	"Aresta.h"
+	"Cluster.h"
+	<iostream>
+	<fstream>
+	<vector>
+	"No.h"
+	"Aresta.h"
+	"Cluster.h"
+	<iostream>
+	<fstream>
+
+1543208279 /home/sasaoka/projetos/grafos/Grafos/TrabalhoGrafos/No.h
+	<vector>
+	"Aresta.h"
+	<vector>
+	"Aresta.h"
+
+1543207355 /home/sasaoka/projetos/grafos/Grafos/TrabalhoGrafos/Aresta.h
+	"No.h"
+	"No.h"
+
+1543207355 /home/sasaoka/projetos/grafos/Grafos/TrabalhoGrafos/Cluster.h
+	"No.h"
+	"Aresta.h"
+	"Grafo.h"
+	"No.h"
+	"Aresta.h"
+	"Grafo.h"
+
+1543332791 /home/sasaoka/projetos/grafos/Grafos/TrabalhoGrafos/Grafo.cpp
+	"Grafo.h"
+	"No.h"
+	"No.cpp"
+	<vector>
+	<algorithm>
+	<cstring>
+	"Cluster.h"
+	"Grafo.h"
+	"No.h"
+	"No.cpp"
+	<vector>
+	<algorithm>
+	<cstring>
+	"Cluster.h"
+	"Cluster.cpp"
+
+1543166865 /home/sasaoka/projetos/grafos/Grafos/TrabalhoGrafos/No.cpp
+	"Aresta.h"
+	"No.h"
+	"Aresta.h"
+	"No.h"
+
+1542554956 /home/sasaoka/projetos/grafos/Grafos/TrabalhoGrafos/Menu.h
+	"Grafo.h"
+	"No.h"
+	"Aresta.h"
+	"Grafo.h"
+	"No.h"
+	"Aresta.h"
+
+1542554956 source:/home/sasaoka/projetos/grafos/Grafos/TrabalhoGrafos/Menu.cpp
+	"Menu.h"
+	"Grafo.h"
+	"No.h"
+	"Aresta.h"
+	"iostream"
+	"Menu.h"
+	"Grafo.h"
+	"No.h"
+	"Aresta.h"
+	"iostream"
+
+1543174682 source:c:\users\adriana\downloads\grafos-master (10)\grafos-master\trabalhografos\main.cpp
+	<iostream>
+	"Grafo.h"
+	"Grafo.cpp"
+	"Menu.h"
+
+1543172536 c:\users\adriana\downloads\grafos-master (10)\grafos-master\trabalhografos\grafo.h
+	<vector>
+	"No.h"
+	"Aresta.h"
+	"Cluster.h"
+	<iostream>
+	<fstream>
+
+1543167312 c:\users\adriana\downloads\grafos-master (10)\grafos-master\trabalhografos\no.h
+	<vector>
+	"Aresta.h"
+
+1542895622 c:\users\adriana\downloads\grafos-master (10)\grafos-master\trabalhografos\aresta.h
+	"No.h"
+
+1543167312 c:\users\adriana\downloads\grafos-master (10)\grafos-master\trabalhografos\cluster.h
+	"No.h"
+	"Aresta.h"
+	"Grafo.h"
+
+1543174725 c:\users\adriana\downloads\grafos-master (10)\grafos-master\trabalhografos\grafo.cpp
+	"Grafo.h"
+	"No.h"
+	"No.cpp"
+	<vector>
+	<algorithm>
+	<cstring>
+	"Cluster.h"
+	"Cluster.cpp"
+
+1543174725 pp"
+
+1542895622 c:\users\adriana\downloads\grafos-master (10)\grafos-master\trabalhografos\no.cpp
+	"Aresta.h"
+	"No.h"
+
+1542895622 c:\users\adriana\downloads\grafos-master (10)\grafos-master\trabalhografos\menu.h
+	"Grafo.h"
+	"No.h"
+	"Aresta.h"
+
+1542895622 source:c:\users\adriana\downloads\grafos-master (10)\grafos-master\trabalhografos\menu.cpp
+	"Menu.h"
+	"Grafo.h"
+	"No.h"
+	"Aresta.h"
+	"iostream"
+
+1543166433 c:\users\adriana\downloads\grafos-master (10)\grafos-master\trabalhografos\cluster.cpp
+	"Cluster.h"
+	<vector>
+	"Aresta.h"
+
+1543166865 /home/sasaoka/projetos/grafos/Grafos/TrabalhoGrafos/Cluster.cpp
+	"Cluster.h"
+	<vector>
+	"Aresta.h"
+
+1542554956 f9be519e98216921d8858debf8170fc8f73e1
+
+1543803673 source:c:\users\adriana\downloads\grafos-master (15)\grafos-master\trabalhografos\main.cpp
+	<iostream>
+	"Grafo.h"
+	"Grafo.cpp"
+	"Menu.h"
+
+1543803523 c:\users\adriana\downloads\grafos-master (15)\grafos-master\trabalhografos\grafo.h
+	<vector>
+	"No.h"
+	"Aresta.h"
+	"Cluster.h"
+	<iostream>
+	<fstream>
+
+1543314928 c:\users\adriana\downloads\grafos-master (15)\grafos-master\trabalhografos\no.h
+	<vector>
+	"Aresta.h"
+
+1543314928 c:\users\adriana\downloads\grafos-master (15)\grafos-master\trabalhografos\aresta.h
+	"No.h"
+
+1543314928 c:\users\adriana\downloads\grafos-master (15)\grafos-master\trabalhografos\cluster.h
+	"No.h"
+	"Aresta.h"
+	"Grafo.h"
+
+1543803571 c:\users\adriana\downloads\grafos-master (15)\grafos-master\trabalhografos\grafo.cpp
+	"Grafo.h"
+	"No.h"
+	"No.cpp"
+	<vector>
+	<algorithm>
+	<cstring>
+	"Cluster.h"
+	"Cluster.cpp"
+
+1543314928 c:\users\adriana\downloads\grafos-master (15)\grafos-master\trabalhografos\no.cpp
+	"Aresta.h"
+	"No.h"
+
+1543314928 c:\users\adriana\downloads\grafos-master (15)\grafos-master\trabalhografos\cluster.cpp
+	"Cluster.h"
+	<vector>
+	"Aresta.h"
+
+1543314928 c:\users\adriana\downloads\grafos-master (15)\grafos-master\trabalhografos\menu.h
+	"Grafo.h"
+	"No.h"
+	"Aresta.h"
+
+1543314928 source:c:\users\adriana\downloads\grafos-master (15)\grafos-master\trabalhografos\menu.cpp
+	"Menu.h"
+	"Grafo.h"
+	"No.h"
+	"Aresta.h"
+	"iostream"
+
+1543801572 source:c:\users\joao\desktop\grafosfinal\grafos-master\trabalhografos\main.cpp
+	<iostream>
+	"Grafo.h"
+	"Grafo.cpp"
+	"Menu.h"
+
+1552580270 c:\users\joao\desktop\grafosfinal\grafos-master\trabalhografos\grafo.h
+	<vector>
+	"No.h"
+	<iostream>
+	<fstream>
+
+1552580132 c:\users\joao\desktop\grafosfinal\grafos-master\trabalhografos\no.h
+	<vector>
+	"Aresta.h"
+
+1543801572 c:\users\joao\desktop\grafosfinal\grafos-master\trabalhografos\aresta.h
+	"No.h"
+
+1543801572 c:\users\joao\desktop\grafosfinal\grafos-master\trabalhografos\cluster.h
+	"No.h"
+	"Aresta.h"
+	"Grafo.h"
+
+1552580284 c:\users\joao\desktop\grafosfinal\grafos-master\trabalhografos\grafo.cpp
+	"Grafo.h"
+	"No.h"
+	"No.cpp"
+	<vector>
+	<algorithm>
+	<cstring>
+
+1543801572 c:\users\joao\desktop\grafosfinal\grafos-master\trabalhografos\no.cpp
+	"Aresta.h"
+	"No.h"
+
+1543801572 c:\users\joao\desktop\grafosfinal\grafos-master\trabalhografos\cluster.cpp
+	"Cluster.h"
+	<vector>
+	"Aresta.h"
+
+1543801572 c:\users\joao\desktop\grafosfinal\grafos-master\trabalhografos\menu.h
+	"Grafo.h"
+	"No.h"
+	"Aresta.h"
+
+1543801572 source:c:\users\joao\desktop\grafosfinal\grafos-master\trabalhografos\menu.cpp
+	"Menu.h"
+	"Grafo.h"
+	"No.h"
+	"Aresta.h"
+	"iostream"
+
+1555173940 source:c:\users\arthur\downloads\grafosnovo-master\grafosnovo-master\grafosfinal\grafos-master\trabalhografos\main.cpp
+	<iostream>
+	"Grafo.h"
+	"Grafo.cpp"
+	"Menu.h"
+
+1555264948 c:\users\arthur\downloads\grafosnovo-master\grafosnovo-master\grafosfinal\grafos-master\trabalhografos\grafo.h
+	<vector>
+	"No.h"
+	<iostream>
+	<fstream>
+
+1555456015 c:\users\arthur\downloads\grafosnovo-master\grafosnovo-master\grafosfinal\grafos-master\trabalhografos\no.h
+	<vector>
+	"Aresta.h"
+
+1555173593 c:\users\arthur\downloads\grafosnovo-master\grafosnovo-master\grafosfinal\grafos-master\trabalhografos\aresta.h
+	"No.h"
+
+1555264948 c:\users\arthur\downloads\grafosnovo-master\grafosnovo-master\grafosfinal\grafos-master\trabalhografos\grafo.cpp
+	"Grafo.h"
+	"No.h"
+	"No.cpp"
+	<vector>
+	<algorithm>
+	<cstring>
+
+1555264948 c:\users\arthur\downloads\grafosnovo-master\grafosnovo-master\grafosfinal\grafos-master\trabalhografos\no.cpp
+	"Aresta.h"
+	"No.h"
+
+1552580506 c:\users\arthur\downloads\grafosnovo-master\grafosnovo-master\grafosfinal\grafos-master\trabalhografos\menu.h
+	"Grafo.h"
+	"No.h"
+	"Aresta.h"
+
+1555456034 source:c:\users\arthur\downloads\grafosnovo-master\grafosnovo-master\grafosfinal\grafos-master\trabalhografos\menu.cpp
+	"Menu.h"
+	"Grafo.h"
+	"No.h"
+	"Aresta.h"
+	"iostream"
+
+1556148729 source:d:\downloads\trabgrafosgrupo2-master\trabalhografos\main.cpp
+	<iostream>
+	"Grafo.h"
+	"Grafo.cpp"
+	"Menu.h"
+
+1556153401 d:\downloads\trabgrafosgrupo2-master\trabalhografos\grafo.h
+	<vector>
+	"No.h"
+	<iostream>
+	<fstream>
+
+1555964530 d:\downloads\trabgrafosgrupo2-master\trabalhografos\no.h
+	<vector>
+	"Aresta.h"
+
+1555887054 d:\downloads\trabgrafosgrupo2-master\trabalhografos\aresta.h
+	"No.h"
+
+1556153650 d:\downloads\trabgrafosgrupo2-master\trabalhografos\grafo.cpp
+	"Grafo.h"
+	"No.h"
+	"No.cpp"
+	<vector>
+	<algorithm>
+	<cstring>
+	<stack>
+
+1556066694 d:\downloads\trabgrafosgrupo2-master\trabalhografos\no.cpp
+	"Aresta.h"
+	"No.h"
+
+1556153401 d:\downloads\trabgrafosgrupo2-master\trabalhografos\menu.h
+	"Grafo.h"
+	"No.h"
+	"Aresta.h"
+
+1556153401 source:d:\downloads\trabgrafosgrupo2-master\trabalhografos\menu.cpp
+	"Menu.h"
+	"Grafo.h"
+	"No.h"
+	"Aresta.h"
+	"iostream"
+
+1556677540 source:c:\users\adriana\documents\projeto grafos\trabgrafosgrupo2\trabalhografos\main.cpp
+	<iostream>
+	"Grafo.h"
+	"Grafo.cpp"
+	"Menu.h"
+
+1556677579 c:\users\adriana\documents\projeto grafos\trabgrafosgrupo2\trabalhografos\grafo.h
+	<vector>
+	"No.h"
+	<iostream>
+	<fstream>
+
+1556677330 c:\users\adriana\documents\projeto grafos\trabgrafosgrupo2\trabalhografos\no.h
+	<vector>
+	"Aresta.h"
+
+1556677341 c:\users\adriana\documents\projeto grafos\trabgrafosgrupo2\trabalhografos\aresta.h
+
+1556677777 c:\users\adriana\documents\projeto grafos\trabgrafosgrupo2\trabalhografos\grafo.cpp
+	"Grafo.h"
+	"No.h"
+	"No.cpp"
+	<vector>
+	<algorithm>
+	<cstring>
+	<stack>
+
+1556677330 c:\users\adriana\documents\projeto grafos\trabgrafosgrupo2\trabalhografos\no.cpp
+	"Aresta.h"
+	"No.h"
+
+1556636065 c:\users\adriana\documents\projeto grafos\trabgrafosgrupo2\trabalhografos\menu.h
+	"Grafo.h"
+	"No.h"
+	"Aresta.h"
+
+1556636065 source:c:\users\adriana\documents\projeto grafos\trabgrafosgrupo2\trabalhografos\menu.cpp
+	"Menu.h"
+	"Grafo.h"
+	"No.h"
+	"Aresta.h"
+	"iostream"
+
+1556678567 source:c:\users\joao\desktop\trabgrafosgrupo2-master\trabalhografos\menu.cpp
+	"Menu.h"
+	"Grafo.h"
+	"No.h"
+	"Aresta.h"
+	"iostream"
+
+1556678567 c:\users\joao\desktop\trabgrafosgrupo2-master\trabalhografos\menu.h
+	"Grafo.h"
+	"No.h"
+	"Aresta.h"
+
+1556926591 c:\users\joao\desktop\trabgrafosgrupo2-master\trabalhografos\grafo.h
+	<vector>
+	"No.h"
+	<iostream>
+	<fstream>
+
+1556678567 c:\users\joao\desktop\trabgrafosgrupo2-master\trabalhografos\no.h
+	<vector>
+	"Aresta.h"
+
+1556678567 c:\users\joao\desktop\trabgrafosgrupo2-master\trabalhografos\aresta.h
+
+1556926743 source:c:\users\joao\desktop\trabgrafosgrupo2-master\trabalhografos\main.cpp
+	<iostream>
+	"Grafo.h"
+	"Grafo.cpp"
+	"Menu.h"
+
+1556927014 c:\users\joao\desktop\trabgrafosgrupo2-master\trabalhografos\grafo.cpp
+	"Grafo.h"
+	"No.h"
+	"No.cpp"
+	<vector>
+	<algorithm>
+	<cstring>
+	<stack>
+	<queue>
+
+1556678567 c:\users\joao\desktop\trabgrafosgrupo2-master\trabalhografos\no.cpp
+	"Aresta.h"
+	"No.h"
+
+1558702051 source:c:\users\adriana\desktop\trabgrafosgrupo2\trabgrafosgrupo2-master\trabalhografos\main.cpp
+	<iostream>
+	"Grafo.h"
+	"Grafo.cpp"
+	"Menu.h"
+
+1558701568 c:\users\adriana\desktop\trabgrafosgrupo2\trabgrafosgrupo2-master\trabalhografos\grafo.h
+	<vector>
+	"No.h"
+	<iostream>
+	<fstream>
+
+1558701552 c:\users\adriana\desktop\trabgrafosgrupo2\trabgrafosgrupo2-master\trabalhografos\no.h
+	<vector>
+	"Aresta.h"
+
+1557101157 c:\users\adriana\desktop\trabgrafosgrupo2\trabgrafosgrupo2-master\trabalhografos\aresta.h
+
+1558701800 c:\users\adriana\desktop\trabgrafosgrupo2\trabgrafosgrupo2-master\trabalhografos\grafo.cpp
+	"Grafo.h"
+	"No.h"
+	"No.cpp"
+	<vector>
+	<algorithm>
+	<cstring>
+	<stack>
+	<queue>
+
+1558701782 c:\users\adriana\desktop\trabgrafosgrupo2\trabgrafosgrupo2-master\trabalhografos\no.cpp
+	"Aresta.h"
+	"No.h"
+
+1557101157 c:\users\adriana\desktop\trabgrafosgrupo2\trabgrafosgrupo2-master\trabalhografos\menu.h
+	"Grafo.h"
+	"No.h"
+	"Aresta.h"
+
+1557101157 source:c:\users\adriana\desktop\trabgrafosgrupo2\trabgrafosgrupo2-master\trabalhografos\menu.cpp
+	"Menu.h"
+	"Grafo.h"
+	"No.h"
+	"Aresta.h"
+	"iostream"
+
+1559664906 source:c:\users\vinic\desktop\trabgrafosgrupo2\trabalhografos\menu.cpp
+	"Menu.h"
+	"Grafo.h"
+	"No.h"
+	"Aresta.h"
+	"iostream"
+
+1559664906 c:\users\vinic\desktop\trabgrafosgrupo2\trabalhografos\menu.h
+	"Grafo.h"
+	"No.h"
+	"Aresta.h"
+
+1559620962 c:\users\vinic\desktop\trabgrafosgrupo2\trabalhografos\grafo.h
+	<vector>
+	"No.h"
+	<iostream>
+	<fstream>
+
+1559620962 c:\users\vinic\desktop\trabgrafosgrupo2\trabalhografos\no.h
+	<vector>
+	"Aresta.h"
+	"No.h"
+
+1559620962 c:\users\vinic\desktop\trabgrafosgrupo2\trabalhografos\aresta.h
+
+1559673258 source:c:\users\vinic\desktop\trabgrafosgrupo2\trabalhografos\main.cpp
+	<iostream>
+	"Grafo.h"
+	"Grafo.cpp"
+	"Menu.h"
+
+1559672631 c:\users\vinic\desktop\trabgrafosgrupo2\trabalhografos\grafo.cpp
+	"Grafo.h"
+	"No.h"
+	"No.cpp"
+	<vector>
+	<algorithm>
+	<cstring>
+	<stack>
+	<queue>
+	"Aresta.h"
+
+1559620962 c:\users\vinic\desktop\trabgrafosgrupo2\trabalhografos\no.cpp
+	"Aresta.h"
+	"No.h"
+
+1559607326 source:c:\users\adriana\desktop\trabgrafosgrupo2-master (4)\trabgrafosgrupo2-master\trabalhografos\menu.cpp
+	"Menu.h"
+	"Grafo.h"
+	"No.h"
+	"Aresta.h"
+	"iostream"
+
+1559607326 c:\users\adriana\desktop\trabgrafosgrupo2-master (4)\trabgrafosgrupo2-master\trabalhografos\menu.h
+	"Grafo.h"
+	"No.h"
+	"Aresta.h"
+
+1559620015 c:\users\adriana\desktop\trabgrafosgrupo2-master (4)\trabgrafosgrupo2-master\trabalhografos\grafo.h
+	<vector>
+	"No.h"
+	<iostream>
+	<fstream>
+
+1559618532 c:\users\adriana\desktop\trabgrafosgrupo2-master (4)\trabgrafosgrupo2-master\trabalhografos\no.h
+	<vector>
+	"Aresta.h"
+	"No.h"
+
+1559619680 c:\users\adriana\desktop\trabgrafosgrupo2-master (4)\trabgrafosgrupo2-master\trabalhografos\aresta.h
+
+1559619721 source:c:\users\adriana\desktop\trabgrafosgrupo2-master (4)\trabgrafosgrupo2-master\trabalhografos\main.cpp
+	<iostream>
+	"Grafo.h"
+	"Grafo.cpp"
+	"Menu.h"
+
+1559620455 c:\users\adriana\desktop\trabgrafosgrupo2-master (4)\trabgrafosgrupo2-master\trabalhografos\grafo.cpp
+	"Grafo.h"
+	"No.h"
+	"No.cpp"
+	<vector>
+	<algorithm>
+	<cstring>
+	<stack>
+	<queue>
+	"Aresta.h"
+
+1559618479 c:\users\adriana\desktop\trabgrafosgrupo2-master (4)\trabgrafosgrupo2-master\trabalhografos\no.cpp
+	"Aresta.h"
+	"No.h"
+
+1560305165 source:c:\users\principal\desktop\codigos\trabgrafosgrupo2-master\trabalhografos\main.cpp
+	<iostream>
+	"Grafo.h"
+	"Grafo.cpp"
+	"Menu.h"
+
+1560306544 c:\users\principal\desktop\codigos\trabgrafosgrupo2-master\trabalhografos\grafo.h
+	<vector>
+	"No.h"
+	<iostream>
+	<fstream>
+	<stack>
+
+1560305165 c:\users\principal\desktop\codigos\trabgrafosgrupo2-master\trabalhografos\no.h
+	<vector>
+	"Aresta.h"
+	"No.h"
+
+1560305165 c:\users\principal\desktop\codigos\trabgrafosgrupo2-master\trabalhografos\aresta.h
+
+1560306444 c:\users\principal\desktop\codigos\trabgrafosgrupo2-master\trabalhografos\grafo.cpp
+	"Grafo.h"
+	"No.h"
+	"No.cpp"
+	<vector>
+	<algorithm>
+	<cstring>
+	<stack>
+	<queue>
+	<time.h>
+	<math.h>
+	<stdlib.h>
+	"Aresta.h"
+
+1560305165 c:\users\principal\desktop\codigos\trabgrafosgrupo2-master\trabalhografos\no.cpp
+	"Aresta.h"
+	"No.h"
+
+1560305165 c:\users\principal\desktop\codigos\trabgrafosgrupo2-master\trabalhografos\menu.h
+	"Grafo.h"
+	"No.h"
+	"Aresta.h"
+
+1560305165 source:c:\users\principal\desktop\codigos\trabgrafosgrupo2-master\trabalhografos\menu.cpp
+	"Menu.h"
+	"Grafo.h"
+	"No.h"
+	"Aresta.h"
+	"iostream"
+
+1560348547 source:c:\users\adriana\desktop\grafosbash\trabgrafosgrupo2\trabalhografos\menu.cpp
+	"Menu.h"
+	"Grafo.h"
+	"No.h"
+	"Aresta.h"
+	"iostream"
+
+1560348547 c:\users\adriana\desktop\grafosbash\trabgrafosgrupo2\trabalhografos\menu.h
+	"Grafo.h"
+	"No.h"
+	"Aresta.h"
+
+1560348547 c:\users\adriana\desktop\grafosbash\trabgrafosgrupo2\trabalhografos\grafo.h
+	<vector>
+	"No.h"
+	<iostream>
+	<fstream>
+	<stack>
+
+1560348547 c:\users\adriana\desktop\grafosbash\trabgrafosgrupo2\trabalhografos\no.h
+	<vector>
+	"Aresta.h"
+	"No.h"
+
+1560348547 c:\users\adriana\desktop\grafosbash\trabgrafosgrupo2\trabalhografos\aresta.h
+
+1560351232 source:c:\users\adriana\desktop\grafosbash\trabgrafosgrupo2\trabalhografos\main.cpp
+	<iostream>
+	"Grafo.h"
+	"Grafo.cpp"
+	"Menu.h"
+
+1560348547 c:\users\adriana\desktop\grafosbash\trabgrafosgrupo2\trabalhografos\grafo.cpp
+	"Grafo.h"
+	"No.h"
+	"No.cpp"
+	<vector>
+	<algorithm>
+	<cstring>
+	<stack>
+	<queue>
+	<time.h>
+	<math.h>
+	<stdlib.h>
+	"Aresta.h"
+
+1560348547 c:\users\adriana\desktop\grafosbash\trabgrafosgrupo2\trabalhografos\no.cpp
+	"Aresta.h"
+	"No.h"
+
