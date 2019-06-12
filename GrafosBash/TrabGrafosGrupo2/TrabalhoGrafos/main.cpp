@@ -123,27 +123,30 @@ int main(int argc, char* argv[])
     string arquivoSaida = argv[2];
     int digrafo = atoi(argv[3]);
     int ponderado = atoi(argv[4]);
-    digrafo = 0, ponderado = 1;
+
+    cout<<arquivoEntrada<<endl;
+
     Grafo* grafo = new Grafo(digrafo,ponderado);
 
     if(ponderado == 1)
         leArquivoComPeso(grafo,arquivoEntrada);
-   // else
-       // leArquivoSemPeso(grafo,arquivoEntrada);
+    else
+        leArquivoSemPeso(grafo,arquivoEntrada);
+
 
 
     //////////// Teste Gulosos /////////
-    /*
+
     cout<<"Testa Guloso Randomizado"<< endl<<endl;
     grafo->auxGulosoRandomizado();
     cout<<endl;
-    grafo->imprimiGrafo();
+
     cout<< endl<<endl;
     cout<<"Testa Guloso"<< endl<<endl;
     int k = grafo->algoritmoGuloso();
     cout<< "Qtd de Cores: " <<k<< endl<<endl;
-    grafo->imprimiGrafo();
-    */
+
+
 
     ////////TESTE KRUSKAL/////////
     /*grafo->adicionarArestaNos(0, 1, 4);
