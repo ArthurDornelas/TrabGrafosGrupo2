@@ -1250,6 +1250,106 @@ void Grafo::dijkstra(int id)
             cout<<i<<"---------"<<distancia[i]<<endl;
     }
 }
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//  ALGORITMO FLOYD                                                                                                 /
+// O algoritmo de floyd serve para calcular a menar distancia entre todos pares de vertices em um grafo ponderado   //
+// e direcionado,armazenando eles em uma matriz.No codigo abaixo iniciamos todos os valores com um int INF para     //
+//representar o valor infinito.A matriz mostra o caminho mais curto de cada vertice,representado por                //
+//cada posicao, VET[1][2] por exemplo é o menor caminho do vertice 1 para o vertice 2.                              //
+                                                                                                                    //
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//
+//
+
+void Grafo::algoritmoFloyd()
+{
+    if(ehdigrafo()==1&&ehponderada()==1)
+    {
+
+        int i,j;
+        int tam =listaAdj.size();
+
+        int vet1[tam][tam];
+
+        for(int i=0; i<tam; i++)
+            for(int j=0; j<tam; j++)
+                vet1[i][j]=INF;
+
+        for(int i=0; i<tam; i++)
+        {
+            for(j=0; j<tam; j++)
+            {
+                if(i==j)
+                    vet1[i][j]=0;
+
+            }
+
+            for(int i=0; i<tam; i++)
+            {
+                for(int j=0; j<tam; j++)
+                {
+
+                    // cout<<"IDNO="<< no->getId();
+
+                    for(std::vector<Aresta>::iterator arest = listaAdj[i].listaAresta.begin(); arest != listaAdj[i].listaAresta.end(); ++arest)
+                    {
+                        if(i!=j)
+                        {
+
+                            if(arest->getIdNo() == listaAdj[j].getId() && arest->getPesoAresta()<vet1[i][j])
+                            {
+
+                                // cout<<"\ni="<<i<<"j="<<j;
+                                // cout<<"   vetIeJ="<<vet1[i][j]<<"\n";
+                                vet1[i][j]=arest->getPesoAresta();
+                                //   cout<<"\n"<<arest->getPesoAresta();
+                                break;
+                            }
+
+                        }
+                    }
+                }
+
+
+            }
+
+
+
+
+
+        }
+        for(int i=0; i<tam; i++)
+        {
+            for(int j=0; j<tam; j++)
+            {
+                for(int k=0; k<tam; k++)
+                {
+                    if(vet1[i][k]+vet1[k][j]<vet1[i][j])
+                        vet1[i][j]=vet1[i][k]+vet1[k][j];
+
+
+
+                }
+
+
+            }
+        }
+
+
+
+
+        for(int i=0; i<listaAdj.size(); i++)
+        {
+            cout<<"\n";
+            for(int j=0; j<listaAdj.size(); j++)
+            {
+                cout<<listaAdj[i].getId()<<"i"<<listaAdj[j].getId()<<"j"<<"="<<vet1[i][j]<<"\t";
+            }
+        }
+
+
+
+    }
 
 
 
@@ -1257,8 +1357,4 @@ void Grafo::dijkstra(int id)
 
 
 
-
-
-
-
-
+}
