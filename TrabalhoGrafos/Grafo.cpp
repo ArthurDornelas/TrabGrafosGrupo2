@@ -707,50 +707,241 @@ void Grafo::buscaEmLargura(int id)
 
 }
 
-void Grafo::compConexa()
+/** Funcao auxiliar utilizada pela compConexa();
+*/
+
+void Grafo::buscaConexaUtil(int u, bool visitado[])
 {
+    // Marca e mostra o no atual visitado
+    visitado[u] = true;
+    cout << u << " ";
 
-    No *aux=new No();
-    int i=0;
-    aux = (&(listaAdj[i]));
-
-    for(std::vector<No>::iterator it = listaAdj.begin(); it != listaAdj.end(); ++it)
+    // Percorre todos os nos adjacentes ao no atual
+    for(std::vector<Aresta>::iterator arest = listaAdj[u].listaAresta.begin(); arest != listaAdj[u].listaAresta.end(); ++arest)
     {
-        it->setVisitadoConex(0);
+        int i = arest->getIndiceNo();
+        if(!visitado[i])
+            buscaConexaUtil(i,visitado);
+
+
     }
-
-    int componente = 0;
-
-    for(std::vector<No>::iterator it = listaAdj.begin(); it != listaAdj.end(); ++it)
-    {
-        if(it->getVisitadoConex() == 0)
-        {
-            componente = componente + 1;
-            buscaConexa(aux, componente);
-        }
-    }
-
 }
 
-void Grafo::buscaConexa(No *v, int componente)
+/** Funcao utilizada para encontrar a componente conexa
+*/
+
+void Grafo::compConexa()
 {
-    v->setVisitadoConex(componente);
+    if(ehdigrafo()==1)
+        cout << "Utilize a funcao compFortConexa() para grafos direcionados";
 
-    for(std::vector<Aresta>::iterator arest = v->listaAresta.begin(); arest != v->listaAresta.end(); ++arest)
+    else
     {
-        int i= 0;
-        for(std::vector<No>::iterator it = listaAdj.begin(); it != listaAdj.end(); ++it)
+        // Marca todos os vertices como nao visitados
+        bool *visitado = new bool[listaAdj.size()];
+        for(int i=0; i < listaAdj.size(); i++)
+            visitado[i] = false;
+        for(int i=0; i < listaAdj.size(); i++)
         {
-            if(it->getVisitadoConex()==0)
+            if(visitado[i] == false)
             {
-                if(it->getId()==arest->getIdNo())
-                {
-                    buscaConexa(&(listaAdj[i]), componente);
-                    break;
-                }
-                i++;
+                // Mostra todos os vertices alcancaveis
+                buscaConexaUtil(i, visitado);
+                cout << "\n";
             }
+        }
+    }
+}
+/**
+       Uma funcao recursiva utilizada para encontra a componente fortemente conexa
+       utilizado a busca em profundidade
+       u -> O no a ser visitado
+       dem[] --> Guarda as vezes que os nos foram visitados
+       low[] --> o no menos visitado que pode ser alcancado pela
+       subarvore com o no atual
+       membro --> Guarda todos nos anteriores que estao conectado
+       (pode ser parte da componente fortemente conexa)
+       verificaMembro[] --> Um vetor utilizado para checar mais
+       rapidamente se o no esta na pilha
+**/
 
+void Grafo::fortConexaUtil(int u, int dem[], int low[], stack<int> *membro, bool *verificaMembro)
+{
+    // Variavel estatica utilizada para facilitar ao inves de utilizar ponteiro
+    static int time = 0;
+    //Inicializa o tempo de descoberta e o valor low
+    dem[u] = low[u] = ++time;
+    membro->push(u);
+    verificaMembro[u] = true;
+
+    // Percorre todos os nos adjacentes ao no atual
+    for(std::vector<Aresta>::iterator arest = listaAdj[u].listaAresta.begin(); arest != listaAdj[u].listaAresta.end(); ++arest)
+    {
+        int i = arest->getIndiceNo();
+
+        // Se i nao foi visitado entao ira chamar novamente a funcao
+        if(dem[i] == -1)
+        {
+            fortConexaUtil(i, dem, low, membro, verificaMembro);
+            /* Checa se a subarvore enraizada a 'i', tem conexao
+               com algum dos nos anteriores a 'u'
+            */
+            low[u] = min(low[u], low[i]);
+        }
+        /*  Atualiza o valor low de 'u' somente se 'i' ainda esta na pilha
+                , ou seja, eh uma aresta de saida ao inves de uma aresta externa.
+            */
+        else if(verificaMembro[i] == true)
+            low[u] = min(low[u], dem[i]);
+    }
+    // No encontrando, utiliza a funcao pop da pilha e mostra a componente fortemente conexa
+    // Variavel utilizada para guardar os nos que foram tirados da pilha
+    int aux = 0;
+    if(low[u] == dem[u])
+    {
+        while(membro->top() != u)
+        {
+            aux = (int) membro->top();
+            cout << aux << " ";
+            verificaMembro[aux] =  false;
+            membro->pop();
+        }
+        aux = (int)membro->top();
+        cout << aux << "\n";
+        verificaMembro[aux] = false;
+        membro->pop();
+    }
+}
+/** Funcao que faz uma busca em profundidade. Utiliza fortConexaUtil()
+*/
+
+void Grafo::fortConexa()
+{
+    if(ehdigrafo()==0)
+        cout << "Nao eh possivel encontrar componente fortemente conexa num grafo nao direcionado" << endl;
+
+    else
+    {
+        int *dem = new int[listaAdj.size()];
+        int *low = new int[listaAdj.size()];
+        bool *verificaMembro = new bool[listaAdj.size()];
+        stack<int> *membro = new stack<int>();
+
+        // Inicializa variaveis
+        for(int i = 0; i < listaAdj.size(); i++)
+        {
+            dem[i] = -1;
+            low[i] = -1;
+            verificaMembro[i] = false;
+        }
+        /* Chama a funcao auxiliar recursiva para encontrar
+           as componentes conexas
+        */
+        for(int i = 0; i < listaAdj.size(); i++)
+            if(dem[i]==-1)
+                fortConexaUtil(i, dem, low, membro, verificaMembro);
+
+    }
+}
+
+/**
+    Funcao auxiliar para verificar se tem ciclo
+*/
+bool Grafo::buscaUtil(int u, int cor[])
+{
+    // Colore como 1 para mostrar que o vertice
+    // esta sendo processado (a busca em profundidade
+    // começou mas não acabou.
+    cor[u] = 1;
+    // Percorre todos os adjacentes
+    for(std::vector<Aresta>::iterator arest = listaAdj[u].listaAresta.begin(); arest != listaAdj[u].listaAresta.end(); ++arest)
+    {
+        int v = arest->getIndiceNo(); // Nó adjacente a u
+        //Se v ja foi visitado
+        if(cor[v] == 1)
+            return true;
+        //Se v não foi visitado e tem um aresta de saida
+        if(cor[v] == 0 && buscaUtil(v, cor))
+            return true;
+    }
+    // Colore como 2 para mostrar que foi processado
+    cor[u] = 2;
+    return false;
+}
+/**
+    Funcao que verifica se tem ciclo no grafo.
+    Retorna true se ha um ciclo.
+*/
+bool Grafo::temCiclo()
+{
+    // Inicializa todos as cores de todos vertices como -1
+    int *cor = new int[listaAdj.size()];
+    for(int i = 0; i != listaAdj.size(); i++)
+    {
+        cor[i] = 0;
+    }
+    //Faz uma busca em profundidade com todos os vertices
+    for(int i= 0; i != listaAdj.size(); i++)
+    {
+        if(cor[i]== 0)
+            if(buscaUtil(i, cor) == true)
+                return true;
+    }
+    return false;
+}
+/**
+    Funcao recursiva utilizada pela Ordenaçao Topologica.
+*/
+void Grafo::ordTopologicaUtil(int v, bool visitado[], stack<int> &pilha)
+{
+    // Marca o no atual como visitado
+    visitado[v] = true;
+    // Percorre todos os nos adjacentes a esse no
+    for(std::vector<Aresta>::iterator arest = listaAdj[v].listaAresta.begin(); arest != listaAdj[v].listaAresta.end(); ++arest)
+    {
+        int i = arest->getIndiceNo();
+        if(!visitado[i])
+            ordTopologicaUtil(i, visitado, pilha);
+    }
+    // Coloca o no atual na pilha para guardar o resultado
+    pilha.push(v);
+}
+
+
+
+
+/**
+    Funcao para fazer a Ordenacao Topologica.
+    Ela utiliza a funcao auxiliar OrdenacaoTopologicaUtil.
+*/
+void Grafo::ordenacaoTopologica()
+{
+    if(temCiclo()==true)
+    {
+        cout << "Nao eh possivel fazer uma ordenacao topologica pois o grafo possui pelo menos um ciclo";
+    }
+    else
+    {
+        stack<int> pilha; //pilha para armazenar o indice dos nós
+        //Marca todos os vertices como nao visitados
+        bool *visitado = new bool[listaAdj.size()];
+        for (int i = 0; i != listaAdj.size(); i++)
+        {
+            visitado[i]= false;
+        }
+        // Chama a funcao auxiliar recursiva
+        // para guardar a ordenacao topologica
+        // de todos os vertices, um por um
+        for (int i= 0; i!=listaAdj.size(); i++)
+        {
+            if(visitado[i] == false)
+                ordTopologicaUtil(i, visitado, pilha);
+        }
+        // Imprime o conteudo da pilha
+        while (pilha.empty() == false)
+        {
+            cout << listaAdj[pilha.top()].getId() << " ";
+            pilha.pop();
         }
     }
 }
@@ -838,7 +1029,8 @@ void Grafo::algoritmoKruskal()
 }
 
 int Grafo::quickPartitionKruskal(int left, int right)//ordenacao de um vetor de arestas em ordem crescente
-{                                                   //de acordo com o peso
+{
+    //de acordo com o peso
     int pivo = pesoArestas[right].getPesoAresta();
     int i = (left - 1);
 
@@ -1009,52 +1201,52 @@ void Grafo::algoritmoGulosoRandomizado(float alfa, int intMax)
             int pos = posCandidatos[j];
 
 
-                for(int i=0; i<=k ; i++)                            // For que roda todas as cores que existem até o momento.
+            for(int i=0; i<=k ; i++)                            // For que roda todas as cores que existem até o momento.
+            {
+
+                bool flag = false;
+                if(i<k)                                         // Se i = k entao nenhum nó adjacente a ele tem cor k, assim a cor dele sera k e nao é preciso checar suas cores adjacentes.
                 {
-
-                    bool flag = false;
-                    if(i<k)                                         // Se i = k entao nenhum nó adjacente a ele tem cor k, assim a cor dele sera k e nao é preciso checar suas cores adjacentes.
+                    for(int corAdjacente = 0; corAdjacente < listaAdj[pos].corAdj.size(); corAdjacente++)       // For que roda todas as cores que sao adjacentes ao nó, pelo vetor corAdjacente que pertence ao nó.
                     {
-                        for(int corAdjacente = 0; corAdjacente < listaAdj[pos].corAdj.size(); corAdjacente++)       // For que roda todas as cores que sao adjacentes ao nó, pelo vetor corAdjacente que pertence ao nó.
+                        if(listaAdj[pos].corAdj[corAdjacente] == i)
                         {
-                            if(listaAdj[pos].corAdj[corAdjacente] == i)
-                            {
-                                flag = true;                                          // Var flag recebe true se existe a cor i no vetor de corAdjacente do nó, e assim passa para a próxima cor.
-                                break;
-                            }
+                            flag = true;                                          // Var flag recebe true se existe a cor i no vetor de corAdjacente do nó, e assim passa para a próxima cor.
+                            break;
                         }
-                    }
-
-                    /* Se a var flag for falsa, entao temos que aquele indice de cor nao está sendo
-                       utilizada por nenhum nó adjacente, portanto pode ser dada a esse nó, e para
-                       isso, é necessario verificar se a cor i é uma cor que ja foi utilizada antes
-                       ou é uma cor nova (o que implica que o nó é adjacente a todas as cores já
-                       utilizadas), sendo assim necessário atualizar a variavel k, com uma cor nova.
-                    */
-                    if(flag == false && i < k)                                   // Cor i já existe.
-                    {
-                        listaAdj[pos].setCorNo(i);
-                        for(std::vector<Aresta>::iterator arest = listaAdj[pos].listaAresta.begin(); arest != listaAdj[pos].listaAresta.end(); ++arest)
-                        {
-                            if(listaAdj[arest->getIndiceNo()].getCorNo() == -1 )
-                                listaAdj[arest->getIndiceNo()].addCorAdj(i);   // Adiciona k no vetor de cores adjacentes de todos os nós adjacentes ao no.
-                        }
-                        break;
-                    }
-                    else if(flag == false && i==k)                               // Cor i não existe.
-                    {
-                        listaAdj[pos].setCorNo(i);
-                        for(std::vector<Aresta>::iterator arest = listaAdj[pos].listaAresta.begin(); arest != listaAdj[pos].listaAresta.end(); ++arest)
-                        {
-                            if(listaAdj[arest->getIndiceNo()].getCorNo() == -1)
-                                listaAdj[arest->getIndiceNo()].addCorAdj(i);   // Adiciona k no vetor de cores adjacentes de todos os nós adjacentes ao no.
-                        }
-                        k++;                                                     // Atualiza k com nova cor
-                        break;
                     }
                 }
 
-                posCandidatos.erase(posCandidatos.begin()+j);
+                /* Se a var flag for falsa, entao temos que aquele indice de cor nao está sendo
+                   utilizada por nenhum nó adjacente, portanto pode ser dada a esse nó, e para
+                   isso, é necessario verificar se a cor i é uma cor que ja foi utilizada antes
+                   ou é uma cor nova (o que implica que o nó é adjacente a todas as cores já
+                   utilizadas), sendo assim necessário atualizar a variavel k, com uma cor nova.
+                */
+                if(flag == false && i < k)                                   // Cor i já existe.
+                {
+                    listaAdj[pos].setCorNo(i);
+                    for(std::vector<Aresta>::iterator arest = listaAdj[pos].listaAresta.begin(); arest != listaAdj[pos].listaAresta.end(); ++arest)
+                    {
+                        if(listaAdj[arest->getIndiceNo()].getCorNo() == -1 )
+                            listaAdj[arest->getIndiceNo()].addCorAdj(i);   // Adiciona k no vetor de cores adjacentes de todos os nós adjacentes ao no.
+                    }
+                    break;
+                }
+                else if(flag == false && i==k)                               // Cor i não existe.
+                {
+                    listaAdj[pos].setCorNo(i);
+                    for(std::vector<Aresta>::iterator arest = listaAdj[pos].listaAresta.begin(); arest != listaAdj[pos].listaAresta.end(); ++arest)
+                    {
+                        if(listaAdj[arest->getIndiceNo()].getCorNo() == -1)
+                            listaAdj[arest->getIndiceNo()].addCorAdj(i);   // Adiciona k no vetor de cores adjacentes de todos os nós adjacentes ao no.
+                    }
+                    k++;                                                     // Atualiza k com nova cor
+                    break;
+                }
+            }
+
+            posCandidatos.erase(posCandidatos.begin()+j);
 
         }
 
@@ -1139,8 +1331,8 @@ void Grafo::dijkstra(int id)
             if(arest->getPesoAresta()<0)
             {
                 cout<<"DIJKSTRA PRECISA DE ARESTAS COM PESO POSITIVO"<<endl;
-                    negativo=0;
-                    exit(0);
+                negativo=0;
+                exit(0);
             }
     //verifica se existem arestas com peso negativo
     if(negativo)
@@ -1256,7 +1448,7 @@ void Grafo::dijkstra(int id)
 // e direcionado,armazenando eles em uma matriz.No codigo abaixo iniciamos todos os valores com um int INF para     //
 //representar o valor infinito.A matriz mostra o caminho mais curto de cada vertice,representado por                //
 //cada posicao, VET[1][2] por exemplo é o menor caminho do vertice 1 para o vertice 2.                              //
-                                                                                                                    //
+//
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 //
