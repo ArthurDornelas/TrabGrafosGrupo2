@@ -950,14 +950,21 @@ void Grafo::ordenacaoTopologica()
 XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 X                                                                                                                                                               X
 X  O algoritmo de Kruskal,sendo um grafo conexo, ponderado e nao direcionado, tem como objetivo encontrar um subconjunto das arestas que forma uma árvore que   X
-X  inclui todos os vértices, onde o peso total, dado pela soma dos pesos das arestas da árvore, é minimizado. No algoritmo abaixo inicialmente foi inicializado X
-X  todos os vertices do grafo como sendo um subconjunto unitario contendo apenas o proprio vertice, representado de forma como o pai de cada vertice eh o       X
-X  proprio vertice e o Rank de todos os vertice eh inicializado com 0. O passo seguinte foi colocar todas as arestas em um unico vetor, e entao ordernar-lo     X
-X  em ordem crescente de acordo com o peso da aresta,esta ordenacao eh feita por meio do Quick Sort. Apos isso eh utilizada uma funcao auxiliar          X
+X  inclui todos os vértices, onde o peso total, dado pela soma dos pesos das arestas da árvore, é minimizado. No algoritmo abaixo inicialmente foi criado uma   X
+X  floresta onde cada vertice eh uma arvore independente, representado de forma como o pai de cada vertice eh o proprio vertice e o Rank de todos os vertice    X
+X   eh inicializado com 0. O passo seguinte foi colocar todas as arestas em um unico vetor, e entao ordernar-lo em ordem crescente de acordo com o peso da      X 
+X   aresta,esta ordenacao eh feita por meio do Quick Sort. Apos isso foi colocado um FOR para rodar o vector de aresta, no algoritmo abaixo representado com o  X 
+X   nome "pesoArestas". Para cada aresta recuperada do vector, pegamos os vertices de origem e de destino da mesma e mandamos por paramentro de uma funcao      X
+X   auxiliar que chama "busca_kruskal" que tem como objetivo busca e retornar o subconjunto de determinado vertice informado por parametro.Com o subconjunto    X
+X   do vertice de origem e do vertice de destino em maos agora comparamos se sao diferentes , caso sejam, significa que nao estao no mesmo subconjunto e,       X
+X   portanto, nao temos ciclos.Dessa forma, agora inserimos esta aresta em questao no vector "arvoreKruskal" que e aonde estarao armazenadas todas a arestas da X 
+X   arvore geradora minima do grafo.Por ultimo , mas nao menos importante, utilizamos outra funcao auxiliar "uniao_krukal" que tem como objetivo unir o vertice X
+X   de origem e de destino em um mesmo subconjunto independente.Ao final voltamos ao FOR , pegamos outra aresta, faz-se o mesmo procedimento ate o final do     X
+X   vector de arestas.                                                                                                                                          X
 X                                                                                                                                                               X
 XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
  */
-No* Grafo::busca_kruskal(No *v)
+No* Grafo::busca_kruskal(No *v)//funcao que busca e retorna o subconjunto de um determinado vertice informado por parametro
 {
     if(v->getPai() == v)
         return v;
@@ -983,8 +990,8 @@ void Grafo::algoritmoKruskal()
     int k=0;
     for(std::vector<No>::iterator it = listaAdj.begin(); it != listaAdj.end(); ++it)
     {
-        it->setPai(&listaAdj[k]);//criar uma sub-arvore para cada no do grafo
-        it->setRank(0);          //sendo o pai o proprio vertice
+        it->setPai(&listaAdj[k]);//criar uma sub-arvore independente para cada no do grafo
+        it->setRank(0);          //sendo o pai o proprio vertice e o Rank sendo 0
         k++;
     }
 
@@ -1005,13 +1012,13 @@ void Grafo::algoritmoKruskal()
     int l=0;
     for(std::vector<Aresta>::iterator it = pesoArestas.begin(); it != pesoArestas.end(); ++it)
     {
-        No *v1=busca_kruskal(&listaAdj[it->getIndiceLista()]);//vertice de origem de uma aresta
-        No *v2=busca_kruskal(&listaAdj[it->getIndiceNo()]);//vertice de destino de uma aresta
+        No *v1=busca_kruskal(&listaAdj[it->getIndiceLista()]);//busca do subconjunto do vertice de origem de uma aresta
+        No *v2=busca_kruskal(&listaAdj[it->getIndiceNo()]);//busca do subconjunto do vertice de destino de uma aresta
 
-        if(v1 != v2)//se forem diferentes é porque nao forma ciclo
-        {
+        if(v1 != v2)// se os subconjuntos de v1 e v2 forem diferentes significa que nao ha ciclo , entao
+        {          
             arvoreKruskal.push_back(pesoArestas[l]);//insere no vetor de arestas da arvore geradora minima
-            uniao_kruskal(v1,v2);//faz a uniao
+            uniao_kruskal(v1,v2);//faz a uniao de v1 e v2 em um mesmo subconjunto
         }
         l++;
     }
@@ -1028,9 +1035,9 @@ void Grafo::algoritmoKruskal()
     cout<<"      Custo Minimo       ==>    "<<soma<<endl;
 }
 
-int Grafo::quickPartitionKruskal(int left, int right)//ordenacao de um vetor de arestas em ordem crescente
+int Grafo::quickPartitionKruskal(int left, int right)//ordenacao de um vetor de arestas em ordem crescente de acordo com o peso
 {
-    //de acordo com o peso
+    
     int pivo = pesoArestas[right].getPesoAresta();
     int i = (left - 1);
 
@@ -1046,7 +1053,7 @@ int Grafo::quickPartitionKruskal(int left, int right)//ordenacao de um vetor de 
     return i+1;
 }
 
-void Grafo::quickSortKruskal(int left,int right)
+void Grafo::quickSortKruskal(int left,int right)//ordenacao de um vetor de arestas em ordem crescente de acordo com o peso
 {
     if( left < right)
     {
@@ -1057,7 +1064,7 @@ void Grafo::quickSortKruskal(int left,int right)
     }
 }
 
-void Grafo::trocaKruskal(int x1, int x2)
+void Grafo::trocaKruskal(int x1, int x2)//ordenacao de um vetor de arestas em ordem crescente de acordo com o peso
 {
     if(x1 != x2)
     {
