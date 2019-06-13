@@ -4,13 +4,22 @@
 #include "Menu.h"
 using namespace std;
 
-void leArquivo(Grafo *grafo, int ponderado)
+
+//****************************************************************
+// Leitura dos Arquivos e armazenamento, quando é um grafo       *
+// ponderado.                                                    *
+// Recebe um objeto de Grafo e uma string com o arquivo de       *
+// entrada.                                                      *
+//****************************************************************
+void leArquivoComPeso(Grafo *grafo, string arquivoEntrada)
 {
     cout<< "Lendo e Armazenando Arquivo..."<<endl<<endl;
     int numN = 0; //armazena o número de N's do arquivo
-    ifstream infile ("teste.txt");
-    int i=0;
 
+    string filename = arquivoEntrada;
+    ifstream infile(filename.c_str());
+
+    int i=0;
     while(infile)
     {
         if(i==0)
@@ -22,119 +31,105 @@ void leArquivo(Grafo *grafo, int ponderado)
         }
     }
 
-
-
-    //****************************************************************
-    // Leitura dos Arquivos e armazenamento, quando é um grafo       *
-    // ponderado                                                     *
-    //****************************************************************
     i=0;
-    if(ponderado == 1)
+    while(!infile.eof())
     {
-        while(!infile.eof())
+        string s;
+        getline(infile,s);
+        //cout<<s<<endl;
+        char str[s.length()+1];
+        strcpy(str, s.c_str());
+        char *pch = strtok(str," ");
+        int vetN[3]= {0,0,0};
+        int contador = 0;
+        while (pch != NULL)
         {
-            string s;
-            getline(infile,s);
-            //cout<<s<<endl;
-            char str[s.length()+1];
-            strcpy(str, s.c_str());
-            char *pch = strtok(str," ");
-            int vetN[3]={0,0,0};
-            int contador = 0;
-            while (pch != NULL)
+            if(contador == 0)
             {
-                if(contador == 0)
-                {
-                    vetN[contador] = atoi(pch);
-                    i++;
-                }
-                else if(contador == 1)
-                {
-                    vetN[contador] = atoi(pch);
-                    i++;
-                }
-                else if(contador == 2)
-                {
-                    vetN[contador] = atoi(pch);
-                    i++;
-                }
-
-                pch = strtok (NULL, " ");
-                contador++;
+                vetN[contador] = atoi(pch);
+                i++;
+            }
+            else if(contador == 1)
+            {
+                vetN[contador] = atoi(pch);
+                i++;
+            }
+            else if(contador == 2)
+            {
+                vetN[contador] = atoi(pch);
+                i++;
             }
 
-            int j=0;
-            grafo->adicionarArestaNos(vetN[j],vetN[j+1],vetN[j+2]);
-
+            pch = strtok (NULL, " ");
+            contador++;
         }
+
+        int j=0;
+        grafo->adicionarArestaNos(vetN[j],vetN[j+1],vetN[j+2]);
+
     }
 
+}
 
-    //****************************************************************
-    // Leitura dos Arquivos e armazenamento, quando é um grafo       *
-    // nao ponderado                                                 *
-    //****************************************************************
+//****************************************************************
+// Leitura dos Arquivos e armazenamento, quando é um grafo       *
+// nao ponderado                                                 *
+// Recebe um objeto de Grafo e uma string com o arquivo de       *
+// entrada.                                                      *
+//****************************************************************
+void leArquivoSemPeso(Grafo *grafo, string arquivoEntrada)
+{
+    cout<< "Lendo e Armazenando Arquivo..."<<endl<<endl;
+    int numN = 0; //armazena o número de N's do arquivo
 
-    else
-    {
-        i=0;
-        while(!infile.eof())
-        {
-            string s;
-            getline(infile,s);
-            //cout<<s<<endl;
-            char str[s.length()+1];
-            strcpy(str, s.c_str());
-            char *pch = strtok(str," ");
-            int vetN[3]={0,0,0};
-            int contador = 0;
-            while (pch != NULL)
-            {
-                if(contador == 0)
-                {
-                    vetN[contador] = atoi(pch);
-                    i++;
-                }
+    string filename = arquivoEntrada;
+    ifstream infile(filename.c_str());
 
-                else if(contador == 1)
-                {
-                    vetN[contador] = atoi(pch);
-                    i++;
-                }
-                else
-                {
-                    break;
-                }
-                pch = strtok (NULL, " ");
-                contador++;
-            }
 
-            int j=0;
-            grafo->adicionarArestaNosSemPeso(vetN[j],vetN[j+1]);
+    int n, id, id2;
+    int contador = 0;
 
+    if(infile.is_open()){
+        while(infile >> id >> id2){
+            cout<<"id: "<<id<<endl;
+            cout<<"id2: "<<id2<<endl<<endl;
+            grafo->adicionarArestaNosSemPeso(id,id2);
         }
+
     }
 
 }
 
 int main(int argc, char* argv[])
 {
-    int digrafo = atoi(argv[0]);
-    int ponderado = atoi(argv[1]);
+    string arquivoEntrada = argv[1];
+    string arquivoSaida = argv[2];
+    int digrafo = atoi(argv[3]);
+    int ponderado = atoi(argv[4]);
 
-    Grafo* grafo = new Grafo(0,1);
-    leArquivo(grafo,1);
+    cout<<arquivoEntrada;
 
+    Grafo* grafo = new Grafo(digrafo,ponderado);
+
+    if(ponderado == 1)
+        leArquivoComPeso(grafo,arquivoEntrada);
+    else
+        leArquivoSemPeso(grafo,arquivoEntrada);
+
+
+    grafo->imprimiGrafo();
+    //////////// Teste Gulosos /////////
+    /*
     cout<<"Testa Guloso Randomizado"<< endl<<endl;
     grafo->auxGulosoRandomizado();
     cout<<endl;
-    grafo->imprimiGrafo();
+
     cout<< endl<<endl;
     cout<<"Testa Guloso"<< endl<<endl;
     int k = grafo->algoritmoGuloso();
     cout<< "Qtd de Cores: " <<k<< endl<<endl;
-    grafo->imprimiGrafo();
 
+    */
 
     ////////TESTE KRUSKAL/////////
     /*grafo->adicionarArestaNos(0, 1, 4);
@@ -156,12 +151,12 @@ int main(int argc, char* argv[])
     //grafo->adicionarArestaNos(1,2,3);
     //grafo->adicionarArestaNos(1,3,5);
     //grafo->adicionarArestaNos(2,3,7);
-   /* grafo->adicionarArestaNos(0,1,10);
-    grafo->adicionarArestaNos(0,2,6);
-    grafo->adicionarArestaNos(0,3,5);
-    grafo->adicionarArestaNos(1,3,15);
-    grafo->adicionarArestaNos(2,3,4);
-*/
+    /* grafo->adicionarArestaNos(0,1,10);
+     grafo->adicionarArestaNos(0,2,6);
+     grafo->adicionarArestaNos(0,3,5);
+     grafo->adicionarArestaNos(1,3,15);
+     grafo->adicionarArestaNos(2,3,4);
+    */
 
     Menu* menu = new Menu(grafo);
     menu->inicia();
