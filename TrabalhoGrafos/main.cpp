@@ -102,6 +102,7 @@ void leArquivoSemPeso(Grafo *grafo, string arquivoEntrada)
 
 int main(int argc, char* argv[])
 {
+    /*
     string arquivoEntrada = argv[1];
     string arquivoSaida = argv[2];
     int digrafo = atoi(argv[3]);
@@ -118,6 +119,7 @@ int main(int argc, char* argv[])
 
 
     grafo->imprimiGrafo();
+    */
     //////////// Teste Gulosos /////////
     /*
     cout<<"Testa Guloso Randomizado"<< endl<<endl;
@@ -157,10 +159,12 @@ int main(int argc, char* argv[])
      grafo->adicionarArestaNos(1,3,15);
      grafo->adicionarArestaNos(2,3,4);
     */
-
+/*
     Menu* menu = new Menu(grafo);
     menu->inicia();
-
+*/
+    Grafo* grafo=new Grafo(1,1);
+    grafo->adicionarArestaNos(1,2,10);
 
     return 0;
 

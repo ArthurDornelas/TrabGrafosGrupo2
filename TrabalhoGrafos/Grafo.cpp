@@ -952,12 +952,12 @@ X                                                                               
 X  O algoritmo de Kruskal,sendo um grafo conexo, ponderado e nao direcionado, tem como objetivo encontrar um subconjunto das arestas que forma uma árvore que   X
 X  inclui todos os vértices, onde o peso total, dado pela soma dos pesos das arestas da árvore, é minimizado. No algoritmo abaixo inicialmente foi criado uma   X
 X  floresta onde cada vertice eh uma arvore independente, representado de forma como o pai de cada vertice eh o proprio vertice e o Rank de todos os vertice    X
-X   eh inicializado com 0. O passo seguinte foi colocar todas as arestas em um unico vetor, e entao ordernar-lo em ordem crescente de acordo com o peso da      X 
-X   aresta,esta ordenacao eh feita por meio do Quick Sort. Apos isso foi colocado um FOR para rodar o vector de aresta, no algoritmo abaixo representado com o  X 
+X   eh inicializado com 0. O passo seguinte foi colocar todas as arestas em um unico vetor, e entao ordernar-lo em ordem crescente de acordo com o peso da      X
+X   aresta,esta ordenacao eh feita por meio do Quick Sort. Apos isso foi colocado um FOR para rodar o vector de aresta, no algoritmo abaixo representado com o  X
 X   nome "pesoArestas". Para cada aresta recuperada do vector, pegamos os vertices de origem e de destino da mesma e mandamos por paramentro de uma funcao      X
 X   auxiliar que chama "busca_kruskal" que tem como objetivo busca e retornar o subconjunto de determinado vertice informado por parametro.Com o subconjunto    X
 X   do vertice de origem e do vertice de destino em maos agora comparamos se sao diferentes , caso sejam, significa que nao estao no mesmo subconjunto e,       X
-X   portanto, nao temos ciclos.Dessa forma, agora inserimos esta aresta em questao no vector "arvoreKruskal" que e aonde estarao armazenadas todas a arestas da X 
+X   portanto, nao temos ciclos.Dessa forma, agora inserimos esta aresta em questao no vector "arvoreKruskal" que e aonde estarao armazenadas todas a arestas da X
 X   arvore geradora minima do grafo.Por ultimo , mas nao menos importante, utilizamos outra funcao auxiliar "uniao_krukal" que tem como objetivo unir o vertice X
 X   de origem e de destino em um mesmo subconjunto independente.Ao final voltamos ao FOR , pegamos outra aresta, faz-se o mesmo procedimento ate o final do     X
 X   vector de arestas.                                                                                                                                          X
@@ -1016,7 +1016,7 @@ void Grafo::algoritmoKruskal()
         No *v2=busca_kruskal(&listaAdj[it->getIndiceNo()]);//busca do subconjunto do vertice de destino de uma aresta
 
         if(v1 != v2)// se os subconjuntos de v1 e v2 forem diferentes significa que nao ha ciclo , entao
-        {          
+        {
             arvoreKruskal.push_back(pesoArestas[l]);//insere no vetor de arestas da arvore geradora minima
             uniao_kruskal(v1,v2);//faz a uniao de v1 e v2 em um mesmo subconjunto
         }
@@ -1037,7 +1037,7 @@ void Grafo::algoritmoKruskal()
 
 int Grafo::quickPartitionKruskal(int left, int right)//ordenacao de um vetor de arestas em ordem crescente de acordo com o peso
 {
-    
+
     int pivo = pesoArestas[right].getPesoAresta();
     int i = (left - 1);
 
@@ -1319,136 +1319,7 @@ void Grafo::troca(int x1, int x2)
         ordenado[x2] = auxiliar;
     }
 }
-///////////////////////////////////////////////////////////////////////////////////////////////////
-//DIJKSTRA                                                                                       //
-// O algoritmo de Dijkstra calcula o caminho de menor custo entre os nós de um grafo.     //
-//Um vértice de origem é escolhido,dai o algoritmo calcula o custo mínimo do vértoce de origem   //
-//para todos outros vértices do grafo.                                                           //
-///////////////////////////////////////////////////////////////////////////////////////////////////
-void Grafo::dijkstra(int id)
-{
-    //vetor distancia que armazena os valores das distancias dos nos para o no de origem
-    int distancia[listaAdj.size()];
-    bool negativo=1;
-    int indiceNo = -1;
 
-    //verifica se existe alguma aresta com peso negativo
-    for(int j=0; j<listaAdj.size(); j++)
-        for(std::vector<Aresta>::iterator arest = listaAdj[j].listaAresta.begin(); arest != listaAdj[j].listaAresta.end(); ++arest)
-            if(arest->getPesoAresta()<0)
-            {
-                cout<<"DIJKSTRA PRECISA DE ARESTAS COM PESO POSITIVO"<<endl;
-                negativo=0;
-                exit(0);
-            }
-    //verifica se existem arestas com peso negativo
-    if(negativo)
-    {
-        int i=0;
-        //procura o indice do ID do no de origem
-        for(std::vector<No>::iterator it = listaAdj.begin(); it != listaAdj.end(); ++it)
-        {
-            distancia[i]=999999;
-            //condicao para achar o indice do no de origem
-            if(it->getId()==id)
-            {
-                indiceNo = i;
-            }
-            i++;
-        }
-
-        //distancia da origem para ela mesma eh 0
-        distancia[indiceNo]=0;
-        int copia=indiceNo;
-
-
-        //percorre a lista de aresta do no de origem e atribui a distancia de cada no como seu peso de sua aresta
-        for(std::vector<Aresta>::iterator arest = listaAdj[indiceNo].listaAresta.begin(); arest != listaAdj[indiceNo].listaAresta.end(); ++arest)
-        {
-
-
-            //verifica se a distancia do no de origem eh menor que a do no que a aresta esta ligando
-            if(distancia[indiceNo]<(distancia[arest->getIndiceNo()]))
-            {
-
-
-                distancia[arest->getIndiceNo()]=distancia[indiceNo]+arest->getPesoAresta();
-            }
-
-
-
-        }
-
-        //percorre a lista adjacente de nos exceto o no de origem
-        for(int j=0; j<listaAdj.size(); j++)
-        {
-            if(j!=copia)
-            {
-
-                //for percorre a lista de aresta de cada no da lista adjacente e compara as distancias
-                for(std::vector<Aresta>::iterator arest = listaAdj[j].listaAresta.begin(); arest != listaAdj[j].listaAresta.end(); ++arest)
-                {
-
-
-                    //compara se a distancia do no na lista adjacente eh menor que o no que a aresta esta ligando
-                    //todas distancias precisam ser diferentes. Caso n forem elas permanecem a mesma.
-                    if(distancia[j]<(distancia[arest->getIndiceNo()])&&distancia[j]!=distancia[arest->getIndiceNo()])
-                    {
-                        //verifica se a distancia do no apontado seja diferente de infinito e menor que a distancia do no de origem
-                        if(distancia[arest->getIndiceNo()]!=999999)
-                        {
-                            //caso nao seja infinito, a distancia do no apontado apenas adiciona com a distancia do no de origem
-                            if(distancia[j]+arest->getPesoAresta()<distancia[arest->getIndiceNo()])
-                            {
-
-                                distancia[arest->getIndiceNo()]+=distancia[j];
-
-                            }
-
-                        }
-                        //condicao se a disntancia do no quea aresta esta indo seja menor que a distancia do no de origem
-                        else
-                        {
-
-                            distancia[arest->getIndiceNo()]=distancia[j]+arest->getPesoAresta();
-
-                        }
-
-
-
-                    }
-                    //condicao para a distancia do no que a aresta esta ligando seja menor que a distancia do no da lista adjacente
-                    else if(distancia[j]!=distancia[arest->getIndiceNo()])
-                    {
-                        if(distancia[j]>(distancia[arest->getIndiceNo()]+arest->getPesoAresta()))
-                        {
-
-                            distancia[j]=distancia[arest->getIndiceNo()]+arest->getPesoAresta();
-                        }
-
-                    }
-
-
-
-
-
-                }
-
-
-
-
-
-
-            }
-
-        }
-
-        //Imprime a distancia dos nos da lista adjacente em funcao do seu indice na lista.
-        cout<<"vetor   Distancia da origem \n";
-        for (int i = 0; i < listaAdj.size(); ++i)
-            cout<<i<<"---------"<<distancia[i]<<endl;
-    }
-}
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //  ALGORITMO FLOYD                                                                                                 /
 // O algoritmo de floyd serve para calcular a menar distancia entre todos pares de vertices em um grafo ponderado   //
@@ -1557,3 +1428,155 @@ void Grafo::algoritmoFloyd()
 
 
 }
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+//DIJKSTRA                                                                                       //
+// O algoritmo de Dijkstra calcula o caminho de menor custo entre os nós de um grafo.     //
+//Um vértice de origem é escolhido,dai o algoritmo calcula o custo mínimo do vértoce de origem   //
+//para todos outros vértices do grafo.                                                           //
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+void Grafo::dijkstra(int id)
+{
+
+
+
+    queue<int>fila;
+
+    int distancia[listaAdj.size()];
+
+    int i=0;
+    int indiceNoOrigem=-1;
+    //loop para achar o indice do ID no vetor de vertices
+    for(std::vector<No>::iterator it = listaAdj.begin(); it != listaAdj.end(); ++it)//percorre a lista procurando o indice do no de origem na lista adjascente
+    {
+
+        distancia[i]=999999;
+        if(it->getId()==id)
+        {
+            indiceNoOrigem = i;
+        }
+        i++;
+
+
+    }
+    int menor=999999;
+    distancia[indiceNoOrigem]=0;
+    int indice;
+    fila.push(indiceNoOrigem);
+    listaAdj[indiceNoOrigem].setVisitado(true);
+    while(!fila.empty())
+    {
+
+        fila.pop();
+        if(menor!=999999)
+            menor=999999;
+        //loop que percorre o no de menor distancia e atribui a distancia para todos nos adjacentes a ele
+        for(std::vector<Aresta>::iterator arest = listaAdj[indiceNoOrigem].listaAresta.begin(); arest != listaAdj[indiceNoOrigem].listaAresta.end(); ++arest)
+        {
+            if(arest->getPesoAresta()<0)
+            {
+                cout<<"DIJKSTRA NAO ACEITA ARESTAS COM VALORES NEGATIVOS"<<endl;
+                    exit(0);
+            }
+            if(distancia[arest->getIndiceNo()]!=distancia[indiceNoOrigem])
+            {
+
+
+                if(!listaAdj[arest->getIndiceNo()].getVisitado())
+                {
+
+
+
+                    if(distancia[arest->getIndiceNo()]>distancia[indiceNoOrigem]+arest->getPesoAresta())
+                    {
+
+                        distancia[arest->getIndiceNo()]=distancia[indiceNoOrigem]+arest->getPesoAresta();
+
+                    }
+                    else if(distancia[arest->getIndiceNo()]==arest->getPesoAresta())
+                    {
+                        distancia[arest->getIndiceNo()]+=distancia[indiceNoOrigem];
+                    }
+
+                    //guarda o indice do no de menor aresta
+                    if(arest->getPesoAresta()<menor)
+                    {
+                        menor=arest->getPesoAresta();
+                        indice=arest->getIndiceNo();
+                    }
+                }
+            }
+            //loop que percorre todos os nos adjacentes dos nos adjacentes ao no de menor distancia
+            for(std::vector<Aresta>::iterator arest2 = listaAdj[arest->getIndiceNo()].listaAresta.begin(); arest2 != listaAdj[arest->getIndiceNo()].listaAresta.end(); ++arest2)
+            {
+                if(arest2->getPesoAresta()<0)
+                {
+                    cout<<"DIJKSTRA NAO ACEITA ARESTAS COM VALORES NEGATIVOS"<<endl;
+                        exit(0);
+                }
+                if(indiceNoOrigem!=arest2->getIndiceNo())
+                {
+
+
+
+
+                    if(!listaAdj[arest2->getIndiceNo()].getVisitado())
+                    {
+                        if(distancia[arest->getIndiceNo()]!=distancia[arest2->getIndiceNo()])
+                        {
+
+
+
+                            if(distancia[arest2->getIndiceNo()]>distancia[arest->getIndiceNo()]+arest2->getPesoAresta())
+                            {
+
+                                distancia[arest2->getIndiceNo()]=distancia[arest->getIndiceNo()]+arest2->getPesoAresta();
+                            }
+                            else if(distancia[arest2->getIndiceNo()]==arest2->getPesoAresta())
+                            {
+                                distancia[arest2->getIndiceNo()]+=distancia[arest->getIndiceNo()];
+                            }
+
+
+                        }
+
+                    }
+                }
+
+            }
+
+
+
+
+        }
+        //bota na fila o no de menor indice e marca ele como visitado
+        if(!listaAdj[indice].getVisitado())
+        {
+
+            indiceNoOrigem=indice;
+            fila.push(indiceNoOrigem);
+            listaAdj[indice].setVisitado(true);
+
+        }
+    }
+    cout<<"VERTICE"<<" "<<" DISTANCIA DA ORIGEM"<<endl;
+    for(int i=0; i<listaAdj.size(); i++)
+    {
+
+        cout<<listaAdj[i].getId()<<"\t \t"<<distancia[i]<<endl;
+    }
+
+
+
+}
+
+
+
+
+
+
+
+
+
+

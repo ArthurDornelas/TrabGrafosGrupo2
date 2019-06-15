@@ -255,3 +255,12 @@ void Menu::opcao13()
     this->inicia();
 }
 
+void Menu::opcao14()
+{
+    int origem;
+    cout<<"INSERIR O VERTICE DE ORIGEM"<<endl;
+    cin>>origem;
+    grafoUtilizado->dijkstra(origem);
+    this->inicia();
+}
+
