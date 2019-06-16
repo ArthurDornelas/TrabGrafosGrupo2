@@ -100,9 +100,36 @@ void leArquivoSemPeso(Grafo *grafo, string arquivoEntrada)
 
 }
 
+//****************************************************************
+// Leitura dos Arquivos e armazenamento, para Coloraçao de       *
+// Vertices.                                                     *
+// Recebe um objeto de Grafo e uma string com o arquivo de       *
+// entrada.                                                      *
+//****************************************************************
+void leArquivoColoracao(Grafo *grafo, string arquivoEntrada)
+{
+    cout<< "Lendo e Armazenando Arquivo..."<<endl<<endl;
+
+    string filename = arquivoEntrada;
+    ifstream infile(filename.c_str());
+
+    int numNos, numArestas, id, id2;
+    string p, edge, e; // strings que armazenam os caracteres do arquivo
+
+    if(infile.is_open()){
+        infile >> p >> edge >> numNos >> numArestas;
+        while(infile >> e >> id >> id2){
+            cout<<"id: "<<id<<endl;
+            cout<<"id2: "<<id2<<endl<<endl;
+            grafo->adicionarArestaNosSemPeso(id,id2);
+        }
+    }
+
+}
+
 int main(int argc, char* argv[])
 {
-    /*
+
     string arquivoEntrada = argv[1];
     string arquivoSaida = argv[2];
     int digrafo = atoi(argv[3]);
@@ -112,16 +139,17 @@ int main(int argc, char* argv[])
 
     Grafo* grafo = new Grafo(digrafo,ponderado);
 
-    if(ponderado == 1)
+    /*if(ponderado == 1)
         leArquivoComPeso(grafo,arquivoEntrada);
     else
         leArquivoSemPeso(grafo,arquivoEntrada);
-
+    */
+    leArquivoColoracao(grafo,arquivoEntrada);
 
     grafo->imprimiGrafo();
-    */
+
     //////////// Teste Gulosos /////////
-    /*
+
     cout<<"Testa Guloso Randomizado"<< endl<<endl;
     grafo->auxGulosoRandomizado();
     cout<<endl;
@@ -131,7 +159,7 @@ int main(int argc, char* argv[])
     int k = grafo->algoritmoGuloso();
     cout<< "Qtd de Cores: " <<k<< endl<<endl;
 
-    */
+
 
     ////////TESTE KRUSKAL/////////
     /*grafo->adicionarArestaNos(0, 1, 4);
@@ -159,12 +187,10 @@ int main(int argc, char* argv[])
      grafo->adicionarArestaNos(1,3,15);
      grafo->adicionarArestaNos(2,3,4);
     */
-/*
+
     Menu* menu = new Menu(grafo);
     menu->inicia();
-*/
-    Grafo* grafo=new Grafo(1,1);
-    grafo->adicionarArestaNos(1,2,10);
+
 
     return 0;
 
