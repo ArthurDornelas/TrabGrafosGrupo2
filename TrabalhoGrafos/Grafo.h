@@ -35,6 +35,9 @@ public:
     void removeAresta(int id1, int id2);
     bool estaNoGrafo(int index);
     int ordemGrafo();
+    bool grafoVazio(){return listaAdj.empty();};
+    void apagaListaNos(){listaAdj.clear();};
+    void alocaTamanhoLista(int numNos){listaAdj.reserve(numNos);};
     int retornagrauSaidaNo(int id);
     bool vizinho(int id1, int id2);
     bool grafoCompleto();
@@ -44,16 +47,8 @@ public:
     void sequenciaGraus();
     void imprimiGrafo();
     void algoritmoPrim();
-    int ehdigrafo()
-    {
-        return ehDigrafo;
-    };
-    int ehponderada()
-    {
-        return ehPonderada;
-    };
-    void lerGrafo(string caminho);
-    void lerDigrafo(string caminho);
+    int ehdigrafo(){return ehDigrafo;};
+    int ehponderada(){return ehPonderada;};
     bool ehBipartido();
     char bucar_label_do_no(int id);
     void preencher_grafo_bipartido();

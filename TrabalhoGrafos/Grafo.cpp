@@ -401,25 +401,6 @@ void Grafo::vizinhancaFechada(int id)
 
 }
 
-/* Nao terminado
-bool Grafo::bipartido()
-{
-    int numNo = listaNos.size();
-    int selecionaVert[numNo+1];
-    for (int i = 1; i <= numNo; ++i)
-        selecionaVert[i] = -1;
-
-    //O loop faz uma busca em largura, e tenta selecionar 2 grupos, provando a bipartilidade.
-    for (int i = 1; i <= V; i++)
-      if (selecionaVert[i] == -1)
-        if (tenta2ColorirGrafo(i, selecionaVert) == false)
-           return false;
-
-     return true;
-
-}
-*/
-
 void Grafo::sequenciaGraus()
 {
     for (std::vector<No>::iterator it = listaAdj.begin(); it != listaAdj.end(); ++it)
@@ -540,35 +521,8 @@ void Grafo::imprimiGrafo()
         std::cout << std::endl;
     }
 
-
-
 }
 
-void Grafo::lerDigrafo(string caminho)
-{
-    ifstream arquivo;
-    int id_no_1, id_no_2;
-    float peso_aresta;
-    arquivo.open(caminho.c_str());
-    if (arquivo.is_open())
-    {
-        while(arquivo >> id_no_1 >> id_no_2 >> peso_aresta)
-        {
-
-            if( !this->estaNoGrafo(id_no_1) )
-            {
-                this->adicionarNo(id_no_1);
-            }
-            if( !this->estaNoGrafo(id_no_2) )
-            {
-                this->adicionarNo(id_no_2);
-            }
-            this->adicionarArestaNos(id_no_1, id_no_2, peso_aresta);
-
-        }
-    }
-    arquivo.close();
-}
 
 char Grafo::bucar_label_do_no(int id)
 {
