@@ -1038,6 +1038,7 @@ int Grafo::algoritmoGuloso()
 {
     ordenado.clear();
     auxOrdena.clear();
+    double tInicio = clock();
     int i = 0;
     for(std::vector<No>::iterator it = listaAdj.begin(); it != listaAdj.end(); ++it)
     {
@@ -1111,6 +1112,10 @@ int Grafo::algoritmoGuloso()
         }
     }
 
+        double tFinal = clock();
+        double tDecorrido = ((double)(tFinal - tInicio))/CLOCKS_PER_SEC;
+        cout << "Tempo decorrido: " << tDecorrido <<" segundos" << endl;
+
     return k;                                                            // Retorna o numero k-coloravel do grafo.
 }
 
@@ -1118,13 +1123,19 @@ int Grafo::algoritmoGuloso()
 
 void Grafo::auxGulosoRandomizado()
 {
-    algoritmoGulosoRandomizado(0.1,1);
+    algoritmoGulosoRandomizado(0.1,10);
+    algoritmoGulosoRandomizado(0.2,10);
+    algoritmoGulosoRandomizado(0.3,10);
 }
 
 void Grafo::algoritmoGulosoRandomizado(float alfa, int intMax)
 {
+    cout<<"Valor de alpha :"<< alfa <<endl;
     ordenado.clear();
     auxOrdena.clear();
+    double tInicio=clock();
+    double tMedio=0;
+    int mediaSolucao=0;
     int i = 0;
     for(std::vector<No>::iterator it = listaAdj.begin(); it != listaAdj.end(); ++it)
     {
@@ -1207,6 +1218,10 @@ void Grafo::algoritmoGulosoRandomizado(float alfa, int intMax)
                 }
             }
 
+            double tFinal = clock();
+
+            double tDecorrido = ((double)(tFinal - tInicio))/CLOCKS_PER_SEC;
+            tMedio += tDecorrido;
             posCandidatos.erase(posCandidatos.begin()+j);
 
         }
@@ -1215,11 +1230,17 @@ void Grafo::algoritmoGulosoRandomizado(float alfa, int intMax)
         {
             melhorSolucao = k;
         }
+        mediaSolucao += k;
         posCandidatos.clear();
         cout<<"Solucao "<<i<<" : " <<k<<endl;
         i++;
     }
-    cout<< "A melhor solucao: " << melhorSolucao;
+    mediaSolucao = mediaSolucao / intMax;
+    tMedio= tMedio / intMax;
+    cout<< "A melhor solucao de cores: " << melhorSolucao <<endl;
+    cout<< "A solucao media de cores: " << mediaSolucao <<endl;
+
+        cout << "Tempo decorrido: " << tMedio <<" segundos" << endl;
 
 }
 

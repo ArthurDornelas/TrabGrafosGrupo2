@@ -751,38 +751,39 @@
 	"Aresta.h"
 	"iostream"
 
-1559664906 source:c:\users\vinic\desktop\trabgrafosgrupo2\trabalhografos\menu.cpp
+1560889863 source:c:\users\vinic\desktop\trabgrafosgrupo2\trabalhografos\menu.cpp
 	"Menu.h"
 	"Grafo.h"
 	"No.h"
 	"Aresta.h"
 	"iostream"
 
-1559664906 c:\users\vinic\desktop\trabgrafosgrupo2\trabalhografos\menu.h
+1560885792 c:\users\vinic\desktop\trabgrafosgrupo2\trabalhografos\menu.h
 	"Grafo.h"
 	"No.h"
 	"Aresta.h"
 
-1559620962 c:\users\vinic\desktop\trabgrafosgrupo2\trabalhografos\grafo.h
+1560885792 c:\users\vinic\desktop\trabgrafosgrupo2\trabalhografos\grafo.h
 	<vector>
 	"No.h"
 	<iostream>
 	<fstream>
+	<stack>
 
-1559620962 c:\users\vinic\desktop\trabgrafosgrupo2\trabalhografos\no.h
+1560885792 c:\users\vinic\desktop\trabgrafosgrupo2\trabalhografos\no.h
 	<vector>
 	"Aresta.h"
 	"No.h"
 
-1559620962 c:\users\vinic\desktop\trabgrafosgrupo2\trabalhografos\aresta.h
+1560885792 c:\users\vinic\desktop\trabgrafosgrupo2\trabalhografos\aresta.h
 
-1559673258 source:c:\users\vinic\desktop\trabgrafosgrupo2\trabalhografos\main.cpp
+1560885792 source:c:\users\vinic\desktop\trabgrafosgrupo2\trabalhografos\main.cpp
 	<iostream>
 	"Grafo.h"
 	"Grafo.cpp"
 	"Menu.h"
 
-1559672631 c:\users\vinic\desktop\trabgrafosgrupo2\trabalhografos\grafo.cpp
+1560890788 c:\users\vinic\desktop\trabgrafosgrupo2\trabalhografos\grafo.cpp
 	"Grafo.h"
 	"No.h"
 	"No.cpp"
@@ -791,9 +792,12 @@
 	<cstring>
 	<stack>
 	<queue>
+	<time.h>
+	<math.h>
+	<stdlib.h>
 	"Aresta.h"
 
-1559620962 c:\users\vinic\desktop\trabgrafosgrupo2\trabalhografos\no.cpp
+1560885792 c:\users\vinic\desktop\trabgrafosgrupo2\trabalhografos\no.cpp
 	"Aresta.h"
 	"No.h"
 

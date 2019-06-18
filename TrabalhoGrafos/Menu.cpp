@@ -96,12 +96,12 @@ void Menu::leArquivoColoracao()
         infile >> p >> edge >> numNos >> numArestas;
         grafoUtilizado->alocaTamanhoLista(numNos);
         while(infile >> e >> id >> id2){
-            cout<<"id: "<<id<<endl;
-            cout<<"id2: "<<id2<<endl<<endl;
+           // cout<<"id: "<<id<<endl;
+            //cout<<"id2: "<<id2<<endl<<endl;
             grafoUtilizado->adicionarArestaNosSemPeso(id,id2);
         }
     }
-    grafoUtilizado->imprimiGrafo();
+   // grafoUtilizado->imprimiGrafo();
 
 }
 
@@ -412,7 +412,7 @@ void Menu::opcao8()
 
 void Menu::opcao9()
 {
-    //Floyd (Joao Boiola)
+    grafoUtilizado->algoritmoFloyd();
     this->parte_1();
 }
 
