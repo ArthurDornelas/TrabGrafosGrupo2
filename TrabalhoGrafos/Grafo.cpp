@@ -1123,9 +1123,9 @@ int Grafo::algoritmoGuloso()
 
 void Grafo::auxGulosoRandomizado()
 {
-    algoritmoGulosoRandomizado(0.1,10);
-    algoritmoGulosoRandomizado(0.2,10);
-    algoritmoGulosoRandomizado(0.3,10);
+    algoritmoGulosoRandomizado(0.1,30);
+    algoritmoGulosoRandomizado(0.2,30);
+    algoritmoGulosoRandomizado(0.3,30);
 }
 
 void Grafo::algoritmoGulosoRandomizado(float alfa, int intMax)
@@ -1133,8 +1133,8 @@ void Grafo::algoritmoGulosoRandomizado(float alfa, int intMax)
     cout<<"Valor de alpha :"<< alfa <<endl;
     ordenado.clear();
     auxOrdena.clear();
-    double tInicio=clock();
     double tMedio=0;
+    int solucoes[intMax];
     int mediaSolucao=0;
     int i = 0;
     for(std::vector<No>::iterator it = listaAdj.begin(); it != listaAdj.end(); ++it)
@@ -1154,6 +1154,7 @@ void Grafo::algoritmoGulosoRandomizado(float alfa, int intMax)
     int aux = 0;
     int j = 0;
     i=0;
+    double tInicio=clock();
 
     while(i < intMax)
     {
@@ -1161,12 +1162,14 @@ void Grafo::algoritmoGulosoRandomizado(float alfa, int intMax)
         for(std::vector<No>::iterator it = listaAdj.begin(); it != listaAdj.end(); ++it)
         {
             it->setCorNo(-1);           // Coloca as cores de todos os nos como -1
+            it->corAdj.clear();         // Apaga as cores do vetor corAdj de cada no.
         }
         int k = 0;
         while(posCandidatos.size() != 0)
         {
 
             int aux = ceil(posCandidatos.size() * alfa);
+
 
             int j = rand() % aux;
 
@@ -1230,17 +1233,26 @@ void Grafo::algoritmoGulosoRandomizado(float alfa, int intMax)
         {
             melhorSolucao = k;
         }
+        solucoes[i]=k;
         mediaSolucao += k;
         posCandidatos.clear();
         cout<<"Solucao "<<i<<" : " <<k<<endl;
         i++;
     }
     mediaSolucao = mediaSolucao / intMax;
-    tMedio= tMedio / intMax;
+    tMedio = tMedio / intMax;
+    float desvioPadrao = 0;
+    for(int s=0; s < intMax ; s++)
+    {
+        desvioPadrao += pow((solucoes[s]-mediaSolucao),2);
+    }
+    desvioPadrao = sqrt(desvioPadrao / intMax);
+
+
     cout<< "A melhor solucao de cores: " << melhorSolucao <<endl;
     cout<< "A solucao media de cores: " << mediaSolucao <<endl;
-
-        cout << "Tempo decorrido: " << tMedio <<" segundos" << endl;
+    cout<< "Desvio padrao: " << desvioPadrao <<endl;
+    cout << "Tempo decorrido: " << tMedio <<" segundos" << endl<<endl;
 
 }
 
