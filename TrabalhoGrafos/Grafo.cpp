@@ -585,38 +585,42 @@ void Grafo::imprimir_biparticao()
 /*
 XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 X                                                                                                                                                               X
-X   O algoritmo de busca em profundidade eh um algoritmo recursivo, que faz uma busca  na direçao "vertical", ou seja, ao ser encotrado um nó que nao tem
-X   mais nós adjacentes para "baixo" ele retornar para o nó anterior e confere se existe outro no adjacente a esse e que n tenha sido visitado
-X
+X   O algoritmo de busca em profundidade eh um algoritmo recursivo, que enquanto for possivel , aprofunda-se no grafo e quando nao for , recuar("backtracking") X
+X   com o objetivo de visitar todos os vertices e arestas do grafo. No algoritmo abaixo , primeiramente utiliza-se uma funcao auxiliar "auxBuscaEmProfundidade" X
+X   que com a chave recebida por parametro alem de procurar o vertice que contem o id informada seta todos os vertices do grafo como nao visitados.             X
+X   Com o vertice referente a id achado , chamamos entao a funcao "buscaEmProfundidade" que seta este vertice como visitado , percorre sua lista de adjascentes X
+X   ate encontrar um vertice que nao tenha sido visitado, ao ser encontrado ,recursivamente chama-se a funcao "buscaEmProfundidade" com este novo vertice, e    X
+X   entao faz-se o mesmo procedimento ate que todos os vertices do grafo sejam visitados. Ao final do processo teremos qual ordem cada vertice foi visitado.    X
+X                                                                                                                                                               X
 XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 */
-void Grafo::auxBuscaEmProfundidade(int key)
-{
+void Grafo::auxBuscaEmProfundidade(int key)//funcao que seta todos os vertices como nao visitados
+{                                          //e busca o vertice correspondente a chave vunda do paramentro
     No *aux=new No();
     int i=0;
     for(std::vector<No>::iterator it = listaAdj.begin(); it != listaAdj.end(); ++it)
     {
-        it->setVisitado(false);
-        if(it->getId()==key)
+        it->setVisitado(false);//seta todos os vertices como nao visitados
+        if(it->getId()==key)//ao percorrer todos os vertices ,quando achado o vertice que possui a id enviada
         {
-            aux=(&(listaAdj[i]));
+            aux=(&(listaAdj[i]));//guardar este vertice em um variavel auxiliar
         }
         i++;
     }
-    buscaEmProfundidade(aux);
+    buscaEmProfundidade(aux);//chamada da funcao com este vertice achado
 }
 
 void Grafo::buscaEmProfundidade(No *v)
 {
-    v->setVisitado(true);
+    v->setVisitado(true);//seta este vertice como visitado
     cout<<"Vertice "<< v->getId() <<" visitado"<<endl;
-    for(std::vector<Aresta>::iterator arest = v->listaAresta.begin(); arest != v->listaAresta.end(); ++arest)
+    for(std::vector<Aresta>::iterator arest = v->listaAresta.begin(); arest != v->listaAresta.end(); ++arest)//percorre a lista de vertices adjascentes ao vertice
     {
-        int indice = arest->getIndiceNo();
+        int indice = arest->getIndiceNo();//salva o indice do vertice adjascente na lista de adjascencia
 
-        if(listaAdj[indice].getVisitado()==false)
+        if(listaAdj[indice].getVisitado()==false)//verifica se este vertice adjascente ja foi visitado
         {
-            buscaEmProfundidade(&(listaAdj[indice]));
+            buscaEmProfundidade(&(listaAdj[indice]));//se nao foi visitado , faz a mesma busca em sua lista de adjascente com a recursao
             break;
         }
     }
@@ -766,7 +770,8 @@ void Grafo::fortConexaUtil(int u, int dem[], int low[], stack<int> *membro, bool
         membro->pop();
     }
 }
-/** Funcao que faz uma busca em profundidade. Utiliza fortConexaUtil()
+/**
+ Funcao que faz uma busca em profundidade. Utiliza fortConexaUtil()
 */
 
 void Grafo::fortConexa()
@@ -950,6 +955,7 @@ void Grafo::algoritmoKruskal()
     }
 
     int i=0;
+
     for(std::vector<No>::iterator it = listaAdj.begin(); it != listaAdj.end(); ++it)
     {
         int j=0;
@@ -1309,7 +1315,7 @@ void Grafo::troca(int x1, int x2)
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //  ALGORITMO FLOYD                                                                                                 /
-// O algoritmo de floyd serve para calcular a menar distancia entre todos pares de vertices em um grafo ponderado   //
+// O algoritmo de floyd serve para calcular a menor distancia entre todos pares de vertices em um grafo ponderado   //
 // e direcionado,armazenando eles em uma matriz.No codigo abaixo iniciamos todos os valores com um int INF para     //
 //representar o valor infinito.A matriz mostra o caminho mais curto de cada vertice,representado por                //
 //cada posicao, VET[1][2] por exemplo é o menor caminho do vertice 1 para o vertice 2.                              //
