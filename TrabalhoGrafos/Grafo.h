@@ -57,9 +57,10 @@ public:
     void buscaEmProfundidade(No *v);//faz uma busca a partir de um vertice
     void buscaEmLargura(int id);
     int algoritmoGuloso();
-    void algoritmoGulosoRandomizado(float alfa, int intMax);
+    int algoritmoGulosoRandomizado(float alfa, int intMax);
     void auxGulosoRandomizado();
-    void algoritmoGulosoReativo();
+    void auxAlgoritmoGulosoReativo();
+    void algoritmoGulosoReativo(float alfa[], int intMax, int block_iterations, int seed,int delta);
     void quickSort(int left, int right);
     int quickPartition(int left, int right);
     void troca(int x1, int x2);
@@ -79,6 +80,7 @@ public:
     void ordTopologicaUtil(int v, bool visitado[], stack<int> &pilha);
     bool temCiclo();
     bool buscaUtil(int x, int cor[]);
+    void geraRandom(int r[], int m);
 
 };
 #endif // GRAFO_H_INCLUDED

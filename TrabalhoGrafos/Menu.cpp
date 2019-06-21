@@ -189,6 +189,9 @@ void Menu::gulosoRandomizado()
 
 void Menu::gulosoReativo()
 {
+    cout<<"Algoritmo Guloso Randomizado Reativo"<< endl<<endl;
+    grafoUtilizado->auxAlgoritmoGulosoReativo();
+    cout<<endl;
     this->coloracaoVertices();
 }
 

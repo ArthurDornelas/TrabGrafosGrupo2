@@ -2,6 +2,8 @@
 #include "Grafo.h"
 #include "Grafo.cpp"
 #include "Menu.h"
+#include <time.h>
+#include <stdlib.h>
 using namespace std;
 
 int main(int argc, char* argv[])

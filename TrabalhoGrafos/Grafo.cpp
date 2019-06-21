@@ -6,7 +6,7 @@
 #include <cstring>
 #define INF 9999999;
 #include <stack> // busca em profundidade
-#include<queue>
+#include <queue>
 #include <time.h>
 #include <math.h>
 #include <stdlib.h>
@@ -1123,12 +1123,13 @@ int Grafo::algoritmoGuloso()
 
 void Grafo::auxGulosoRandomizado()
 {
-    algoritmoGulosoRandomizado(0.1,30);
-    algoritmoGulosoRandomizado(0.2,30);
-    algoritmoGulosoRandomizado(0.3,30);
+    int solucao = 0;
+    solucao = algoritmoGulosoRandomizado(0.1,30);
+    solucao = algoritmoGulosoRandomizado(0.2,30);
+    solucao = algoritmoGulosoRandomizado(0.3,30);
 }
 
-void Grafo::algoritmoGulosoRandomizado(float alfa, int intMax)
+int Grafo::algoritmoGulosoRandomizado(float alfa, int intMax)
 {
     cout<<"Valor de alpha :"<< alfa <<endl;
     ordenado.clear();
@@ -1169,12 +1170,8 @@ void Grafo::algoritmoGulosoRandomizado(float alfa, int intMax)
         {
 
             int aux = ceil(posCandidatos.size() * alfa);
-
-
             int j = rand() % aux;
-
             int pos = posCandidatos[j];
-
 
             for(int i=0; i<=k ; i++)                            // For que roda todas as cores que existem até o momento.
             {
@@ -1229,6 +1226,7 @@ void Grafo::algoritmoGulosoRandomizado(float alfa, int intMax)
 
         }
 
+        /* Atualiza Melhor Solucao */
         if(k < melhorSolucao)
         {
             melhorSolucao = k;
@@ -1254,8 +1252,124 @@ void Grafo::algoritmoGulosoRandomizado(float alfa, int intMax)
     cout<< "Desvio padrao: " << desvioPadrao <<endl;
     cout << "Tempo decorrido: " << tMedio <<" segundos" << endl<<endl;
 
+    return mediaSolucao;
+
 }
 
+void Grafo::auxAlgoritmoGulosoReativo()
+{
+    int m = 10;
+    float alfa[m];
+    for(int i=0; i<m; i++)
+    {
+        alfa[i] = 0.1 * (i+1);
+    }
+    algoritmoGulosoReativo(alfa,1000,100,10,10);
+
+}
+
+void Grafo::algoritmoGulosoReativo(float alfa[], int intMax, int block_iterations, int seed, int delta)
+{
+    int m = 10;
+    //cout<<"M: " << m<<endl;
+    float p[m];
+    int solucao = 0;
+    int contadorAlfa[m];
+    float mediaAlfa[m];
+    int somatorioAlfa[m];
+    int melhorSolucao = INF;
+    int posAlfaMelhorSolucao = -1;
+    int r[intMax];
+    geraRandom(r,intMax);
+
+    for(int i=0; i<m; i++)    /* Inicia todas as probabilidades com o mesmo valor */
+    {
+        p[i] = (1.0/m);
+        mediaAlfa[i]=0.0;
+        somatorioAlfa[i]=0;
+        contadorAlfa[i]=0;
+    }
+
+    for(int k=1; k<=intMax; k++)
+    {
+        cout<< "Iteracao: "<< k<<endl<<endl;
+
+        /* Seleciona alfa randomicamente usando as probabiidades*/
+        cout<<"Numero Random: "<<r[k-1]<<endl;
+        int i = 0;
+        cout<<"P de "<<i<<": "<<p[i]<<endl;
+        float c = p[i]*100.0;
+        cout<<"C: "<<c<<endl;
+        while(c<=r[k-1] && i<m){
+            i++;
+            cout<<"P de "<<i<<": "<<p[i]<<endl;
+            c += p[i]*100.0;
+            cout<<"C: "<<c<<endl;
+        }
+
+        cout<<"Valor de I: "<<i<<endl;
+        contadorAlfa[i] = contadorAlfa[i] + 1;                /* Atualiza quantas vezes o alfa foi selecionado */
+        cout<<"Valor de Alfa Saindo Reativo: "<<alfa[i]<<endl;
+        solucao = algoritmoGulosoRandomizado(alfa[i], seed);  /* Chama a funcao do guloso randomizado com o alfa escolhido */
+        somatorioAlfa[i] = somatorioAlfa[i] + solucao;                /* Atualiza as solucoes medias de alfa com a solucao encontrada */
+
+        if(solucao < melhorSolucao)
+        {
+            posAlfaMelhorSolucao = i;
+            melhorSolucao = solucao;
+        }
+
+        /* Se k for um multiplo do block_iterations, então se recalcula as probabilidades dos alfas */
+        if(k % block_iterations == 0)
+        {
+            bool flag[m];
+            for(int i=0; i<m; i++)
+                flag[i]=false;
+            float q[m];
+            float somatorioQ = 0.0;
+            for(int i=0; i<m ; i++)
+            {
+                if(contadorAlfa[i]==0){     /*  Verifica se alfa ja foi selecionado e evita divisao por zero */
+                    flag[i] = true;
+                    q[i]=0.0;
+                }
+                else{
+                    mediaAlfa[i] = somatorioAlfa[i]/contadorAlfa[i];
+                    q[i] = pow(((float)melhorSolucao/mediaAlfa[i]), delta);
+                }
+                somatorioQ += q[i];
+            }
+            for(int i=0; i<m; i++){
+                if(flag[i] == false)
+                {
+                    p[i] = q[i]/somatorioQ;
+                }
+                else /* Se alfa nao foi selecionado ainda, probabilidade é igual a do começo. */
+                    p[i] == 1.0/m;
+            }
+            cout<<endl<<endl<<endl<<"Probabilidades: "<<endl;
+            for(int i=0; i<m; i++)
+            {
+                cout<<"Prob "<<i<<": "<<p[i]<<endl;
+            }
+            cout<<endl<<endl;
+        }
+
+    }
+    cout<< "Melhor: " <<melhorSolucao<<endl;
+    cout<< "Melhor Alfa: "<<alfa[posAlfaMelhorSolucao]<<endl;
+
+}
+
+void Grafo::geraRandom(int r[],int m)
+{
+    srand(time(NULL));
+    for(int i=0; i<m ;i++)
+    {
+        r[i]= rand()%100;
+        //cout<<"R: "<<r[i]<<endl;
+    }
+}
 
 /**
         Realiza o quickSort para fazer com que os nós do vector auxOrdena
