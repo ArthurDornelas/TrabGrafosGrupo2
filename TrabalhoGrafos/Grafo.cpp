@@ -11,6 +11,7 @@
 #include <math.h>
 #include <stdlib.h>
 #include "Aresta.h"
+#include "fstream"
 
 using namespace std;
 
@@ -413,8 +414,8 @@ void Grafo::sequenciaGraus()
 /*
 XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 X                                                                                                                                                               X
-X  No algoritmo de Prim comeca do primeiro No inserido e busca o proximo No com menor peso de aresta que esse liga                                              X
-X  e adiciona esse No a um vetor chamado arvore.Em seguida o algoritmo de prim  busca o proximo No a ser inserido com menor pseso                               X
+X  No algoritmo de Prim comeca do primeiro No inserido, após isso se busca o proximo No com menor peso de aresta que esse liga a esse Nó                        X
+X  e o adiciona a um vetor chamado arvore.Em seguida o algoritmo de prim  busca o proximo No a ser inserido com menor peso                                      X
 X  de aresta entre os nos ja presentes no vetor, por exemplo, se temos dois Nos inseridos no vetor arvore buscaremos a aresta de menor peso                     X
 X  em um conjunto que engloba a aresta desses dois nos ,  colocaremos esse No a qual essa aresta liga ao nosso vetor                                            X
 X  e o processo repete.Verificamos antes de inserir o novo No se ele vai formar um ciclo com dois Nos ja presentes no vetor arvore atraves da variavel "ciclo". X
@@ -426,11 +427,18 @@ XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
  */
 void Grafo::algoritmoPrim()
 {
+    ofstream file(arquivoSaida.c_str());
+
+    cout<<endl<<"Algoritmo de Prim"<<endl<<endl;
+    file<<endl<<"Algoritmo de Prim"<<endl<<endl;
+
     int posListaAdj = 0;
     int cont = 0;
+    arvore.clear();
+    arestasArvore.clear();
     arvore.push_back(listaAdj[0]);
 
-    while(arvore.size() != listaAdj.size())
+    while(arvore.size() < listaAdj.size())
     {
 
         int menor = INF;
@@ -494,17 +502,30 @@ void Grafo::algoritmoPrim()
         cont++;
     }
 
-    for (std::vector<No>::iterator no = arvore.begin(); no != arvore.end(); ++no)
-    {
-        cout << no->getId() << "  ";
-    }
-    cout << endl;
+    int pesoTotal = 0;
 
+    cout<<"Arestas da Arvore: "<<endl<<endl;
+    file<<"Arestas da Arvore: "<<endl<<endl;
     for (std::vector<Aresta>::iterator aresta = arestasArvore.begin(); aresta != arestasArvore.end(); ++aresta)
     {
-        cout << aresta->getIdLista() << " -> " << aresta->getIdNo() << "  ";
+        pesoTotal = pesoTotal + aresta->getPesoAresta();
+        cout << aresta->getIdLista() << " -> " << aresta->getIdNo() << " - " <<"Peso: "<< aresta->getPesoAresta()<<endl;
+        file << aresta->getIdLista() << " -> " << aresta->getIdNo() << " - " <<"Peso: "<< aresta->getPesoAresta()<<endl;
     }
-    cout<<endl;
+
+
+    cout<<endl<<"Arvore: "<<endl<<endl;
+    file<<endl<<"Arvore: "<<endl<<endl;
+    cout<<"Vertices ";
+    file<<"Vertices ";
+    for(std::vector<No>::iterator noArv = arvore.begin(); noArv != arvore.end(); ++noArv)
+    {
+        cout<<" -> "<<noArv->getId();
+        file<<" -> "<<noArv->getId();
+    }
+
+    cout<<endl<<endl<<"PESO TOTAL: "<<pesoTotal<<endl;
+    file<<endl<<endl<<"PESO TOTAL: "<<pesoTotal<<endl;
 }
 
 void Grafo::imprimiGrafo()
@@ -828,6 +849,7 @@ bool Grafo::buscaUtil(int u, int cor[])
     cor[u] = 2;
     return false;
 }
+
 /**
     Funcao que verifica se tem ciclo no grafo.
     Retorna true se ha um ciclo.
@@ -849,6 +871,7 @@ bool Grafo::temCiclo()
     }
     return false;
 }
+
 /**
     Funcao recursiva utilizada pela Ordenaçao Topologica.
 */

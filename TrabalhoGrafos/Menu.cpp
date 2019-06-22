@@ -39,13 +39,13 @@ void Menu::leArquivoComPeso()
         infile >> numNos;
         grafoUtilizado->alocaTamanhoLista(numNos);
         while(infile >> id >> id2 >> peso){
-            cout<<"id: "<<id<<endl;
-            cout<<"id2: "<<id2<<endl;
-            cout<<"peso: "<<peso<<endl<<endl;
+            //cout<<"id: "<<id<<endl;
+            //cout<<"id2: "<<id2<<endl;
+            //cout<<"peso: "<<peso<<endl<<endl;
             grafoUtilizado->adicionarArestaNos(id,id2,peso);
         }
     }
-    grafoUtilizado->imprimiGrafo();
+    //grafoUtilizado->imprimiGrafo();
 }
 
 //****************************************************************
@@ -65,14 +65,15 @@ void Menu::leArquivoSemPeso()
     int contador = 0;
 
     if(infile.is_open()){
+        infile >> numNos;
         while(infile >> id >> id2){
-            cout<<"id: "<<id<<endl;
-            cout<<"id2: "<<id2<<endl<<endl;
+            //cout<<"id: "<<id<<endl;
+            //cout<<"id2: "<<id2<<endl<<endl;
             grafoUtilizado->adicionarArestaNosSemPeso(id,id2);
         }
 
     }
-    grafoUtilizado->imprimiGrafo();
+    //grafoUtilizado->imprimiGrafo();
 
 }
 
@@ -440,7 +441,7 @@ void Menu::opcao12()
     int id;
     cin >> id;
     int grauSaida = grafoUtilizado->retornagrauSaidaNo(id);
-    cout << "O Grau do no é: " << grauSaida << endl;
+    cout << "O Grau do no eh: " << grauSaida << endl;
     this->parte_1();
 }
 

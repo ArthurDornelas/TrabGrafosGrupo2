@@ -15,6 +15,7 @@ int main(int argc, char* argv[])
     int ponderado = atoi(argv[4]);
 
     Grafo* grafo = new Grafo(digrafo,ponderado);
+    grafo->arquivoSaida = arquivoSaida;
 
     Menu* menu = new Menu(grafo,arquivoEntrada,arquivoSaida,digrafo,ponderado);
     menu->inicia();

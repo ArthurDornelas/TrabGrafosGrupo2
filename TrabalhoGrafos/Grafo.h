@@ -15,7 +15,6 @@ private:
     int ehDigrafo;
     int ehPonderada;
 
-
 public:
 
     std::vector <No> arvore;
@@ -26,6 +25,7 @@ public:
     std::vector <Aresta> pesoArestas;
     std::vector <int> ordenado;
     std::vector <No> auxOrdena;
+    string arquivoSaida;
     Grafo(int ehDigrafoAux, int ehPonderadaAux);
     ~Grafo();
     void adicionarArestaNos(int id, int id2,int peso);
