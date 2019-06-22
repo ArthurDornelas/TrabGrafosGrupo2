@@ -971,6 +971,10 @@ void Grafo::uniao_kruskal(No *v1,No *v2)//funcao para unir 2 subconjuntos de ver
 
 void Grafo::algoritmoKruskal()
 {
+    ofstream file(arquivoSaida.c_str());
+    pesoArestas.clear();
+    arvoreKruskal.clear();
+
     int k=0;
     for(std::vector<No>::iterator it = listaAdj.begin(); it != listaAdj.end(); ++it)
     {
@@ -1010,14 +1014,19 @@ void Grafo::algoritmoKruskal()
 
     int soma=0;
     cout<<"Arvore Geradora Minima - KRUSKAL"<<endl;
+    file<<"Arvore Geradora Minima - KRUSKAL"<<endl;
     cout<<"|No Origem|"<<"  |No destino|"<<"  |Peso Aresta|"<<endl;
+    file<<"|No Origem|"<<"  |No destino|"<<"  |Peso Aresta|"<<endl;
     for(std::vector<Aresta>::iterator it = arvoreKruskal.begin(); it != arvoreKruskal.end(); ++it)
     {
         soma+=it->getPesoAresta();
         cout<<"     "<<it->getIdLista()<<" ----------- "<<it->getIdNo()<<"     ==>    "<<it->getPesoAresta()<<endl;
+        file<<"     "<<it->getIdLista()<<" ----------- "<<it->getIdNo()<<"     ==>    "<<it->getPesoAresta()<<endl;
     }
     cout<<"                           -----------"<<endl;
     cout<<"      Custo Minimo       ==>    "<<soma<<endl;
+    file<<"                           -----------"<<endl;
+    file<<"      Custo Minimo       ==>    "<<soma<<endl;
 }
 
 int Grafo::quickPartitionKruskal(int left, int right)//ordenacao de um vetor de arestas em ordem crescente de acordo com o peso
