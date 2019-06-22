@@ -796,6 +796,7 @@ void Grafo::fortConexa()
         /* Chama a funcao auxiliar recursiva para encontrar
            as componentes conexas
         */
+        cout << "As componente fortemente conexas sao:" << endl;
         for(int i = 0; i < listaAdj.size(); i++)
             if(dem[i]==-1)
                 fortConexaUtil(i, dem, low, membro, verificaMembro);
@@ -891,6 +892,7 @@ void Grafo::ordenacaoTopologica()
         // Chama a funcao auxiliar recursiva
         // para guardar a ordenacao topologica
         // de todos os vertices, um por um
+        cout << "A ordenacao topologica eh:" << endl;
         for (int i= 0; i!=listaAdj.size(); i++)
         {
             if(visitado[i] == false)

@@ -389,18 +389,21 @@ void Menu::opcao4()
 void Menu::opcao5()
 {
     //Componente Fortemente Conexa
+    grafoUtilizado->fortConexa();
     this->parte_1();
 }
 
 void Menu::opcao6()
 {
     //Componente Conexa
+    grafoUtilizado->compConexa();
     this->parte_1();
 }
 
 void Menu::opcao7()
 {
     //Ordenacao Topologica
+    grafoUtilizado->ordenacaoTopologica();
     this->parte_1();
 }
 
