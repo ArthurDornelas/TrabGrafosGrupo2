@@ -16,8 +16,8 @@ private:
     float id_intraNo;
     bool visitado;
     int visitadoConex;
-    No* pai;
-    int Rank;
+    No* pai;//atributo para implementar o kruskal
+    int Rank;//atributo para implementar o kruskal
 public:
     std::vector <int> corAdj;
     std::vector <Aresta> listaAresta;
