@@ -20,7 +20,7 @@ Menu::Menu(Grafo* grafo, string arquivoEntrada1, string arquivoSaida1, int ehDig
 }
 
 //****************************************************************
-// Leitura dos Arquivos e armazenamento, quando é um grafo       *
+// Leitura dos Arquivos e armazenamento, quando Ã© um grafo       *
 // ponderado.                                                    *
 //****************************************************************
 void Menu::leArquivoComPeso()
@@ -49,7 +49,7 @@ void Menu::leArquivoComPeso()
 }
 
 //****************************************************************
-// Leitura dos Arquivos e armazenamento, quando é um grafo       *
+// Leitura dos Arquivos e armazenamento, quando Ã© um grafo       *
 // nao ponderado                                                 *
 //****************************************************************
 void Menu::leArquivoSemPeso()
@@ -78,7 +78,7 @@ void Menu::leArquivoSemPeso()
 }
 
 //****************************************************************
-// Leitura dos Arquivos e armazenamento, para Coloraçao de       *
+// Leitura dos Arquivos e armazenamento, para ColoraÃ§ao de       *
 // Vertices.                                                     *
 //****************************************************************
 void Menu::leArquivoColoracao()
@@ -134,7 +134,7 @@ void Menu::inicia()
             break;
         case 0:
             cout << "Fechando o programa" << endl;
-            break;
+            exit(0);
         }
     }
 
@@ -339,7 +339,7 @@ void Menu::opcao2()
     cin >> i;
     if (i == 1)
     {
-        cout << "Digite os ids dos nos que você quer adicionar uma aresta" << endl;
+        cout << "Digite os ids dos nos que vocÃª quer adicionar uma aresta" << endl;
         int id1;
         int id2;
         cin >> id1;
@@ -471,7 +471,7 @@ void Menu::opcao14()
 
 void Menu::opcao15()
 {
-    cout << "Digite o no para saber a vizinhança aberta" << endl;
+    cout << "Digite o no para saber a vizinhanÃ§a aberta" << endl;
     int id;
     cin >> id;
     grafoUtilizado->vizinhancaAberta(id);
@@ -481,7 +481,7 @@ void Menu::opcao15()
 
 void Menu::opcao16()
 {
-    cout << "Digite o no para saber a vizinhança fechada" << endl;
+    cout << "Digite o no para saber a vizinhanÃ§a fechada" << endl;
     int id;
     cin >> id;
     grafoUtilizado->vizinhancaFechada(id);
