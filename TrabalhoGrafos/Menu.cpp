@@ -135,6 +135,7 @@ void Menu::inicia()
         case 0:
             cout << "Fechando o programa" << endl;
             exit(0);
+            break;
         }
     }
 
