@@ -1474,7 +1474,7 @@ void Grafo::troca(int x1, int x2)
 
 void Grafo::algoritmoFloyd()
 {
-    if(ehdigrafo()==1&&ehponderada()==1)
+    if(ehponderada()==1)
     {
 
         int i,j;
@@ -1492,43 +1492,28 @@ void Grafo::algoritmoFloyd()
             {
                 if(i==j)
                     vet1[i][j]=0;
-
             }
 
             for(int i=0; i<tam; i++)
             {
                 for(int j=0; j<tam; j++)
                 {
-
-                    // cout<<"IDNO="<< no->getId();
-
                     for(std::vector<Aresta>::iterator arest = listaAdj[i].listaAresta.begin(); arest != listaAdj[i].listaAresta.end(); ++arest)
                     {
                         if(i!=j)
                         {
-
                             if(arest->getIdNo() == listaAdj[j].getId() && arest->getPesoAresta()<vet1[i][j])
                             {
-
-                                // cout<<"\ni="<<i<<"j="<<j;
-                                // cout<<"   vetIeJ="<<vet1[i][j]<<"\n";
                                 vet1[i][j]=arest->getPesoAresta();
-                                //   cout<<"\n"<<arest->getPesoAresta();
                                 break;
                             }
-
                         }
                     }
                 }
-
-
             }
-
-
-
-
-
         }
+        
+        //Parte principal do floyd
         for(int i=0; i<tam; i++)
         {
             for(int j=0; j<tam; j++)
@@ -1537,37 +1522,22 @@ void Grafo::algoritmoFloyd()
                 {
                     if(vet1[i][k]+vet1[k][j]<vet1[i][j])
                         vet1[i][j]=vet1[i][k]+vet1[k][j];
-
-
-
                 }
-
-
             }
         }
-
-
-
 
         for(int i=0; i<listaAdj.size(); i++)
         {
             cout<<"\n";
             for(int j=0; j<listaAdj.size(); j++)
             {
-                cout<<listaAdj[i].getId()<<"i"<<listaAdj[j].getId()<<"j"<<"="<<vet1[i][j]<<"\t";
+                /*if(vet1[i][j] == INF)
+                    cout<<listaAdj[i].getId()<<"i"<<listaAdj[j].getId()<<"j"<<"= INF"<<"\t";
+                else*/
+                    cout<<listaAdj[i].getId()<<"i"<<listaAdj[j].getId()<<"j"<<"="<<vet1[i][j]<<"\t";
             }
         }
-
-
-
     }
-
-
-
-
-
-
-
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
