@@ -81,6 +81,6 @@ public:
     bool temCiclo();
     bool buscaUtil(int x, int cor[]);
     void geraRandom(int r[], int m);
-
+    bool verificaVetorVazioDijkstra(int vet[],int n);
 };
 #endif // GRAFO_H_INCLUDED

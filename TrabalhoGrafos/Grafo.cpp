@@ -1543,130 +1543,99 @@ void Grafo::algoritmoFloyd()
 //para todos outros vértices do grafo.                                                           //
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
+bool Grafo::verificaVetorVazioDijkstra(int vet[],int n)
+{
+    for(int i=0; i<n; i++)
+        if(vet[i]!=-1)
+            return false;
+    return true;
+}
+
+
 void Grafo::dijkstra(int id)
 {
 
 
 
     queue<int>fila;
-
-    int distancia[listaAdj.size()];
+    int *vetorindice=new int{listaAdj.size()};
+    int *distancia=new int[listaAdj.size()];
 
     int i=0;
+    bool existe=false;
     int indiceNoOrigem=-1;
     //loop para achar o indice do ID no vetor de vertices
     for(std::vector<No>::iterator it = listaAdj.begin(); it != listaAdj.end(); ++it)//percorre a lista procurando o indice do no de origem na lista adjascente
     {
-
+        vetorindice[i]=i;
         distancia[i]=999999;
         if(it->getId()==id)
         {
+
             indiceNoOrigem = i;
+            existe=true;
         }
         i++;
 
 
     }
-    int menor=999999;
+
+    if(!existe)
+    {
+        cout<<"VERTICE NAO ESTA NO GRAFO"<<endl;
+        exit(0);
+    }
+
     distancia[indiceNoOrigem]=0;
-    int indice;
-    fila.push(indiceNoOrigem);
-    listaAdj[indiceNoOrigem].setVisitado(true);
-    while(!fila.empty())
+    int menor=-1;
+    int k=0;
+    while(!verificaVetorVazioDijkstra(vetorindice,listaAdj.size())&&k<listaAdj.size())
     {
 
-        fila.pop();
-        if(menor!=999999)
-            menor=999999;
-        //loop que percorre o no de menor distancia e atribui a distancia para todos nos adjacentes a ele
-        for(std::vector<Aresta>::iterator arest = listaAdj[indiceNoOrigem].listaAresta.begin(); arest != listaAdj[indiceNoOrigem].listaAresta.end(); ++arest)
+        for(int i=0; i<listaAdj.size(); i++)
         {
-            if(arest->getPesoAresta()<0)
+
+            if(distancia[i]<menor&&vetorindice[i]!=-1)
             {
-                cout<<"DIJKSTRA NAO ACEITA ARESTAS COM VALORES NEGATIVOS"<<endl;
-                    exit(0);
+
+                menor=distancia[i];
+                indiceNoOrigem=i;
             }
-            if(distancia[arest->getIndiceNo()]!=distancia[indiceNoOrigem])
+
+        }
+
+
+
+            for(std::vector<Aresta>::iterator arest = listaAdj[indiceNoOrigem].listaAresta.begin(); arest != listaAdj[indiceNoOrigem].listaAresta.end(); ++arest)
             {
 
-
-                if(!listaAdj[arest->getIndiceNo()].getVisitado())
-                {
-
-
-
-                    if(distancia[arest->getIndiceNo()]>distancia[indiceNoOrigem]+arest->getPesoAresta())
-                    {
-
-                        distancia[arest->getIndiceNo()]=distancia[indiceNoOrigem]+arest->getPesoAresta();
-
-                    }
-                    else if(distancia[arest->getIndiceNo()]==arest->getPesoAresta())
-                    {
-                        distancia[arest->getIndiceNo()]+=distancia[indiceNoOrigem];
-                    }
-
-                    //guarda o indice do no de menor aresta
-                    if(arest->getPesoAresta()<menor)
-                    {
-                        menor=arest->getPesoAresta();
-                        indice=arest->getIndiceNo();
-                    }
-                }
-            }
-            //loop que percorre todos os nos adjacentes dos nos adjacentes ao no de menor distancia
-            for(std::vector<Aresta>::iterator arest2 = listaAdj[arest->getIndiceNo()].listaAresta.begin(); arest2 != listaAdj[arest->getIndiceNo()].listaAresta.end(); ++arest2)
-            {
-                if(arest2->getPesoAresta()<0)
+                if(arest->getPesoAresta()<0)
                 {
                     cout<<"DIJKSTRA NAO ACEITA ARESTAS COM VALORES NEGATIVOS"<<endl;
-                        exit(0);
+                    exit(0);
                 }
-                if(indiceNoOrigem!=arest2->getIndiceNo())
+
+                if(distancia[arest->getIndiceNo()]==999999)
+                {
+                    distancia[arest->getIndiceNo()]=distancia[indiceNoOrigem]+arest->getPesoAresta();
+                }
+
+                else if(distancia[arest->getIndiceNo()]>distancia[indiceNoOrigem]+arest->getPesoAresta())
                 {
 
-
-
-
-                    if(!listaAdj[arest2->getIndiceNo()].getVisitado())
-                    {
-                        if(distancia[arest->getIndiceNo()]!=distancia[arest2->getIndiceNo()])
-                        {
-
-
-
-                            if(distancia[arest2->getIndiceNo()]>distancia[arest->getIndiceNo()]+arest2->getPesoAresta())
-                            {
-
-                                distancia[arest2->getIndiceNo()]=distancia[arest->getIndiceNo()]+arest2->getPesoAresta();
-                            }
-                            else if(distancia[arest2->getIndiceNo()]==arest2->getPesoAresta())
-                            {
-                                distancia[arest2->getIndiceNo()]+=distancia[arest->getIndiceNo()];
-                            }
-
-
-                        }
-
-                    }
+                    distancia[arest->getIndiceNo()]=distancia[indiceNoOrigem]+arest->getPesoAresta();
                 }
 
             }
 
+            vetorindice[indiceNoOrigem]=-1;
+            menor=999999;
 
 
-
-        }
-        //bota na fila o no de menor indice e marca ele como visitado
-        if(!listaAdj[indice].getVisitado())
-        {
-
-            indiceNoOrigem=indice;
-            fila.push(indiceNoOrigem);
-            listaAdj[indice].setVisitado(true);
-
-        }
+        k++;
     }
+
+
     cout<<"VERTICE"<<" "<<" DISTANCIA DA ORIGEM"<<endl;
     for(int i=0; i<listaAdj.size(); i++)
     {
@@ -1677,10 +1646,6 @@ void Grafo::dijkstra(int id)
 
 
 }
-
-
-
-
 
 
 
