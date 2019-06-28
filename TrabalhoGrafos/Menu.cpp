@@ -3,6 +3,7 @@
 #include "No.h"
 #include "Aresta.h"
 #include "iostream"
+#include <stdlib.h>
 using namespace std;
 
 Menu::Menu(Grafo* grafo)

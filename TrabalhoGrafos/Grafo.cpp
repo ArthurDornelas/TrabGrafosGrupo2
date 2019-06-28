@@ -1163,13 +1163,14 @@ int Grafo::algoritmoGuloso()
 
 void Grafo::auxGulosoRandomizado()
 {
+    ordenaGrafo();
     int solucao = 0;
     cout<<"Valor de alpha : 0.1"<<endl;
-    solucao = algoritmoGulosoRandomizado(0.1,30,0);
+    solucao = algoritmoGulosoRandomizado(0.1,50,0);
     cout<<"Valor de alpha : 0.2"<<endl;
-    solucao = algoritmoGulosoRandomizado(0.2,30,0);
+    solucao = algoritmoGulosoRandomizado(0.2,50,0);
     cout<<"Valor de alpha : 0.3"<<endl;
-    solucao = algoritmoGulosoRandomizado(0.3,30,0);
+    solucao = algoritmoGulosoRandomizado(0.3,50,0);
 }
 
 /**
@@ -1182,19 +1183,8 @@ void Grafo::auxGulosoRandomizado()
 */
 int Grafo::algoritmoGulosoRandomizado(float alfa, int intMax, int chamado)
 {
-    ordenado.clear();
-    auxOrdena.clear();
-    int solucoes[intMax];
-    int i = 0;
-    for(std::vector<No>::iterator it = listaAdj.begin(); it != listaAdj.end(); ++it)
-    {
-        it->setCorNo(-1);           // Coloca as cores de todos os nos como -1
-        ordenado.push_back(i);      // Manda a posicao de todos os nós na listaAdj para o vetor ordenado
-        i++;
-    }
-    auxOrdena = listaAdj;
-    quickSort(0, listaAdj.size()-1);
 
+    int solucoes[intMax];
     srand(time(NULL)); //seed para numero random
 
     std::vector <int> posCandidatos;
@@ -1202,7 +1192,7 @@ int Grafo::algoritmoGulosoRandomizado(float alfa, int intMax, int chamado)
 
     int aux = 0;
     int j = 0;
-    i=0;
+    int i=0;
     double tInicio=clock();
 
     while(i < intMax)
@@ -1290,14 +1280,29 @@ int Grafo::algoritmoGulosoRandomizado(float alfa, int intMax, int chamado)
     return melhorSolucao;
 }
 
+void Grafo::ordenaGrafo()
+{
+    ordenado.clear();
+    auxOrdena.clear();
+    int i = 0;
+    for(std::vector<No>::iterator it = listaAdj.begin(); it != listaAdj.end(); ++it)
+    {
+        it->setCorNo(-1);           // Coloca as cores de todos os nos como -1
+        ordenado.push_back(i);      // Manda a posicao de todos os nós na listaAdj para o vetor ordenado
+        i++;
+    }
+    auxOrdena = listaAdj;
+    quickSort(0, listaAdj.size()-1);
+}
 
 void Grafo::auxAlgoritmoGulosoReativo()
 {
+    ordenaGrafo(); //Ordena o Grafo para o Guloso Randomizado
     int m = 10;
     float alfa[m];
     for(int i=0; i<m; i++)
     {
-        alfa[i] = 0.05 * (i+1);
+        alfa[i] = 0.1 * (i+1);
     }
     algoritmoGulosoReativo(alfa,1000,100,10,10);
 
@@ -1315,8 +1320,8 @@ void Grafo::auxAlgoritmoGulosoReativo()
 */
 void Grafo::algoritmoGulosoReativo(float alfa[], int intMax, int block_iterations, int seed, int delta)
 {
+    cout<<endl<<"Processando Guloso Reativo..."<<endl<<endl;
     int m = 10;
-    //cout<<"M: " << m<<endl;
     float p[m];
     int solucao = 0;
     int contadorAlfa[m];

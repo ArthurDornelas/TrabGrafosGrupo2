@@ -59,6 +59,7 @@ public:
     int algoritmoGuloso();
     int algoritmoGulosoRandomizado(float alfa, int intMax, int chamado);
     void auxGulosoRandomizado();
+    void ordenaGrafo();
     void auxAlgoritmoGulosoReativo();
     void algoritmoGulosoReativo(float alfa[], int intMax, int block_iterations, int seed,int delta);
     void quickSort(int left, int right);

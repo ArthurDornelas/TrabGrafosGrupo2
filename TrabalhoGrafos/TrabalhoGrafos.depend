@@ -900,33 +900,34 @@
 	"Aresta.h"
 	"iostream"
 
-1561227217 source:c:\users\adriana\desktop\grafosbash\trabgrafosgrupo2\trabalhografos\menu.cpp
+1561743081 source:c:\users\adriana\desktop\grafosbash\trabgrafosgrupo2\trabalhografos\menu.cpp
 	"Menu.h"
 	"Grafo.h"
 	"No.h"
 	"Aresta.h"
 	"iostream"
+	<stdlib.h>
 
-1561050777 c:\users\adriana\desktop\grafosbash\trabgrafosgrupo2\trabalhografos\menu.h
+1561739500 c:\users\adriana\desktop\grafosbash\trabgrafosgrupo2\trabalhografos\menu.h
 	"Grafo.h"
 	"No.h"
 	"Aresta.h"
 
-1561227434 c:\users\adriana\desktop\grafosbash\trabgrafosgrupo2\trabalhografos\grafo.h
+1561741981 c:\users\adriana\desktop\grafosbash\trabgrafosgrupo2\trabalhografos\grafo.h
 	<vector>
 	"No.h"
 	<iostream>
 	<fstream>
 	<stack>
 
-1561050777 c:\users\adriana\desktop\grafosbash\trabgrafosgrupo2\trabalhografos\no.h
+1561739500 c:\users\adriana\desktop\grafosbash\trabgrafosgrupo2\trabalhografos\no.h
 	<vector>
 	"Aresta.h"
 	"No.h"
 
-1561050777 c:\users\adriana\desktop\grafosbash\trabgrafosgrupo2\trabalhografos\aresta.h
+1561739500 c:\users\adriana\desktop\grafosbash\trabgrafosgrupo2\trabalhografos\aresta.h
 
-1561227709 source:c:\users\adriana\desktop\grafosbash\trabgrafosgrupo2\trabalhografos\main.cpp
+1561739500 source:c:\users\adriana\desktop\grafosbash\trabgrafosgrupo2\trabalhografos\main.cpp
 	<iostream>
 	"Grafo.h"
 	"Grafo.cpp"
@@ -934,7 +935,7 @@
 	<time.h>
 	<stdlib.h>
 
-1561229246 c:\users\adriana\desktop\grafosbash\trabgrafosgrupo2\trabalhografos\grafo.cpp
+1561742895 c:\users\adriana\desktop\grafosbash\trabgrafosgrupo2\trabalhografos\grafo.cpp
 	"Grafo.h"
 	"No.h"
 	"No.cpp"
@@ -949,7 +950,7 @@
 	"Aresta.h"
 	"fstream"
 
-1561050777 c:\users\adriana\desktop\grafosbash\trabgrafosgrupo2\trabalhografos\no.cpp
+1561739500 c:\users\adriana\desktop\grafosbash\trabgrafosgrupo2\trabalhografos\no.cpp
 	"Aresta.h"
 	"No.h"
 
