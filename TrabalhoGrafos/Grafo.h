@@ -57,7 +57,7 @@ public:
     void buscaEmProfundidade(No *v);//faz uma busca a partir de um vertice
     void buscaEmLargura(int id);
     int algoritmoGuloso();
-    int algoritmoGulosoRandomizado(float alfa, int intMax);
+    int algoritmoGulosoRandomizado(float alfa, int intMax, int chamado);
     void auxGulosoRandomizado();
     void auxAlgoritmoGulosoReativo();
     void algoritmoGulosoReativo(float alfa[], int intMax, int block_iterations, int seed,int delta);

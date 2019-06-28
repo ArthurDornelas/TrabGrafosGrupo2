@@ -1164,19 +1164,27 @@ int Grafo::algoritmoGuloso()
 void Grafo::auxGulosoRandomizado()
 {
     int solucao = 0;
-    solucao = algoritmoGulosoRandomizado(0.1,30);
-    solucao = algoritmoGulosoRandomizado(0.2,30);
-    solucao = algoritmoGulosoRandomizado(0.3,30);
+    cout<<"Valor de alpha : 0.1"<<endl;
+    solucao = algoritmoGulosoRandomizado(0.1,30,0);
+    cout<<"Valor de alpha : 0.2"<<endl;
+    solucao = algoritmoGulosoRandomizado(0.2,30,0);
+    cout<<"Valor de alpha : 0.3"<<endl;
+    solucao = algoritmoGulosoRandomizado(0.3,30,0);
 }
 
-int Grafo::algoritmoGulosoRandomizado(float alfa, int intMax)
+/**
+    Algoritmo Guloso Randomizado
+
+    Paramentros:
+    alfa - grau de aleatoriedade
+    intMax - máximo de iterações realizadas
+    chamado - 0 se for chamado pelo auxRandomizado / 1 se for chamada pelo guloso reativo
+*/
+int Grafo::algoritmoGulosoRandomizado(float alfa, int intMax, int chamado)
 {
-    cout<<"Valor de alpha :"<< alfa <<endl;
     ordenado.clear();
     auxOrdena.clear();
-    double tMedio=0;
     int solucoes[intMax];
-    int mediaSolucao=0;
     int i = 0;
     for(std::vector<No>::iterator it = listaAdj.begin(); it != listaAdj.end(); ++it)
     {
@@ -1187,10 +1195,10 @@ int Grafo::algoritmoGulosoRandomizado(float alfa, int intMax)
     auxOrdena = listaAdj;
     quickSort(0, listaAdj.size()-1);
 
-    srand(time(NULL));
+    srand(time(NULL)); //seed para numero random
 
     std::vector <int> posCandidatos;
-    int melhorSolucao = 9999;
+    int melhorSolucao = INF;
 
     int aux = 0;
     int j = 0;
@@ -1257,13 +1265,7 @@ int Grafo::algoritmoGulosoRandomizado(float alfa, int intMax)
                     break;
                 }
             }
-
-            double tFinal = clock();
-
-            double tDecorrido = ((double)(tFinal - tInicio))/CLOCKS_PER_SEC;
-            tMedio += tDecorrido;
-            posCandidatos.erase(posCandidatos.begin()+j);
-
+            posCandidatos.erase(posCandidatos.begin()+j); //apaga o nó da lista de candidatos.
         }
 
         /* Atualiza Melhor Solucao */
@@ -1272,29 +1274,22 @@ int Grafo::algoritmoGulosoRandomizado(float alfa, int intMax)
             melhorSolucao = k;
         }
         solucoes[i]=k;
-        mediaSolucao += k;
         posCandidatos.clear();
-        cout<<"Solucao "<<i<<" : " <<k<<endl;
+        //cout<<"Solucao "<<i<<" : " <<k<<endl;
         i++;
     }
-    mediaSolucao = mediaSolucao / intMax;
-    tMedio = tMedio / intMax;
-    float desvioPadrao = 0;
-    for(int s=0; s < intMax ; s++)
+
+    double tFinal = clock();
+    double tDecorrido = ((double)(tFinal - tInicio))/CLOCKS_PER_SEC;
+    if(chamado == 0)
     {
-        desvioPadrao += pow((solucoes[s]-mediaSolucao),2);
+        cout<< "A melhor solucao de cores: " << melhorSolucao <<endl;
+        cout << "Tempo decorrido: " << tDecorrido <<" segundos" << endl<<endl;
     }
-    desvioPadrao = sqrt(desvioPadrao / intMax);
 
-
-    cout<< "A melhor solucao de cores: " << melhorSolucao <<endl;
-    cout<< "A solucao media de cores: " << mediaSolucao <<endl;
-    cout<< "Desvio padrao: " << desvioPadrao <<endl;
-    cout << "Tempo decorrido: " << tMedio <<" segundos" << endl<<endl;
-
-    return mediaSolucao;
-
+    return melhorSolucao;
 }
+
 
 void Grafo::auxAlgoritmoGulosoReativo()
 {
@@ -1302,12 +1297,22 @@ void Grafo::auxAlgoritmoGulosoReativo()
     float alfa[m];
     for(int i=0; i<m; i++)
     {
-        alfa[i] = 0.1 * (i+1);
+        alfa[i] = 0.05 * (i+1);
     }
     algoritmoGulosoReativo(alfa,1000,100,10,10);
 
 }
 
+/**
+    Algoritmo Guloso Randomizado Reativo
+
+    Paramentros:
+    alfa[] - array com os graus de aleatoriedade.
+    intMax - máximo de iterações realizadaas.
+    block_iterations - intervalo de iterações que as probabilidades serão recalculadas.
+    seed - máximo de iterações para o guloso randomizado.
+    delta - usado no cálculo de q.
+*/
 void Grafo::algoritmoGulosoReativo(float alfa[], int intMax, int block_iterations, int seed, int delta)
 {
     int m = 10;
@@ -1330,27 +1335,19 @@ void Grafo::algoritmoGulosoReativo(float alfa[], int intMax, int block_iteration
         contadorAlfa[i]=0;
     }
 
+    double tInicio=clock();
+
     for(int k=1; k<=intMax; k++)
     {
-        cout<< "Iteracao: "<< k<<endl<<endl;
-
         /* Seleciona alfa randomicamente usando as probabiidades*/
-        cout<<"Numero Random: "<<r[k-1]<<endl;
         int i = 0;
-        cout<<"P de "<<i<<": "<<p[i]<<endl;
         float c = p[i]*100.0;
-        cout<<"C: "<<c<<endl;
         while(c<=r[k-1] && i<m){
             i++;
-            cout<<"P de "<<i<<": "<<p[i]<<endl;
             c += p[i]*100.0;
-            cout<<"C: "<<c<<endl;
         }
-
-        cout<<"Valor de I: "<<i<<endl;
         contadorAlfa[i] = contadorAlfa[i] + 1;                /* Atualiza quantas vezes o alfa foi selecionado */
-        cout<<"Valor de Alfa Saindo Reativo: "<<alfa[i]<<endl;
-        solucao = algoritmoGulosoRandomizado(alfa[i], seed);  /* Chama a funcao do guloso randomizado com o alfa escolhido */
+        solucao = algoritmoGulosoRandomizado(alfa[i], seed, 1);  /* Chama a funcao do guloso randomizado com o alfa escolhido */
         somatorioAlfa[i] = somatorioAlfa[i] + solucao;                /* Atualiza as solucoes medias de alfa com a solucao encontrada */
 
         if(solucao < melhorSolucao)
@@ -1387,17 +1384,16 @@ void Grafo::algoritmoGulosoReativo(float alfa[], int intMax, int block_iteration
                 else /* Se alfa nao foi selecionado ainda, probabilidade é igual a do começo. */
                     p[i] == 1.0/m;
             }
-            cout<<endl<<endl<<endl<<"Probabilidades: "<<endl;
-            for(int i=0; i<m; i++)
-            {
-                cout<<"Prob "<<i<<": "<<p[i]<<endl;
-            }
-            cout<<endl<<endl;
         }
 
     }
+
+    double tFinal = clock();
+    double tDecorrido = ((double)(tFinal - tInicio))/CLOCKS_PER_SEC;
+
     cout<< "Melhor: " <<melhorSolucao<<endl;
     cout<< "Melhor Alfa: "<<alfa[posAlfaMelhorSolucao]<<endl;
+    cout << "Tempo decorrido: " << tDecorrido <<" segundos" << endl<<endl;
 
 }
 
@@ -1512,7 +1508,7 @@ void Grafo::algoritmoFloyd()
                 }
             }
         }
-        
+
         //Parte principal do floyd
         for(int i=0; i<tam; i++)
         {

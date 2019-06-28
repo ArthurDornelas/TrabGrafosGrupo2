@@ -1005,3 +1005,56 @@
 	"Aresta.h"
 	"iostream"
 
+1561682864 source:c:\users\arthur\desktop\grafos\trabgrafosgrupo2\trabalhografos\main.cpp
+	<iostream>
+	"Grafo.h"
+	"Grafo.cpp"
+	"Menu.h"
+	<time.h>
+	<stdlib.h>
+
+1561685805 c:\users\arthur\desktop\grafos\trabgrafosgrupo2\trabalhografos\grafo.h
+	<vector>
+	"No.h"
+	<iostream>
+	<fstream>
+	<stack>
+
+1561682864 c:\users\arthur\desktop\grafos\trabgrafosgrupo2\trabalhografos\no.h
+	<vector>
+	"Aresta.h"
+	"No.h"
+
+1561682864 c:\users\arthur\desktop\grafos\trabgrafosgrupo2\trabalhografos\aresta.h
+
+1561686327 c:\users\arthur\desktop\grafos\trabgrafosgrupo2\trabalhografos\grafo.cpp
+	"Grafo.h"
+	"No.h"
+	"No.cpp"
+	<vector>
+	<algorithm>
+	<cstring>
+	<stack>
+	<queue>
+	<time.h>
+	<math.h>
+	<stdlib.h>
+	"Aresta.h"
+	"fstream"
+
+1561682864 c:\users\arthur\desktop\grafos\trabgrafosgrupo2\trabalhografos\no.cpp
+	"Aresta.h"
+	"No.h"
+
+1561682864 c:\users\arthur\desktop\grafos\trabgrafosgrupo2\trabalhografos\menu.h
+	"Grafo.h"
+	"No.h"
+	"Aresta.h"
+
+1561682864 source:c:\users\arthur\desktop\grafos\trabgrafosgrupo2\trabalhografos\menu.cpp
+	"Menu.h"
+	"Grafo.h"
+	"No.h"
+	"Aresta.h"
+	"iostream"
+
