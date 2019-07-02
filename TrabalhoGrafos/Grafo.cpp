@@ -4,7 +4,7 @@
 #include <vector>
 #include <algorithm>
 #include <cstring>
-#define INF 9999999;
+#define INF 9999999
 #include <stack> // busca em profundidade
 #include <queue>
 #include <time.h>
@@ -1477,7 +1477,6 @@ void Grafo::algoritmoFloyd()
 {
     if(ehponderada()==1)
     {
-
         int i,j;
         int tam =listaAdj.size();
 
@@ -1527,15 +1526,15 @@ void Grafo::algoritmoFloyd()
             }
         }
 
+        cout<<"|No Origem|"<<"  |No destino|"<<"  |Distacia|"<<endl;
         for(int i=0; i<listaAdj.size(); i++)
         {
-            cout<<"\n";
             for(int j=0; j<listaAdj.size(); j++)
             {
-                /*if(vet1[i][j] == INF)
-                    cout<<listaAdj[i].getId()<<"i"<<listaAdj[j].getId()<<"j"<<"= INF"<<"\t";
-                else*/
-                    cout<<listaAdj[i].getId()<<"i"<<listaAdj[j].getId()<<"j"<<"="<<vet1[i][j]<<"\t";
+                if(vet1[i][j] == INF)
+                    cout<<"      "<<listaAdj[i].getId()<<"---------"<<listaAdj[j].getId()<<" "<<"   =      INF"<<endl;
+                else
+                    cout<<"      "<<listaAdj[i].getId()<<"---------"<<listaAdj[j].getId()<<"  "<<"   =      "<<vet1[i][j]<<endl;
             }
         }
     }
