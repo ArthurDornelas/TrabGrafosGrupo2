@@ -1475,6 +1475,7 @@ void Grafo::troca(int x1, int x2)
 
 void Grafo::algoritmoFloyd()
 {
+    ofstream file(arquivoSaida.c_str());
     if(ehponderada()==1)
     {
         int i,j;
@@ -1527,14 +1528,19 @@ void Grafo::algoritmoFloyd()
         }
 
         cout<<"|No Origem|"<<"  |No destino|"<<"  |Distacia|"<<endl;
+        file<<"|No Origem|"<<"  |No destino|"<<"  |Distacia|"<<endl;
         for(int i=0; i<listaAdj.size(); i++)
         {
             for(int j=0; j<listaAdj.size(); j++)
             {
-                if(vet1[i][j] == INF)
+                if(vet1[i][j] == INF){
                     cout<<"      "<<listaAdj[i].getId()<<"---------"<<listaAdj[j].getId()<<" "<<"   =      INF"<<endl;
-                else
+                    file<<"      "<<listaAdj[i].getId()<<"---------"<<listaAdj[j].getId()<<" "<<"   =      INF"<<endl;
+                }
+                else{
                     cout<<"      "<<listaAdj[i].getId()<<"---------"<<listaAdj[j].getId()<<"  "<<"   =      "<<vet1[i][j]<<endl;
+                    file<<"      "<<listaAdj[i].getId()<<"---------"<<listaAdj[j].getId()<<"  "<<"   =      "<<vet1[i][j]<<endl;
+                }
             }
         }
     }
